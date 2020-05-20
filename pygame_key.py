@@ -69,7 +69,10 @@ def start_th():
 	create_bot.start()
 
 def create_object(x_scale = 1, y_scale = 1):
-	
+	global LIST_BOT 
+	last_id = max(LIST_BOT.max(axis=1))
+	current_id = last_id + 1
+
 	(x, y) = pygame.mouse.get_pos()
 	pix = pygame.Surface((x_scale, y_scale))
 
