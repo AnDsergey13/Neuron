@@ -86,8 +86,8 @@ def create_object(x_scale = 1, y_scale = 1):
 			continue
 		clear_bot(pix, x, y)
 
-		x += math.sin(x)*5
-		y += -math.cos(y)*5
+		x += int(math.sin(x)*5)
+		y += int(-math.cos(y)*5)
 		# print(x,y)
 
 		# если выход за пределы комнаты, то удаление
