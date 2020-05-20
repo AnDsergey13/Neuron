@@ -70,8 +70,11 @@ def start_th():
 
 def create_object(x_scale = 1, y_scale = 1):
 	global LIST_BOT 
-	last_id = max(LIST_BOT.max(axis=1))
+
+	last_id = max(LIST_BOT.take(1, axis=1))
 	current_id = last_id + 1
+	LIST_BOT = np.append(LIST_BOT, np.zeros((1, num_index_list_bot), dtype=int), axis=0)
+	# print(LIST_BOT.shape)
 
 	(x, y) = pygame.mouse.get_pos()
 	pix = pygame.Surface((x_scale, y_scale))
@@ -97,8 +100,9 @@ def create_object(x_scale = 1, y_scale = 1):
 		window. blit(pix, (x, y))
 		pygame. display. flip()
 
+num_index_list_bot = 3
 # [id, x, y]
-LIST_BOT = np.zeros((3), dtype=int)
+LIST_BOT = np.zeros((1, num_index_list_bot), dtype=int)
 
 
 screen_width = 1000
