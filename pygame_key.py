@@ -85,7 +85,7 @@ def create_object(x_scale = 1, y_scale = 1):
 		# print(x,y)
 
 		# если выход за пределы комнаты, то удаление
-		if x > screen_width or x < 0 or y > y_ or y < 0:
+		if x > screen_width or x < 0 or y > screen_height or y < 0:
 			clear_bot(pix, x, y)
 			draw_num_th()
 			break
@@ -99,12 +99,12 @@ LIST_BOT = np.zeros((3), dtype=int)
 
 
 screen_width = 1000
-y_ = 500
+screen_height = 500
 
 speed = 100
 
 pygame.init()
-window = pygame.display.set_mode((screen_width , y_))
+window = pygame.display.set_mode((screen_width , screen_height))
 pygame.display.set_caption("Hello, pygame!")
 fontObj = pygame.font.SysFont('verdana', 25)
 pix = pygame.Surface((5, 5))
@@ -113,7 +113,7 @@ done = True
 pause_session = False
 block = False
 
-number_pix = np.ones((screen_width , y_), dtype=int)
+number_pix = np.ones((screen_width , screen_height), dtype=int)
 number_pix = np.zeros_like(number_pix) # генерируем массив нулей (цвет чёрный)
 
 # print(LIST_BOT)
@@ -127,7 +127,7 @@ while done:
 	key_pressed(0, pygame.K_z, closed_window)
 
 	(x,y) = pygame.mouse.get_pos()
-	if x > 0 and x < screen_width and y > 0 and y < y_:
+	if x > 0 and x < screen_width and y > 0 and y < screen_height:
 		key_pressed(1, 0, start_th)
 
 
@@ -147,7 +147,7 @@ while done:
 # # генерация случайной позиции по х и по y
 # 	# random.seed(5)
 # 	x = np.random.randint(0, screen_width )
-# 	y = np.random.razdint(0, y_)
+# 	y = np.random.razdint(0, screen_height)
 # 	read_number = number_pix.take(x, axis=0)[y] # взятие числа в матрице по координатам 
 # 	number_pix[x, y] = read_number + step	# увеличение яркости цвета на step(от чёрного к белому) при повторном попадании пикселя, на одно и тоже место
 # 	if read_number > 255:
