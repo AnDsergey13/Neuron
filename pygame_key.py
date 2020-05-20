@@ -1,6 +1,14 @@
+# Исправить паузу (не всегда срабатывает)
+# БАГ. при создании, экземпляр не должен появлятся на том месте, где уже есть экземпляр
+# разделить отрисовку, и логику
+# !добавить общий список, с координатами
+
+
 import pygame
-import numpy as np
 import time
+
+import math
+import numpy as np
 import threading
 		
 def pause_ses():
@@ -8,9 +16,23 @@ def pause_ses():
 	pause_session = not pause_session
 	print(pause_session)
 
-def closed():
+def closed_window():
 	global done
 	done = False
+
+def draw_num_th():
+	#сначала закрасим текст черным(типо очистки), а потом отрисуем на нём количество активных потоков
+	text1 = fontObj.render("█████", 1, (0, 0, 0),(0, 0, 0)) #alt + 219
+	window. blit(text1, (10, 100))
+	num_TH = str(threading.active_count())
+	text1 = fontObj.render(num_TH, 1, (0, 255, 0))
+	window. blit(text1, (10, 100))
+
+def clear_bot(pix, x, y):
+	"""запонение чёрным, где был бот"""
+	pix. fill((0, 0, 0))
+	window. blit(pix, (x, y))
+	pygame. display. flip()
 
 def key_pressed(mode, key_p, function):
 	"""
@@ -21,11 +43,12 @@ def key_pressed(mode, key_p, function):
 	Example 2 (mouse). key_pressed(1, 0, closed)
 	"""
 
+	# Две отдельные функции, ибо клавиатура может работать вместе с мышью
 	global block
 	if mode == 0:	# клавиатура
 		if pygame.key.get_pressed()[key_p] == 1:
 			if block == False:
-				print("Кнопка на клавиатуре нажата")
+				# print("Кнопка на клавиатуре нажата")
 				block = True
 				function()
 		else:
@@ -34,72 +57,66 @@ def key_pressed(mode, key_p, function):
 	if mode == 1:	# мышь
 		if pygame.mouse.get_pressed()[key_p] == 1:
 			if block == False:
-				print("Кнопка мыши нажата")
+				# print("Кнопка мыши нажата")
 				block = True
 				function()
 		else:
 			block = False		
 
-def create_object(x_scale = 1, y_scale = 1):
-	print(threading.active_count())
-	(x, y) = pygame.mouse.get_pos()
-	pix = pygame.Surface((x_scale, y_scale))
-	# bot(pix, x, y)
-	while done:
-		if pause_session == True:
-			continue
-		pix. fill((0, 0, 0))
-		window. blit(pix, (x, y))
-		pygame. display. flip()
-		x += np.random.randint(-1, 1)
-		y += np.random.randint(-1, 1)
-		pix. fill((np.random.randint(0, 255), np.random.randint(0, 255), np.random.randint(0, 255)))
-		window. blit(pix, (x, y))
-		pygame. display. flip()
-
-		# выход за пределы комнаты
-		if x > x_ or x < 0 or y > y_ or y < 0:
-			# запонение чёрным, где был бот
-			pix. fill((0, 0, 0))	
-			window. blit(pix, (x, y))
-			pygame. display. flip()
-
-			print("del_bot")
-			break
-
-# def bot(pix, x, y):
-# 	while done:
-# 		x += np.random.randint(-5, 5)
-# 		y += np.random.randint(-5, 5)
-# 		pix. fill((0, 255, 0))
-# 		window. blit(pix, (x, y))
-# 		pygame. display. flip()
-# 		# pygame.time.delay(10)
-
-def TH_start():
-	create_bot = threading.Thread(target=create_object, args=(1,1,))
+def start_th():
+	create_bot = threading.Thread(target=create_object, args=(2,2,))
 	# create_object(5,5)
 	create_bot.start()
 
-def num_th():
-	print(threading.active_count())
+def create_object(x_scale = 1, y_scale = 1):
+	
+	(x, y) = pygame.mouse.get_pos()
+	pix = pygame.Surface((x_scale, y_scale))
 
-x_ = 1200
-y_ = 768
+	draw_num_th()
 
-speed = 0
-step = 25
+	while done:
+		if pause_session == True:
+			continue
+		clear_bot(pix, x, y)
 
+		x += math.sin(x)*5
+		y += -math.cos(y)*5
+		# print(x,y)
+
+		# если выход за пределы комнаты, то удаление
+		if x > x_ or x < 0 or y > y_ or y < 0:
+			clear_bot(pix, x, y)
+			draw_num_th()
+			break
+
+		pix. fill((np.random.randint(140, 255), np.random.randint(140, 255), 255))
+		window. blit(pix, (x, y))
+		pygame. display. flip()
+
+# [id, x, y]
+LIST_BOT = np.zeros((3), dtype=int)
+
+
+x_ = 1000
+y_ = 500
+
+speed = 100
+
+pygame.init()
 window = pygame.display.set_mode((x_, y_))
 pygame.display.set_caption("Hello, pygame!")
+fontObj = pygame.font.SysFont('verdana', 25)
 pix = pygame.Surface((5, 5))
-done = True
 
+done = True
 pause_session = False
 block = False
 
 number_pix = np.ones((x_, y_), dtype=int)
 number_pix = np.zeros_like(number_pix) # геренрируем массив нулей(цвет чёрный)
+
+# print(LIST_BOT)
 
 while done:
 	for e in pygame.event.get() :
@@ -107,26 +124,19 @@ while done:
 			done = False
 
 	key_pressed(0, pygame.K_SPACE, pause_ses)
-	key_pressed(0, pygame.K_z, closed)
-	key_pressed(0, pygame.K_x, num_th)	#показать количество запущенных потоков
+	key_pressed(0, pygame.K_z, closed_window)
 
-	key_pressed(1, 0, TH_start)
+	(x,y) = pygame.mouse.get_pos()
+	if x > 0 and x < x_ and y > 0 and y < y_:
+		key_pressed(1, 0, start_th)
 
-	fontObj = pygame.font.SysFont(None, 36)
-	text1 = fontObj.render('Hello Привет', 1, (180, 0, 0))
-	window. blit(text1, (10, 100))
-
-
-	# print(pygame.mouse.get_pressed()[0])
-
-	# if pygame.mouse.get_pressed()[0] == 1:
-	# 	create_bot = threading.Thread(target=create_object, args=(5,5,))
-	# 	# create_object(5,5)
-	# 	create_bot.start()
 
 	if pause_session == True:
 		continue
 
+	pygame.draw.rect(window, (255, 255, 255), (45, 75, 10, 75))
+	# pygame.draw.rect(window, (64, 128, 255), (150, 20, 100, 150), 4)
+	
 
 
 
@@ -146,3 +156,17 @@ while done:
 # 		pix. fill((read_number, read_number, read_number))
 
 # 	window. blit(pix, (x, y))
+
+
+#1
+# x += int(x/y*4)
+# y += int(y/x*4)
+# #2
+# x += x/100
+# y += y/100
+# #3?
+# x += int(2-(math.sqrt(y)))
+# y += int(2-(math.sqrt(x)))
+# 4
+# x += math.sin(x)*5
+# y += -math.cos(y)*5
