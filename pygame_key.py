@@ -9,7 +9,7 @@ import time
 
 import math
 import numpy as np
-import threading
+import threading, queue
 		
 def pause_ses():
 	global pause_session
@@ -34,37 +34,42 @@ def clear_bot(pix, x, y):
 	window. blit(pix, (x, y))
 	pygame. display. flip()
 
-def key_pressed(mode, key_p, function):
+def keyboard_pressed(key_p, function):# клавиатура
 	"""
-	mode - режим клавиатура(0)/мышь(1)
-	key_p - нажимаемая клавиша. клавиатура(pygame.K_SPACE)/мышь(ЛКМ(0),СКМ(1),ПКМ(2))
+	key_p - нажимаемая клавиша. клавиатура(pygame.K_SPACE)
 	function - запускаемая функция после события
-	Example 1 (keyboard). key_pressed(0, pygame.K_SPACE, pause_ses)
-	Example 2 (mouse). key_pressed(1, 0, closed)
+	Example. key_pressed(pygame.K_SPACE, pause_ses)
 	"""
+	global block_keyboard
 
-	# Две отдельные функции, ибо клавиатура может работать вместе с мышью
-	global block
-	if mode == 0:	# клавиатура
-		if pygame.key.get_pressed()[key_p] == 1:
-			if block == False:
-				# print("Кнопка на клавиатуре нажата")
-				block = True
-				function()
-		else:
-			block = False
+	if pygame.key.get_pressed()[key_p] == 1:
 
-	if mode == 1:	# мышь
-		if pygame.mouse.get_pressed()[key_p] == 1:
-			if block == False:
-				# print("Кнопка мыши нажата")
-				block = True
-				function()
-		else:
-			block = False		
+		if block_keyboard == False:
+			# print(block_keyboard) 
+			time.sleep(0.5)
+			block_keyboard = True
+			function()
+	else:
+		block_keyboard = False
+
+def mouse_pressed(key_p, function):
+	"""
+	key_p - нажимаемая клавиша ЛКМ(0),СКМ(1),ПКМ(2)
+	function - запускаемая функция после события
+	Example. key_pressed(0, closed)
+	"""
+	global block_mouse
+
+	if pygame.mouse.get_pressed()[key_p] == 1:# мышь
+		if block_mouse == False:
+			# print(block_mouse)
+			block_mouse = True
+			function()
+	else:
+		block_mouse = False		
 
 def start_th():
-	create_bot = threading.Thread(target=create_object, args=(2,2,))
+	create_bot = threading.Thread(target=create_object, args=(3,3))
 	# create_object(5,5)
 	create_bot.start()
 
@@ -86,8 +91,8 @@ def create_object(x_scale = 1, y_scale = 1):
 			continue
 		clear_bot(pix, x, y)
 
-		x += int(math.sin(x)*5)
-		y += int(-math.cos(y)*5)
+		x += math.sin(x)*5
+		y += -math.cos(y)*5
 		# print(x,y)
 
 		# если выход за пределы комнаты, то удаление
@@ -108,7 +113,7 @@ LIST_BOT = np.zeros((1, num_index_list_bot), dtype=int)
 screen_width = 1000
 screen_height = 500
 
-speed = 100
+speed = 0
 
 pygame.init()
 window = pygame.display.set_mode((screen_width , screen_height))
@@ -118,24 +123,27 @@ pix = pygame.Surface((5, 5))
 
 done = True
 pause_session = False
-block = False
+block_keyboard = False
+block_mouse = False
 
 number_pix = np.ones((screen_width , screen_height), dtype=int)
 number_pix = np.zeros_like(number_pix) # генерируем массив нулей (цвет чёрный)
 
 # print(LIST_BOT)
+flow_priority = queue.Queue()
+
 
 while done:
 	for e in pygame.event.get() :
 		if e. type == pygame. QUIT:
 			done = False
 
-	key_pressed(0, pygame.K_SPACE, pause_ses)
-	key_pressed(0, pygame.K_z, closed_window)
+	keyboard_pressed(pygame.K_SPACE, pause_ses)
+	keyboard_pressed(pygame.K_z, closed_window)
 
 	(x,y) = pygame.mouse.get_pos()
 	if x > 0 and x < screen_width and y > 0 and y < screen_height:
-		key_pressed(1, 0, start_th)
+		mouse_pressed(0, start_th)
 
 
 	if pause_session == True:
