@@ -47,9 +47,9 @@ def clear_bot(pix, x, y):
 
 def keyboard_pressed(key_p, function):  # клавиатура
     """
-    key_p - нажимаемая клавиша. клавиатура(pygame.K_SPACE)
+    key_p - нажимаемая клавиша. клавиатура(pygame.K_SPACE)  # Стиль имени!
     function - запускаемая функция после события
-    Example. key_pressed(pygame.K_SPACE, pause_ses)
+    Example. key_pressed(pygame.K_SPACE, pause_ses)  # Стиль имени!
     """
     global block_keyboard
 
@@ -126,7 +126,7 @@ def create_object(x_scale=1, y_scale=1):
 
 num_index_list_bot = 3
 # [id, x, y]
-LIST_BOT = np.zeros((1, num_index_list_bot), dtype=int)
+LIST_BOT = np.zeros((1, num_index_list_bot), dtype=int)  # Стиль имени!
 
 
 screen_width = 1000
@@ -157,7 +157,7 @@ while done:
         if e.type == pygame.QUIT:
             done = False
 
-    keyboard_pressed(pygame.K_SPACE, pause_ses)
+    keyboard_pressed(pygame.K_SPACE, pause_ses)  # Стиль имени!
     keyboard_pressed(pygame.K_z, closed_window)
 
     (x, y) = pygame.mouse.get_pos()
