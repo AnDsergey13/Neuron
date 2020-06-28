@@ -26,7 +26,7 @@ def closed_window():
 
 def draw_num_th():
     # сначала закрасим текст черным (типа очистки), а потом отрисуем на нём количество активных потоков
-    text1 = fontObj.render("█████", 1, (0, 0, 0),(0, 0, 0)) #alt + 219
+    text1 = fontObj.render("█████", 1, (0, 0, 0),(0, 0, 0))  #alt + 219
     window. blit(text1, (10, 100))
     num_TH = str(threading.active_count())
     text1 = fontObj.render(num_TH, 1, (0, 255, 0))
@@ -40,7 +40,7 @@ def clear_bot(pix, x, y):
     pygame. display. flip()
 
 
-def keyboard_pressed(key_p, function):# клавиатура
+def keyboard_pressed(key_p, function):  # клавиатура
     """
     key_p - нажимаемая клавиша. клавиатура(pygame.K_SPACE)
     function - запускаемая функция после события
@@ -67,7 +67,7 @@ def mouse_pressed(key_p, function):
     """
     global block_mouse
 
-    if pygame.mouse.get_pressed()[key_p] == 1:# мышь
+    if pygame.mouse.get_pressed()[key_p] == 1:  # мышь
         if block_mouse == False:
             # print(block_mouse)
             block_mouse = True
@@ -136,7 +136,7 @@ block_keyboard = False
 block_mouse = False
 
 number_pix = np.ones((screen_width , screen_height), dtype=int)
-number_pix = np.zeros_like(number_pix) # генерируем массив нулей (цвет чёрный)
+number_pix = np.zeros_like(number_pix)  # генерируем массив нулей (цвет чёрный)
 
 # print(LIST_BOT)
 flow_priority = queue.Queue()
