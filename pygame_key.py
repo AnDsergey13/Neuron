@@ -27,17 +27,17 @@ def closed_window():
 def draw_num_th():
     # сначала закрасим текст черным (типа очистки), а потом отрисуем на нём количество активных потоков
     text1 = fontObj.render("█████", 1, (0, 0, 0), (0, 0, 0))  # alt + 219
-    window. blit(text1, (10, 100))
+    window.blit(text1, (10, 100))
     num_TH = str(threading.active_count())
     text1 = fontObj.render(num_TH, 1, (0, 255, 0))
-    window. blit(text1, (10, 100))
+    window.blit(text1, (10, 100))
 
 
 def clear_bot(pix, x, y):
     """заполнение чёрным там, где был бот"""
-    pix. fill((0, 0, 0))
-    window. blit(pix, (x, y))
-    pygame. display. flip()
+    pix.fill((0, 0, 0))
+    window.blit(pix, (x, y))
+    pygame.display.flip()
 
 
 def keyboard_pressed(key_p, function):  # клавиатура
@@ -110,9 +110,9 @@ def create_object(x_scale=1, y_scale=1):
             draw_num_th()
             break
 
-        pix. fill((np.random.randint(140, 255), np.random.randint(140, 255), 255))
-        window. blit(pix, (x, y))
-        pygame. display. flip()
+        pix.fill((np.random.randint(140, 255), np.random.randint(140, 255), 255))
+        window.blit(pix, (x, y))
+        pygame.display.flip()
 
 num_index_list_bot = 3
 # [id, x, y]
@@ -144,7 +144,7 @@ flow_priority = queue.Queue()
 
 while done:
     for e in pygame.event.get():
-        if e. type == pygame. QUIT:
+        if e.type == pygame.QUIT:
             done = False
 
     keyboard_pressed(pygame.K_SPACE, pause_ses)
@@ -160,7 +160,7 @@ while done:
     pygame.draw.rect(window, (255, 255, 255), (45, 75, 10, 75))
     # pygame.draw.rect(window, (64, 128, 255), (150, 20, 100, 150), 4)
 
-    pygame. display. flip()
+    pygame.display.flip()
     pygame.time.delay(speed)
 
 
@@ -171,11 +171,11 @@ while done:
 #   read_number = number_pix.take(x, axis=0)[y] # взятие числа в матрице по координатам
 #   number_pix[x, y] = read_number + step   # увеличение яркости цвета на step(от чёрного к белому) при повторном попадании пикселя, на одно и тоже место
 #   if read_number > 255:
-#       pix. fill((255, 0, 255))
+#       pix.fill((255, 0, 255))
 #   else:
-#       pix. fill((read_number, read_number, read_number))
+#       pix.fill((read_number, read_number, read_number))
 
-#   window. blit(pix, (x, y))
+#   window.blit(pix, (x, y))
 
 
 # 1
