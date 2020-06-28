@@ -46,7 +46,7 @@ def keyboard_pressed(key_p, function):# клавиатура
     if pygame.key.get_pressed()[key_p] == 1:
 
         if block_keyboard == False:
-            # print(block_keyboard) 
+            # print(block_keyboard)
             time.sleep(0.5)
             block_keyboard = True
             function()
@@ -67,7 +67,7 @@ def mouse_pressed(key_p, function):
             block_mouse = True
             function()
     else:
-        block_mouse = False     
+        block_mouse = False
 
 def start_th():
     create_bot = threading.Thread(target=create_object, args=(3,3))
@@ -75,7 +75,7 @@ def start_th():
     create_bot.start()
 
 def create_object(x_scale = 1, y_scale = 1):
-    global LIST_BOT 
+    global LIST_BOT
 
     last_id = max(LIST_BOT.take(1, axis=1))
     current_id = last_id + 1
@@ -164,7 +164,7 @@ while done:
 #   # random.seed(5)
 #   x = np.random.randint(0, screen_width )
 #   y = np.random.razdint(0, screen_height)
-#   read_number = number_pix.take(x, axis=0)[y] # взятие числа в матрице по координатам 
+#   read_number = number_pix.take(x, axis=0)[y] # взятие числа в матрице по координатам
 #   number_pix[x, y] = read_number + step   # увеличение яркости цвета на step(от чёрного к белому) при повторном попадании пикселя, на одно и тоже место
 #   if read_number > 255:
 #       pix. fill((255, 0, 255))
