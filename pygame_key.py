@@ -26,7 +26,7 @@ def closed_window():
 
 def draw_num_th():
     # сначала закрасим текст черным (типа очистки), а потом отрисуем на нём количество активных потоков
-    text1 = fontObj.render("█████", 1, (0, 0, 0), (0, 0, 0))  #alt + 219
+    text1 = fontObj.render("█████", 1, (0, 0, 0), (0, 0, 0))  # alt + 219
     window. blit(text1, (10, 100))
     num_TH = str(threading.active_count())
     text1 = fontObj.render(num_TH, 1, (0, 255, 0))
@@ -182,7 +182,7 @@ while done:
 #   window. blit(pix, (x, y))
 
 
-#1
+# 1
 # x += int(x/y*4)
 # y += int(y/x*4)
 # #2
