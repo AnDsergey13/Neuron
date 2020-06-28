@@ -1,5 +1,6 @@
 # Исправить паузу (не всегда срабатывает)
-# БАГ. при создании, экземпляр не должен появляться на том месте, где уже есть экземпляр
+# БАГ. при создании, экземпляр не должен появляться на том месте,
+#     где уже есть экземпляр
 # разделить отрисовку  и логику
 # !добавить общий список, с координатами
 
@@ -25,7 +26,8 @@ def closed_window():
 
 
 def draw_num_th():
-    # сначала закрасим текст черным (типа очистки), а потом отрисуем на нём количество активных потоков
+    # сначала закрасим текст черным (типа очистки),
+    #    а потом отрисуем на нём количество активных потоков
     text1 = fontObj.render("█████", 1, (0, 0, 0), (0, 0, 0))  # alt + 219
     window.blit(text1, (10, 100))
     num_TH = str(threading.active_count())
@@ -87,7 +89,10 @@ def create_object(x_scale=1, y_scale=1):
 
     last_id = max(LIST_BOT.take(1, axis=1))
     current_id = last_id + 1
-    LIST_BOT = np.append(LIST_BOT, np.zeros((1, num_index_list_bot), dtype=int), axis=0)
+    LIST_BOT = np.append(
+        LIST_BOT,
+        np.zeros((1, num_index_list_bot), dtype=int),
+        axis=0)
     # print(LIST_BOT.shape)
 
     (x, y) = pygame.mouse.get_pos()
@@ -110,7 +115,9 @@ def create_object(x_scale=1, y_scale=1):
             draw_num_th()
             break
 
-        pix.fill((np.random.randint(140, 255), np.random.randint(140, 255), 255))
+        pix.fill((
+            np.random.randint(140, 255),
+            np.random.randint(140, 255), 255))
         window.blit(pix, (x, y))
         pygame.display.flip()
 
@@ -168,8 +175,11 @@ while done:
 #   # random.seed(5)
 #   x = np.random.randint(0, screen_width )
 #   y = np.random.razdint(0, screen_height)
-#   read_number = number_pix.take(x, axis=0)[y] # взятие числа в матрице по координатам
-#   number_pix[x, y] = read_number + step   # увеличение яркости цвета на step(от чёрного к белому) при повторном попадании пикселя, на одно и тоже место
+#   read_number = number_pix.take(x, axis=0)[y] # взятие числа
+#       в матрице по координатам
+#   number_pix[x, y] = read_number + step   # увеличение яркости цвета
+#       на step(от чёрного к белому) при повторном попадании пикселя,
+#       на одно и тоже место
 #   if read_number > 255:
 #       pix.fill((255, 0, 255))
 #   else:
