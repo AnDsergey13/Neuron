@@ -26,7 +26,7 @@ def closed_window():
 
 def draw_num_th():
     # сначала закрасим текст черным (типа очистки), а потом отрисуем на нём количество активных потоков
-    text1 = fontObj.render("█████", 1, (0, 0, 0),(0, 0, 0))  #alt + 219
+    text1 = fontObj.render("█████", 1, (0, 0, 0), (0, 0, 0))  #alt + 219
     window. blit(text1, (10, 100))
     num_TH = str(threading.active_count())
     text1 = fontObj.render(num_TH, 1, (0, 255, 0))
@@ -77,12 +77,12 @@ def mouse_pressed(key_p, function):
 
 
 def start_th():
-    create_bot = threading.Thread(target=create_object, args=(3,3))
-    # create_object(5,5)
+    create_bot = threading.Thread(target=create_object, args=(3, 3))
+    # create_object(5, 5)
     create_bot.start()
 
 
-def create_object(x_scale = 1, y_scale = 1):
+def create_object(x_scale=1, y_scale=1):
     global LIST_BOT
 
     last_id = max(LIST_BOT.take(1, axis=1))
@@ -125,7 +125,7 @@ screen_height = 500
 speed = 0
 
 pygame.init()
-window = pygame.display.set_mode((screen_width , screen_height))
+window = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Hello, pygame!")
 fontObj = pygame.font.SysFont('verdana', 25)
 pix = pygame.Surface((5, 5))
@@ -135,7 +135,7 @@ pause_session = False
 block_keyboard = False
 block_mouse = False
 
-number_pix = np.ones((screen_width , screen_height), dtype=int)
+number_pix = np.ones((screen_width, screen_height), dtype=int)
 number_pix = np.zeros_like(number_pix)  # генерируем массив нулей (цвет чёрный)
 
 # print(LIST_BOT)
@@ -143,14 +143,14 @@ flow_priority = queue.Queue()
 
 
 while done:
-    for e in pygame.event.get() :
+    for e in pygame.event.get():
         if e. type == pygame. QUIT:
             done = False
 
     keyboard_pressed(pygame.K_SPACE, pause_ses)
     keyboard_pressed(pygame.K_z, closed_window)
 
-    (x,y) = pygame.mouse.get_pos()
+    (x, y) = pygame.mouse.get_pos()
     if x > 0 and x < screen_width and y > 0 and y < screen_height:
         mouse_pressed(0, start_th)
 
