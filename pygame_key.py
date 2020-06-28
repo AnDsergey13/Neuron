@@ -50,7 +50,7 @@ def keyboard_pressed(key_p, function):  # клавиатура
 
     if pygame.key.get_pressed()[key_p] == 1:
 
-        if block_keyboard == False:
+        if not block_keyboard:
             # print(block_keyboard)
             time.sleep(0.5)
             block_keyboard = True
@@ -68,7 +68,7 @@ def mouse_pressed(key_p, function):
     global block_mouse
 
     if pygame.mouse.get_pressed()[key_p] == 1:  # мышь
-        if block_mouse == False:
+        if not block_mouse:
             # print(block_mouse)
             block_mouse = True
             function()
@@ -96,7 +96,7 @@ def create_object(x_scale=1, y_scale=1):
     draw_num_th()
 
     while done:
-        if pause_session == True:
+        if pause_session:
             continue
         clear_bot(pix, x, y)
 
@@ -155,7 +155,7 @@ while done:
         mouse_pressed(0, start_th)
 
 
-    if pause_session == True:
+    if pause_session:
         continue
 
     pygame.draw.rect(window, (255, 255, 255), (45, 75, 10, 75))
