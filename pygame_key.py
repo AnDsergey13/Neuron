@@ -4,12 +4,13 @@
 # !добавить общий список, с координатами
 
 
-import pygame
-import time
-
 import math
+import time
+import threading
+import queue
+
+import pygame
 import numpy as np
-import threading, queue
         
 def pause_ses():
     global pause_session
