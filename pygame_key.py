@@ -11,7 +11,7 @@ import queue
 
 import pygame
 import numpy as np
-        
+
 def pause_ses():
     global pause_session
     pause_session = not pause_session
@@ -152,7 +152,7 @@ while done:
 
     pygame.draw.rect(window, (255, 255, 255), (45, 75, 10, 75))
     # pygame.draw.rect(window, (64, 128, 255), (150, 20, 100, 150), 4)
-    
+
 
 
 
