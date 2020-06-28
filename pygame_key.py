@@ -108,8 +108,8 @@ def create_object(x_scale=1, y_scale=1):
             continue
         clear_bot(pix, x, y)
 
-        x += math.sin(x)*5
-        y += -math.cos(y)*5
+        x += math.sin(x) * 5
+        y += -math.cos(y) * 5
         # print(x,y)
 
         # если выход за пределы комнаты, то удаление
@@ -192,14 +192,14 @@ while done:
 
 
 # 1
-# x += int(x/y*4)
-# y += int(y/x*4)
+# x += int(x / y * 4)
+# y += int(y / x * 4)
 # #2
-# x += x/100
-# y += y/100
+# x += x / 100
+# y += y / 100
 # #3?
-# x += int(2-(math.sqrt(y)))
-# y += int(2-(math.sqrt(x)))
+# x += int(2 - (math.sqrt(y)))
+# y += int(2 - (math.sqrt(x)))
 # 4
-# x += math.sin(x)*5
-# y += -math.cos(y)*5
+# x += math.sin(x) * 5
+# y += -math.cos(y) * 5
