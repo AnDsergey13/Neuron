@@ -154,15 +154,11 @@ while done:
     if x > 0 and x < screen_width and y > 0 and y < screen_height:
         mouse_pressed(0, start_th)
 
-
     if pause_session:
         continue
 
     pygame.draw.rect(window, (255, 255, 255), (45, 75, 10, 75))
     # pygame.draw.rect(window, (64, 128, 255), (150, 20, 100, 150), 4)
-
-
-
 
     pygame. display. flip()
     pygame.time.delay(speed)
