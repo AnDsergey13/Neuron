@@ -12,14 +12,17 @@ import queue
 import pygame
 import numpy as np
 
+
 def pause_ses():
     global pause_session
     pause_session = not pause_session
     print(pause_session)
 
+
 def closed_window():
     global done
     done = False
+
 
 def draw_num_th():
     # сначала закрасим текст черным (типа очистки), а потом отрисуем на нём количество активных потоков
@@ -29,11 +32,13 @@ def draw_num_th():
     text1 = fontObj.render(num_TH, 1, (0, 255, 0))
     window. blit(text1, (10, 100))
 
+
 def clear_bot(pix, x, y):
     """заполнение чёрным там, где был бот"""
     pix. fill((0, 0, 0))
     window. blit(pix, (x, y))
     pygame. display. flip()
+
 
 def keyboard_pressed(key_p, function):# клавиатура
     """
@@ -53,6 +58,7 @@ def keyboard_pressed(key_p, function):# клавиатура
     else:
         block_keyboard = False
 
+
 def mouse_pressed(key_p, function):
     """
     key_p - нажимаемая клавиша ЛКМ(0),СКМ(1),ПКМ(2)
@@ -69,10 +75,12 @@ def mouse_pressed(key_p, function):
     else:
         block_mouse = False
 
+
 def start_th():
     create_bot = threading.Thread(target=create_object, args=(3,3))
     # create_object(5,5)
     create_bot.start()
+
 
 def create_object(x_scale = 1, y_scale = 1):
     global LIST_BOT
