@@ -126,8 +126,8 @@ pause_session = False
 block_keyboard = False
 block_mouse = False
 
-number_pix = np.ones((screen_width , screen_height), dtype=int)
-number_pix = np.zeros_like(number_pix) # генерируем массив нулей (цвет чёрный)
+# number_pix = np.ones((screen_width , screen_height), dtype=int)
+# number_pix = np.zeros_like(number_pix) # генерируем массив нулей (цвет чёрный)
 
 # print(LIST_BOT)
 flow_priority = queue.Queue()
