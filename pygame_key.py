@@ -124,6 +124,8 @@ def create_object(x_scale=1, y_scale=1):
         window.blit(pix, (x, y))
         pygame.display.flip()
 
+
+
 num_index_list_bot = 3
 # [id, x, y]
 LIST_BOT = np.zeros((1, num_index_list_bot), dtype=int)  # Стиль имени!
