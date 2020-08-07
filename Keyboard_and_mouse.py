@@ -2,11 +2,9 @@ import pygame
 
 class Event_mouse_and_keyboard():
 	""" DOC	"""
-	block = False
-
-	def __init__():
+	def __init__(self):
 		"""  Стартовые параметры """
-		pass
+		self.block = False
 
 	def keyboard_pressed(self, key_p, function):
 		"""
@@ -17,13 +15,13 @@ class Event_mouse_and_keyboard():
 
 		if pygame.key.get_pressed()[key_p] == 1:
 
-			if not Event_mouse_and_keyboard.block:
+			if not self.block:
 				# print(block_keyboard)
 				time.sleep(0.5)
-				Event_mouse_and_keyboard.block = True
+				self.block = True
 				function()
 		else:
-			Event_mouse_and_keyboard.block = False
+			self.block = False
 
 
 	def mouse_pressed(self, key_p, function):
@@ -34,9 +32,10 @@ class Event_mouse_and_keyboard():
 		"""
 
 		if pygame.mouse.get_pressed()[key_p] == 1:  # мышь
-			if not Event_mouse_and_keyboard.block:
+			if not self.block:
 				# print(block_mouse)
-				Event_mouse_and_keyboard.block = True
+				self.block = True
 				function()
 		else:
-			Event_mouse_and_keyboard.block = False
+			self.block = False
+
