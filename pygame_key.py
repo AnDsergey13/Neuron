@@ -47,42 +47,6 @@ def clear_bot(pix, x, y):
 	pygame.display.flip()
 
 
-# def keyboard_pressed(key_p, function):  # клавиатура
-# 	"""
-# 	key_p - нажимаемая клавиша. клавиатура(pygame.K_SPACE)  # Стиль имени!
-# 	function - запускаемая функция после события
-# 	Example. key_pressed(pygame.K_SPACE, pause_ses)  # Стиль имени!
-# 	"""
-# 	global block_keyboard
-
-# 	if pygame.key.get_pressed()[key_p] == 1:
-
-# 		if not block_keyboard:
-# 			# print(block_keyboard)
-# 			time.sleep(0.5)
-# 			block_keyboard = True
-# 			function()
-# 	else:
-# 		block_keyboard = False
-
-
-# def mouse_pressed(key_p, function):
-# 	"""
-# 	key_p - нажимаемая клавиша ЛКМ(0),СКМ(1),ПКМ(2)
-# 	function - запускаемая функция после события
-# 	Example. key_pressed(0, closed)
-# 	"""
-# 	global block_mouse
-
-# 	if pygame.mouse.get_pressed()[key_p] == 1:  # мышь
-# 		if not block_mouse:
-# 			# print(block_mouse)
-# 			block_mouse = True
-# 			function()
-# 	else:
-# 		block_mouse = False
-
-
 def start_th():
 	create_bot = threading.Thread(target=create_object, args=(3, 3))
 	# create_object(5, 5)
@@ -150,8 +114,6 @@ pause_session = False
 mouse_lbm = Event_mouse_and_keyboard()
 keyboard_space = Event_mouse_and_keyboard()
 keyboard_z = Event_mouse_and_keyboard()
-# block_keyboard = False
-# block_mouse = False
 
 # number_pix = np.ones((screen_width, screen_height), dtype=int)
 # number_pix = np.zeros_like(number_pix)  # генерируем массив нулей (цвет чёрный)
