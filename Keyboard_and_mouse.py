@@ -17,7 +17,7 @@ class Event_mouse_and_keyboard():
 
 			if not self.block:
 				# print(block_keyboard)
-				time.sleep(0.5)
+				# time.sleep(0.5)
 				self.block = True
 				function()
 		else:
