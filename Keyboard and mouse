@@ -1,4 +1,0 @@
-import pygame
-
-class Event_mouse_and_keyboard():
-	pass
