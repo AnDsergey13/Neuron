@@ -4,6 +4,7 @@
 # разделить отрисовку  и логику
 # !добавить общий список, с координатами
 
+from Keyboard_and_mouse import Event_mouse_and_keyboard
 
 import math
 import time
@@ -46,40 +47,40 @@ def clear_bot(pix, x, y):
 	pygame.display.flip()
 
 
-def keyboard_pressed(key_p, function):  # клавиатура
-	"""
-	key_p - нажимаемая клавиша. клавиатура(pygame.K_SPACE)  # Стиль имени!
-	function - запускаемая функция после события
-	Example. key_pressed(pygame.K_SPACE, pause_ses)  # Стиль имени!
-	"""
-	global block_keyboard
+# def keyboard_pressed(key_p, function):  # клавиатура
+# 	"""
+# 	key_p - нажимаемая клавиша. клавиатура(pygame.K_SPACE)  # Стиль имени!
+# 	function - запускаемая функция после события
+# 	Example. key_pressed(pygame.K_SPACE, pause_ses)  # Стиль имени!
+# 	"""
+# 	global block_keyboard
 
-	if pygame.key.get_pressed()[key_p] == 1:
+# 	if pygame.key.get_pressed()[key_p] == 1:
 
-		if not block_keyboard:
-			# print(block_keyboard)
-			time.sleep(0.5)
-			block_keyboard = True
-			function()
-	else:
-		block_keyboard = False
+# 		if not block_keyboard:
+# 			# print(block_keyboard)
+# 			time.sleep(0.5)
+# 			block_keyboard = True
+# 			function()
+# 	else:
+# 		block_keyboard = False
 
 
-def mouse_pressed(key_p, function):
-	"""
-	key_p - нажимаемая клавиша ЛКМ(0),СКМ(1),ПКМ(2)
-	function - запускаемая функция после события
-	Example. key_pressed(0, closed)
-	"""
-	global block_mouse
+# def mouse_pressed(key_p, function):
+# 	"""
+# 	key_p - нажимаемая клавиша ЛКМ(0),СКМ(1),ПКМ(2)
+# 	function - запускаемая функция после события
+# 	Example. key_pressed(0, closed)
+# 	"""
+# 	global block_mouse
 
-	if pygame.mouse.get_pressed()[key_p] == 1:  # мышь
-		if not block_mouse:
-			# print(block_mouse)
-			block_mouse = True
-			function()
-	else:
-		block_mouse = False
+# 	if pygame.mouse.get_pressed()[key_p] == 1:  # мышь
+# 		if not block_mouse:
+# 			# print(block_mouse)
+# 			block_mouse = True
+# 			function()
+# 	else:
+# 		block_mouse = False
 
 
 def start_th():
@@ -145,8 +146,12 @@ pix = pygame.Surface((5, 5))
 
 done = True
 pause_session = False
-block_keyboard = False
-block_mouse = False
+
+mouse_lbm = Event_mouse_and_keyboard()
+keyboard_space = Event_mouse_and_keyboard()
+keyboard_z = Event_mouse_and_keyboard()
+# block_keyboard = False
+# block_mouse = False
 
 # number_pix = np.ones((screen_width, screen_height), dtype=int)
 # number_pix = np.zeros_like(number_pix)  # генерируем массив нулей (цвет чёрный)
@@ -160,12 +165,12 @@ while done:
 		if e.type == pygame.QUIT:
 			done = False
 
-	keyboard_pressed(pygame.K_SPACE, pause_ses)  # Стиль имени!
-	keyboard_pressed(pygame.K_z, closed_window)
+	keyboard_space.keyboard_pressed(pygame.K_SPACE, pause_ses)  # Стиль имени!
+	keyboard_z.keyboard_pressed(pygame.K_z, closed_window)
 
 	(x, y) = pygame.mouse.get_pos()
 	if x > 0 and x < screen_width and y > 0 and y < screen_height:
-		mouse_pressed(0, start_th)
+		mouse_lbm.mouse_pressed(0, start_th)
 
 	if pause_session:
 		continue
