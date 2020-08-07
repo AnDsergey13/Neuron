@@ -32,6 +32,7 @@ def draw_num_th():
         "\u2588\u2588\u2588\u2588\u2588",
         1,
         (0, 0, 0), (0, 0, 0))  # alt + 219
+    # text1 = fontObj.render("█████", 1, (0, 0, 0), (0, 0, 0))
     window.blit(text1, (10, 100))
     num_TH = str(threading.active_count())
     text1 = fontObj.render(num_TH, 1, (0, 255, 0))
