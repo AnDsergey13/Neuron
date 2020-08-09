@@ -61,7 +61,7 @@ def create_object():
 
 		py.set_color_bot(np.random.randint(140, 255), np.random.randint(140, 255), 255)
 		py.draw_bot(x, y)
-		pygame.display.flip()
+		py.update_screen()
 
 
 num_index_list_bot = 3
