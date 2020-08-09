@@ -61,32 +61,33 @@ def create_object(x_scale=1, y_scale=1):
 		LIST_BOT,
 		np.zeros((1, num_index_list_bot), dtype=int),
 		axis=0)
-	# print(LIST_BOT.shape)
 
-	(x, y) = pygame.mouse.get_pos()
-	pix = pygame.Surface((x_scale, y_scale))
+	# ???
+	x, y = py.get_pos_mouse()
+	py.create_bot()
 
-	draw_num_th()
+	py.draw_num_th("green")
 
 	while done:
 		if pause_session:
 			continue
-		clear_bot(pix, x, y)
+		py.clear_pos_bot()
+		py.draw_bot(x, y)
 
 		x += math.sin(x) * 5
 		y += -math.cos(y) * 5
 		# print(x,y)
 
 		# если выход за пределы комнаты, то удаление
-		if x > screen_width or x < 0 or y > screen_height or y < 0:
-			clear_bot(pix, x, y)
-			draw_num_th()
+		if py.check_object_on_screen(py.get_pos_mouse()):
+			py.clear_pos_bot()
+			py.clear_text()
+			py.draw_num_th("green")
 			break
 
-		pix.fill((
-			np.random.randint(140, 255),
-			np.random.randint(140, 255), 255))
-		window.blit(pix, (x, y))
+		py.set_color_bot(np.random.randint(140, 255), np.random.randint(140, 255), 255)
+		
+		py.draw_bot(x, y)
 		pygame.display.flip()
 
 
