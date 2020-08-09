@@ -96,18 +96,6 @@ num_index_list_bot = 3
 # [id, x, y]
 LIST_BOT = np.zeros((1, num_index_list_bot), dtype=int)  # Стиль имени!
 
-
-# screen_width = 1000
-# screen_height = 500
-
-# speed = 0
-
-# pygame.init()
-# window = pygame.display.set_mode((screen_width, screen_height))
-# pygame.display.set_caption("Hello, pygame!")
-# fontObj = pygame.font.SysFont('verdana', 25)
-# pix = pygame.Surface((5, 5))
-
 # ?name
 py = Drawing()
 py.set_delay(0)
