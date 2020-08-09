@@ -24,10 +24,7 @@ class Drawing():
 		self.screen_width = screen_width
 		self.screen_height = screen_height
 		self.window = pygame.display.set_mode((self.screen_width, self.screen_height))
-		self.fontObj = pygame.font.SysFont('verdana', text_height)
-		# ?
-		self.bot = pygame.Surface((bot_width, bot_height))
-		# ?
+		self.fontObj = pygame.font.SysFont("verdana", text_height)
 		pygame.display.set_caption(name)
 
 	def clear_pos_bot(self, bot):
@@ -35,7 +32,9 @@ class Drawing():
 		# меняем цвет бота
 		bot.fill((0, 0, 0))
 
-	def draw_object(self, window, object_, x, y):
+	def create_bot(self, bot_width=5, bot_height=5):
+		""" Создаём объект бота """
+		self.bot = pygame.Surface((bot_width, bot_height))
 		""" Преносим изменения на экран """
 		# обновляем переменные 
 		self.object_ = object_
