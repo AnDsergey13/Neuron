@@ -9,7 +9,6 @@ from Keyboard_and_mouse import Event_mouse_and_keyboard
 import math
 import time
 import threading
-import queue
 
 import pygame
 import numpy as np
@@ -119,8 +118,6 @@ keyboard_z = Event_mouse_and_keyboard()
 # number_pix = np.zeros_like(number_pix)  # генерируем массив нулей (цвет чёрный)
 
 # print(LIST_BOT)
-flow_priority = queue.Queue()
-
 
 while done:
 	for e in pygame.event.get():
