@@ -4,17 +4,21 @@ import threading
 class Drawing():
 	""" Класс для работы с графикой	"""
 
-	def __init__(self):
-		"""  Создание окна, инициализация объекта класса pygame, 
-		название окна, стиль текста, размер пикселей/ботов  """
-		pass
-
-	def update_varible(self, *varible):
-		# как обновить сразу все переменные?
-		self.bot = bot
-		self.window = window
-		self.x = x
-		self.y = y
+	def __init__(self, name="Hello, pygame!", screen_width=1000, screen_height=500, 
+		bot_width=5, bot_height=5, text_height=25):
+		""" Начальные условия
+			Создание окна, инициализация объекта класса pygame, 
+			название окна, стиль текста, размер пикселей/ботов и т.д. 
+		"""
+		pygame.init()
+		self.screen_width = screen_width
+		self.screen_height = screen_height
+		self.window = pygame.display.set_mode((self.screen_width, self.screen_height))
+		self.fontObj = pygame.font.SysFont('verdana', text_height)
+		# ?
+		self.bot = pygame.Surface((bot_width, bot_height))
+		# ?
+		pygame.display.set_caption(name)
 
 	def clear_pos_bot(self, bot):
 		""" Очищаем место где был бот раньше на экране """
@@ -23,12 +27,15 @@ class Drawing():
 
 	def draw_object(self, window, object_, x, y):
 		""" Преносим изменения на экран """
-		self.update_varible(window, object_, x, y)
+		# обновляем переменные 
+		self.object_ = object_
+		self.x = x
+		self.y = y
 		window.blit(object_, (x, y))
 
 	def clear_text(self, object_):
 		""" Закрашиваем чёрным место, где отрисовывается текст"""
-		object_ = fontObj.render("█████", 1, (0, 0, 0), (0, 0, 0))
+		object_ = self.fontObj.render("█████", 1, (0, 0, 0), (0, 0, 0))
 		# text1 = fontObj.render(
 		# "\u2588\u2588\u2588\u2588\u2588", 1, (0, 0, 0), (0, 0, 0))  # alt + 219
 
@@ -45,3 +52,15 @@ class Drawing():
 	def set_delay(self, delay_update):
 		""" Установить задержку для каждой отрисовки"""
 		self.delay_update = delay_update
+
+	def get_pos_mouse(self):
+		""" Возвращает кортеж x и y позиции мышки"""
+		return pygame.mouse.get_pos()
+
+	def check_mouse_on_screen(self):
+		""" Возвращает True, если мышка находится на окне, иначе False """
+		(x, y) = get_pos_mouse()
+		if x > 0 and x < screen_width and y > 0 and y < screen_height:
+			return True
+		else:
+			return False
