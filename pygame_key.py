@@ -58,7 +58,7 @@ def create_object(x_scale=1, y_scale=1):
 		# print(x,y)
 
 		# если выход за пределы комнаты, то удаление
-		if py.check_object_on_screen(py.get_pos_mouse()):
+		if not py.check_object_on_screen((x, y)):
 			py.clear_pos_bot()
 			py.clear_text()
 			py.draw_num_th("green")
