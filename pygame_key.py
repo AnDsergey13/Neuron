@@ -89,8 +89,7 @@ while done:
 	py.clear_text()
 	py.update_screen()
 	# рисуем количество потоков
-	num_th = threading.active_count()
-	py.draw_text("purple", value=num_th)
+	py.draw_text("purple", value=threading.active_count())
 
 	print(threading.active_count())
 	for e in pygame.event.get():
