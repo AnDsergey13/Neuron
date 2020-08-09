@@ -5,6 +5,7 @@
 # !добавить общий список, с координатами
 
 from Keyboard_and_mouse import Event_mouse_and_keyboard
+from Drawing import Drawing
 
 import math
 import time
@@ -96,16 +97,20 @@ num_index_list_bot = 3
 LIST_BOT = np.zeros((1, num_index_list_bot), dtype=int)  # Стиль имени!
 
 
-screen_width = 1000
-screen_height = 500
+# screen_width = 1000
+# screen_height = 500
 
-speed = 0
+# speed = 0
 
-pygame.init()
-window = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Hello, pygame!")
-fontObj = pygame.font.SysFont('verdana', 25)
-pix = pygame.Surface((5, 5))
+# pygame.init()
+# window = pygame.display.set_mode((screen_width, screen_height))
+# pygame.display.set_caption("Hello, pygame!")
+# fontObj = pygame.font.SysFont('verdana', 25)
+# pix = pygame.Surface((5, 5))
+
+# ?name
+py = Drawing()
+py.set_delay(0)
 
 done = True
 pause_session = False
@@ -127,18 +132,16 @@ while done:
 	keyboard_space.keyboard_pressed(pygame.K_SPACE, pause_ses)  # Стиль имени!
 	keyboard_z.keyboard_pressed(pygame.K_z, closed_window)
 
-	(x, y) = pygame.mouse.get_pos()
-	if x > 0 and x < screen_width and y > 0 and y < screen_height:
+	if py.check_object_on_screen(py.get_pos_mouse()):
 		mouse_lbm.mouse_pressed(0, start_th)
 
 	if pause_session:
 		continue
 
-	pygame.draw.rect(window, (255, 255, 255), (45, 75, 10, 75))
+	# pygame.draw.rect(window, (255, 255, 255), (45, 75, 10, 75))
 	# pygame.draw.rect(window, (64, 128, 255), (150, 20, 100, 150), 4)
 
-	pygame.display.flip()
-	pygame.time.delay(speed)
+	py.update_screen()
 
 
 # # генерация случайной позиции по х и по y
