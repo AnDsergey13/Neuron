@@ -68,7 +68,10 @@ class Drawing():
 	# "\u2588\u2588\u2588\u2588\u2588", 1, (0, 0, 0), (0, 0, 0))  # alt + 219
 
 	def draw_num_th(self, *color):
-		""" Рисуем количество активных потоков """
+		""" Задаём цвет для текста.
+			Допускается надписи типа "red", а также в RGB виде
+			ПРИМЕР! py.draw_text("purple", value=num_th)
+		"""
 		if len(color) == 3:
 			self.text = self.fontObj.render(num_TH, 1, color)
 		elif len(color) == 1:
