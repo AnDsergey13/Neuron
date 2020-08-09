@@ -55,7 +55,6 @@ def create_object(x_scale=1, y_scale=1):
 
 		x += math.sin(x) * 5
 		y += -math.cos(y) * 5
-		# print(x,y)
 
 		# если выход за пределы комнаты, то удаление
 		if not py.check_object_on_screen((x, y)):
@@ -65,10 +64,8 @@ def create_object(x_scale=1, y_scale=1):
 			break
 
 		py.set_color_bot(np.random.randint(140, 255), np.random.randint(140, 255), 255)
-		
 		py.draw_bot(x, y)
 		pygame.display.flip()
-
 
 
 num_index_list_bot = 3

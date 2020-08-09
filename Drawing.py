@@ -71,7 +71,6 @@ class Drawing():
 		num_TH = str(threading.active_count())
 		self.text = self.fontObj.render(num_TH, 1, Drawing.color_object.get(color))
 
-
 	def update_screen(self):
 		""" Обновляем картинку для всех объектов на экране"""
 		pygame.display.flip()
@@ -81,7 +80,6 @@ class Drawing():
 		""" Установить задержку для каждой отрисовки"""
 		self.delay_update = delay_update
 
-
 	def get_pos_mouse(self):
 		""" Возвращает кортеж x и y позиции мышки"""
 		return pygame.mouse.get_pos()
@@ -90,6 +88,7 @@ class Drawing():
 		""" Возвращает True, если объект находится в зоне окна, иначе False """
 		# на вход принимается кортеж
 		# pos[0] - это x, pos[1] - это y
+		# print(pos)
 		if pos[0] > 0 and pos[0] < self.screen_width and pos[1] > 0 and pos[1] < self.screen_height:
 			return True
 		else:
