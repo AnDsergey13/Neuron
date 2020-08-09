@@ -18,7 +18,7 @@ class Drawing():
 	def __init__(self, name="Hello, pygame!", screen_width=700, screen_height=500, text_height=25):
 		""" Начальные условия
 			Создание окна, инициализация объекта класса pygame, 
-			название окна, стиль текста, размер пикселей/ботов и т.д. 
+			название окна, стиль текста, и т.д. 
 		"""
 		pygame.init()
 		self.screen_width = screen_width
