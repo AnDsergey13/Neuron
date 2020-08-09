@@ -93,3 +93,6 @@ class Drawing():
 			return True
 		else:
 			return False
+
+	def get_list_colors(self):
+		return list(Drawing.color_object.keys())
