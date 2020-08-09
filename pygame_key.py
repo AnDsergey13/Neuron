@@ -107,5 +107,5 @@ while done:
 
 	# pygame.draw.rect(window, (255, 255, 255), (45, 75, 10, 75))
 	# pygame.draw.rect(window, (64, 128, 255), (150, 20, 100, 150), 4)
-
-	py.update_screen()
+	
+	py.update_screen_with_delay()
