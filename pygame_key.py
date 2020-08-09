@@ -44,8 +44,6 @@ def create_object():
 	# ???
 	x, y = py.get_pos_mouse()
 	py.create_bot(3, 3)
-	# py.set_color_bot(0,254,0)
-	py.draw_num_th("green")
 
 	while done:
 		if pause_session:
@@ -59,8 +57,6 @@ def create_object():
 		# если выход за пределы комнаты, то удаление
 		if not py.check_object_on_screen((x, y)):
 			py.clear_pos_bot()
-			py.clear_text()
-			py.draw_num_th("green")
 			break
 
 		py.set_color_bot(np.random.randint(140, 255), np.random.randint(140, 255), 255)
