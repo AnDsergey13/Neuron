@@ -25,27 +25,6 @@ def closed_window():
 	done = False
 
 
-def draw_num_th():
-	# сначала закрасим текст черным (типа очистки),
-	#    а потом отрисуем на нём количество активных потоков
-	text1 = fontObj.render(
-		"\u2588\u2588\u2588\u2588\u2588",
-		1,
-		(0, 0, 0), (0, 0, 0))  # alt + 219
-	# text1 = fontObj.render("█████", 1, (0, 0, 0), (0, 0, 0))
-	window.blit(text1, (10, 100))
-	num_TH = str(threading.active_count())
-	text1 = fontObj.render(num_TH, 1, (0, 255, 0))
-	window.blit(text1, (10, 100))
-
-
-def clear_bot(pix, x, y):
-	"""заполнение чёрным там, где был бот"""
-	pix.fill((0, 0, 0))
-	window.blit(pix, (x, y))
-	pygame.display.flip()
-
-
 def start_th():
 	create_bot = threading.Thread(target=create_object, args=(3, 3))
 	# create_object(5, 5)
