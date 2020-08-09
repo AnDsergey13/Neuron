@@ -66,10 +66,21 @@ class Drawing():
 	# text1 = fontObj.render(
 	# "\u2588\u2588\u2588\u2588\u2588", 1, (0, 0, 0), (0, 0, 0))  # alt + 219
 
-	def draw_num_th(self, color):
+	def draw_num_th(self, *color):
 		""" Рисуем количество активных потоков """
 		num_TH = str(threading.active_count())
-		self.text = self.fontObj.render(num_TH, 1, Drawing.color_object.get(color))
+		if len(color) == 3:
+			self.text = self.fontObj.render(num_TH, 1, color)
+		elif len(color) == 1:
+			color = color[0]
+			self.text = self.fontObj.render(num_TH, 1, Drawing.color_object.get(color))
+		else:
+			print("""
+				Ошибка ввода! Введите название цвета или его RGB формат.
+				ПРИМЕРЫ! draw_num_th("light blue") или draw_num_th(0, 255, 255)
+				Для уточнения, какие цвета можно использовать, введите get_list_colors()
+			""")
+		
 
 	def update_screen(self):
 		""" Обновляем картинку для всех объектов на экране"""
