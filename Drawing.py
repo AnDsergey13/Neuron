@@ -44,19 +44,19 @@ class Drawing():
 	def set_color_bot(self, *color):
 		""" Задаём цвет для бота.
 			Допускается надписи типа "red", а также в RGB виде """
-		if len(RGB) == 3:
-			self.bot.fill(RGB)
-		else:
+		if len(color) == 3:
+			self.bot.fill(color)
+		elif len(color) == 1:
+			# достаём строку из кортежа
+			color = color[0]
 			# если пришёл только один аргумент, то это строка
-			try:
-				self.bot.fill(Drawing.color_object.get(RGB))
-			except:
-				print("""
-						Ошибка ввода! Введите название цвета или его RGB формат.
-						ПРИМЕРЫ! set_color_bot("light blue") или set_color_bot(0, 255, 255)
-						Для уточнения, какие цвета можно использовать, введите get_list_colors()
-					""")
-
+			self.bot.fill(Drawing.color_object.get(color))
+		else:
+			print("""
+				Ошибка ввода! Введите название цвета или его RGB формат.
+				ПРИМЕРЫ! set_color_bot("light blue") или set_color_bot(0, 255, 255)
+				Для уточнения, какие цвета можно использовать, введите get_list_colors()
+			""")
 
 	def clear_text(self):
 		""" Закрашиваем чёрным место, где отрисовывается текст"""
