@@ -25,6 +25,7 @@ class Drawing():
 		self.screen_height = screen_height
 		self.window = pygame.display.set_mode((self.screen_width, self.screen_height))
 		self.fontObj = pygame.font.SysFont("verdana", text_height)
+
 		pygame.display.set_caption(name)
 
 	def clear_pos_bot(self):
@@ -69,6 +70,7 @@ class Drawing():
 		num_TH = str(threading.active_count())
 		self.text = self.fontObj.render(num_TH, 1, Drawing.color_object.get(color))
 
+
 	def update_screen(self):
 		""" Обновляем картинку для всех объектов на экране"""
 		pygame.display.flip()
@@ -77,6 +79,7 @@ class Drawing():
 	def set_delay(self, delay_update):
 		""" Установить задержку для каждой отрисовки"""
 		self.delay_update = delay_update
+
 
 	def get_pos_mouse(self):
 		""" Возвращает кортеж x и y позиции мышки"""
