@@ -84,7 +84,6 @@ class Drawing():
 				Для уточнения, какие цвета можно использовать, введите get_list_colors()
 			""")
 		
-
 	def update_screen(self):
 		""" Обновляем экран без задержки"""
 		pygame.display.flip()
@@ -107,7 +106,6 @@ class Drawing():
 		""" Возвращает True, если объект находится в зоне окна, иначе False """
 		# на вход принимается кортеж
 		# pos[0] - это x, pos[1] - это y
-		# print(pos)
 		if pos[0] > 0 and pos[0] < self.screen_width and pos[1] > 0 and pos[1] < self.screen_height:
 			return True
 		else:
