@@ -3,6 +3,17 @@ import threading
 
 class Drawing():
 	""" Класс для работы с графикой	"""
+	color_object = {
+		"red" : (255, 0, 0),
+		"orange" : (255, 128, 0),
+		"yellow" : (255, 255, 0),
+		"green" : (255, 255, 0),
+		"light blue" : (0, 255, 255),
+		"dark blue" : (0, 0, 255),
+		"purple" : (255, 0, 255),
+		"black" : (0, 0, 0),
+		"white" : (255, 255, 255)
+	}
 
 	def __init__(self, name="Hello, pygame!", screen_width=700, screen_height=500, 
 		bot_width=5, bot_height=5, text_height=25):
