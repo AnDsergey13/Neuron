@@ -85,6 +85,13 @@ keyboard_z = Event_mouse_and_keyboard()
 # print(LIST_BOT)
 
 while done:
+	py.clear_text()
+	py.update_screen()
+	# рисуем количество потоков
+	num_th = threading.active_count()
+	py.draw_text("purple", value=num_th)
+
+	print(threading.active_count())
 	for e in pygame.event.get():
 		if e.type == pygame.QUIT:
 			done = False
