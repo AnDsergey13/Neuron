@@ -1,5 +1,4 @@
 import pygame
-import threading
 
 class Drawing():
 	""" Класс для работы с графикой	"""
@@ -68,7 +67,6 @@ class Drawing():
 
 	def draw_num_th(self, *color):
 		""" Рисуем количество активных потоков """
-		num_TH = str(threading.active_count())
 		if len(color) == 3:
 			self.text = self.fontObj.render(num_TH, 1, color)
 		elif len(color) == 1:
