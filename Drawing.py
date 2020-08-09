@@ -60,9 +60,11 @@ class Drawing():
 
 	def clear_text(self):
 		""" Закрашиваем чёрным место, где отрисовывается текст"""
-		self.text = self.fontObj.render("█████", 1, Drawing.color_object.get("black"), Drawing.color_object.get("black"))
-		# text1 = fontObj.render(
-		# "\u2588\u2588\u2588\u2588\u2588", 1, (0, 0, 0), (0, 0, 0))  # alt + 219
+		self.text = self.fontObj.render("█████", 1, Drawing.color_object.get("black"),
+										Drawing.color_object.get("black"))
+
+	# text1 = fontObj.render(
+	# "\u2588\u2588\u2588\u2588\u2588", 1, (0, 0, 0), (0, 0, 0))  # alt + 219
 
 	def draw_num_th(self, color):
 		""" Рисуем количество активных потоков """
