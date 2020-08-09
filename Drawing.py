@@ -36,12 +36,11 @@ class Drawing():
 	def create_bot(self, bot_width=5, bot_height=5):
 		""" Создаём объект бота """
 		self.bot = pygame.Surface((bot_width, bot_height))
+
+	def draw_bot(self, x, y):
 		""" Преносим изменения на экран """
-		# обновляем переменные 
-		self.object_ = object_
-		self.x = x
-		self.y = y
-		window.blit(object_, (x, y))
+		self.window.blit(self.bot, (x, y))
+
 	def set_color_bot(self, *color):
 		""" Задаём цвет для бота.
 			Допускается надписи типа "red", а также в RGB виде """
