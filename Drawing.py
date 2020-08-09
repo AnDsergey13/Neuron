@@ -15,8 +15,7 @@ class Drawing():
 		"white" : (255, 255, 255)
 	}
 
-	def __init__(self, name="Hello, pygame!", screen_width=700, screen_height=500, 
-		bot_width=5, bot_height=5, text_height=25):
+	def __init__(self, name="Hello, pygame!", screen_width=700, screen_height=500, text_height=25):
 		""" Начальные условия
 			Создание окна, инициализация объекта класса pygame, 
 			название окна, стиль текста, размер пикселей/ботов и т.д. 
