@@ -67,16 +67,16 @@ class Drawing():
 	# text1 = fontObj.render(
 	# "\u2588\u2588\u2588\u2588\u2588", 1, (0, 0, 0), (0, 0, 0))  # alt + 219
 
-	def draw_num_th(self, *color):
+	def draw_text(self, *color, value):
 		""" Задаём цвет для текста.
 			Допускается надписи типа "red", а также в RGB виде
 			ПРИМЕР! py.draw_text("purple", value=num_th)
 		"""
 		if len(color) == 3:
-			self.text = self.fontObj.render(num_TH, 1, color)
+			self.text = self.fontObj.render(str(value), 1, color)
 		elif len(color) == 1:
 			color = color[0]
-			self.text = self.fontObj.render(num_TH, 1, Drawing.color_object.get(color))
+			self.text = self.fontObj.render(str(value), 1, Drawing.color_object.get(color))
 		else:
 			print("""
 				Ошибка ввода! Введите название цвета или его RGB формат.
