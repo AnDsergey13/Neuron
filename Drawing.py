@@ -86,7 +86,7 @@ class Drawing():
 		
 
 	def update_screen(self):
-		""" Обновляем картинку для всех объектов на экране"""
+		""" Обновляем экран без задержки"""
 		pygame.display.flip()
 		pygame.time.delay(self.delay_update)
 
