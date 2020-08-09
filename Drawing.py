@@ -4,7 +4,7 @@ import threading
 class Drawing():
 	""" Класс для работы с графикой	"""
 
-	def __init__(self, name="Hello, pygame!", screen_width=1000, screen_height=500, 
+	def __init__(self, name="Hello, pygame!", screen_width=700, screen_height=500, 
 		bot_width=5, bot_height=5, text_height=25):
 		""" Начальные условия
 			Создание окна, инициализация объекта класса pygame, 
