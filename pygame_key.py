@@ -43,8 +43,8 @@ def create_object(x_scale=1, y_scale=1):
 
 	# ???
 	x, y = py.get_pos_mouse()
-	py.create_bot()
-
+	py.create_bot(2, 2)
+	# py.set_color_bot(0,254,0)
 	py.draw_num_th("green")
 
 	while done:
