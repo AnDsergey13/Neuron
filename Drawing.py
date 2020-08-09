@@ -27,10 +27,10 @@ class Drawing():
 		self.fontObj = pygame.font.SysFont("verdana", text_height)
 		pygame.display.set_caption(name)
 
-	def clear_pos_bot(self, bot):
+	def clear_pos_bot(self):
 		""" Очищаем место где был бот раньше на экране """
 		# меняем цвет бота
-		bot.fill((0, 0, 0))
+		self.bot.fill(Drawing.color_object.get("black"))
 
 	def create_bot(self, bot_width=5, bot_height=5):
 		""" Создаём объект бота """
@@ -42,16 +42,17 @@ class Drawing():
 		self.y = y
 		window.blit(object_, (x, y))
 
-	def clear_text(self, object_):
+
+	def clear_text(self):
 		""" Закрашиваем чёрным место, где отрисовывается текст"""
-		object_ = self.fontObj.render("█████", 1, (0, 0, 0), (0, 0, 0))
+		self.text = self.fontObj.render("█████", 1, Drawing.color_object.get("black"), Drawing.color_object.get("black"))
 		# text1 = fontObj.render(
 		# "\u2588\u2588\u2588\u2588\u2588", 1, (0, 0, 0), (0, 0, 0))  # alt + 219
 
-	def draw_num_th(self, object_):
+	def draw_num_th(self, color):
 		""" Рисуем количество активных потоков """
 		num_TH = str(threading.active_count())
-		object_ = fontObj.render(num_TH, 1, (0, 255, 0))
+		self.text = self.fontObj.render(num_TH, 1, Drawing.color_object.get(color))
 
 	def update_screen(self):
 		""" Обновляем картинку для всех объектов на экране"""
