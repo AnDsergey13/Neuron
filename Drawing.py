@@ -93,6 +93,8 @@ class Drawing():
 		""" Обновляем экран c задержкой. По умолчанию задержка 0"""
 		pygame.display.flip()
 		pygame.time.delay(delay_update)
+
+	# del?
 	def set_delay(self, delay_update):
 		""" Установить задержку для каждой отрисовки"""
 		self.delay_update = delay_update
