@@ -26,12 +26,12 @@ def closed_window():
 
 
 def start_th():
-	create_bot = threading.Thread(target=create_object, args=(3, 3))
+	create_bot = threading.Thread(target=create_object)
 	# create_object(5, 5)
 	create_bot.start()
 
 
-def create_object(x_scale=1, y_scale=1):
+def create_object():
 	global LIST_BOT
 
 	last_id = max(LIST_BOT.take(1, axis=1))
