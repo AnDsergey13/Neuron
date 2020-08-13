@@ -72,9 +72,12 @@ class Drawing():
 			ПРИМЕР! py.draw_text("purple") или py.draw_text(255, 0, 255) # фиолетовый
 		"""
 		self.color_text = color
+
+
 	def pos_text(self, x=15, y=15):
 		self.x_text = x
 		self.y_text = y
+
 	def draw_text(self, value):
 		""" Рисуем заданный текст по координатам.
 			ПРИМЕР! py.draw_text(5467, 100, 70)
