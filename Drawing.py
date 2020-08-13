@@ -65,19 +65,27 @@ class Drawing():
 	# text1 = fontObj.render(
 	# "\u2588\u2588\u2588\u2588\u2588", 1, (0, 0, 0), (0, 0, 0))  # alt + 219
 
-	def draw_text(self, *color, value):
+	def set_color_text(self, *color):
 		""" Задаём цвет для текста.
 			Допускается надписи типа "red", а также в RGB виде
 			ПРИМЕР! py.draw_text("purple", value=num_th)
 		"""
-		if len(color) == 3:
-			self.text = self.fontObj.render(str(value), 1, color)
-		elif len(color) == 1:
-			color = color[0]
-			self.text = self.fontObj.render(str(value), 1, Drawing.color_object.get(color))
+		self.color_text = color
 	def pos_text(self, x=15, y=15):
 		self.x_text = x
 		self.y_text = y
+	def draw_text(self, value):
+		""" Рисуем заданный текст по координатам.
+			ПРИМЕР! py.draw_text(5467, 100, 70)
+			Нарисовано число 5467 по координатам х = 100 и y = 70
+		"""
+		if len(self.color_text) == 3:
+			self.text = self.fontObj.render(str(value), 1, self.color_text)
+			self.window.blit(self.text, (self.x_text, self.y_text))
+		elif len(self.color_text) == 1:
+			color_text = self.color_text[0]
+			self.text = self.fontObj.render(str(value), 1, Drawing.color_object.get(color_text))
+			self.window.blit(self.text, (self.x_text, self.y_text))
 		else:
 			print("""
 				Ошибка ввода! Введите название цвета или его RGB формат.
