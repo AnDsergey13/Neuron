@@ -75,6 +75,9 @@ class Drawing():
 		elif len(color) == 1:
 			color = color[0]
 			self.text = self.fontObj.render(str(value), 1, Drawing.color_object.get(color))
+	def pos_text(self, x=15, y=15):
+		self.x_text = x
+		self.y_text = y
 		else:
 			print("""
 				Ошибка ввода! Введите название цвета или его RGB формат.
