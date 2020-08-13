@@ -61,6 +61,7 @@ class Drawing():
 		""" Закрашиваем чёрным место, где отрисовывается текст"""
 		self.text = self.fontObj.render("█████", 1, Drawing.color_object.get("black"),
 										Drawing.color_object.get("black"))
+		self.window.blit(self.text, (self.x_text, self.y_text))
 
 	# text1 = fontObj.render(
 	# "\u2588\u2588\u2588\u2588\u2588", 1, (0, 0, 0), (0, 0, 0))  # alt + 219
