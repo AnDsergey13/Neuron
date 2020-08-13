@@ -70,6 +70,8 @@ LIST_BOT = np.zeros((1, num_index_list_bot), dtype=int)  # Стиль имени
 
 # ?name
 py = Drawing()
+py.pos_text()
+py.set_color_text("purple")
 
 done = True
 pause_session = False
@@ -87,7 +89,7 @@ while done:
 	py.clear_text()
 	py.update_screen()
 	# рисуем количество потоков
-	py.draw_text("purple", value=threading.active_count())
+	py.draw_text(threading.active_count())
 
 	print(threading.active_count())
 	for e in pygame.event.get():
