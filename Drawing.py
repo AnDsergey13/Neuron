@@ -40,18 +40,16 @@ class Drawing():
 		""" Преносим изменения на экран """
 		self.window.blit(self.bot, (x, y))
 
-	def set_color_bot(self, *color, x=15, y=15):
+	def set_color_bot(self, *color):
 		""" Задаём цвет для бота.
 			Допускается надписи типа "red", а также в RGB виде """
 		if len(color) == 3:
 			self.bot.fill(color)
-			self.window.blit(self.text, (x, y))
 		elif len(color) == 1:
 			# достаём строку из кортежа
 			color = color[0]
 			# если пришёл только один аргумент, то это строка
 			self.bot.fill(Drawing.color_object.get(color))
-			self.window.blit(self.text, (x, y))
 		else:
 			print("""
 				Ошибка ввода! Введите название цвета или его RGB формат.
