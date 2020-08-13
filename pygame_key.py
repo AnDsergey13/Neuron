@@ -71,7 +71,6 @@ LIST_BOT = np.zeros((1, num_index_list_bot), dtype=int)  # Стиль имени
 
 # ?name
 py = Drawing()
-py.set_delay(0)
 
 done = True
 pause_session = False
