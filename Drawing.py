@@ -67,8 +67,8 @@ class Drawing():
 
 	def set_color_text(self, *color):
 		""" Задаём цвет для текста.
-			Допускается надписи типа "red", а также в RGB виде
-			ПРИМЕР! py.draw_text("purple", value=num_th)
+			В установке цвета допускается надписи типа "red", а также в RGB виде
+			ПРИМЕР! py.draw_text("purple") или py.draw_text(255, 0, 255) # фиолетовый
 		"""
 		self.color_text = color
 	def pos_text(self, x=15, y=15):
