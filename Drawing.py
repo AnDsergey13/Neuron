@@ -14,7 +14,6 @@ class Drawing():
 		"white" : (255, 255, 255)
 	}
 
-		self.fontObj = pygame.font.SysFont("verdana", text_height)
 	pygame.init()
 	screen_width = 700
 	screen_height = 500
@@ -23,6 +22,7 @@ class Drawing():
 	def __init__(self):
 		""" DOC """
 		pass
+
 	def set_name_window(self, name="Hello, pygame!"):
 		""" Устанавливаем имя окна.
 			ПРИМЕР! py.set_name_window("Rembo") """
@@ -35,9 +35,43 @@ class Drawing():
 		Drawing.screen_width = screen_width
 		Drawing.screen_height = screen_height
 		Drawing.window = pygame.display.set_mode((Drawing.screen_width, Drawing.screen_height))
+	def update_screen(self):
+		""" Обновляем экран без задержки"""
+		pygame.display.flip()
 
-	def create_bot(self, bot_width=5, bot_height=5):
+	def update_screen_with_delay(self, delay_update=0):
+		""" Обновляем экран c задержкой. По умолчанию задержка 0 милисекунд.
+			ПРИМЕР! py.update_screen_with_delay(10)"""
+		pygame.display.flip()
+		pygame.time.delay(delay_update)
+
+	# del?
+	def set_delay(self, delay_update):
+		""" Установить задержку для каждой отрисовки. Значения в милисекундах.
+			ПРИМЕР! py.set_delay(10)"""
+		self.delay_update = delay_update
+
+	def get_pos_mouse(self):
+		""" Возвращает кортеж x и y позиции мышки"""
+		return pygame.mouse.get_pos()
+
+	def check_object_on_screen(self, pos):
+		""" Возвращает True, если объект находится в зоне окна, иначе False """
+		# на вход принимается кортеж
+		# pos[0] - это x, pos[1] - это y
 		if pos[0] > 0 and pos[0] < Drawing.screen_width and pos[1] > 0 and pos[1] < Drawing.screen_height:
+			return True
+		else:
+			return False
+
+	def get_list_colors(self):
+		return list(Drawing.color_object.keys())
+
+
+class Bot(Drawing):
+	""" Подкласс для работы с отрисовкой ботов """
+
+	def __init__(self, bot_width=3, bot_height=3):
 		""" Создаём объект бота """
 		self.bot = pygame.Surface((bot_width, bot_height))
 
@@ -66,6 +100,21 @@ class Drawing():
 				Для уточнения, какие цвета можно использовать, введите get_list_colors()
 			""")
 
+
+class Text(Drawing):
+	""" Подкласс для работы с отрисовкой текста """
+
+	def __init__(self, x=15, y=15, h=25, style="verdana"):
+		""" Инициализируем стартовые параметры.
+			Такие как координаты x и y. Высота текста и его стиль 
+			ПРИМЕР! test = Text(x, y, h, style) или test = Text(16, 71, 10, "verdana")
+		"""
+		pygame.font.init()
+		self.x_text = x
+		self.y_text = y
+		self.fontObj = pygame.font.SysFont(style, h)
+		# по умолчанию ставим белый текст 
+		self.set_color_text("white")
 	def clear_text(self):
 		""" Закрашиваем чёрным место, где отрисовывается текст"""
 		self.text = self.fontObj.render("██████████", 1, Drawing.color_object.get("black"),
@@ -107,33 +156,3 @@ class Drawing():
 				ПРИМЕРЫ! test.draw_text("light blue") или test.draw_text(0, 255, 255)
 				Для уточнения, какие цвета можно использовать, введите py.get_list_colors()
 			""")
-		
-	def update_screen(self):
-		""" Обновляем экран без задержки"""
-		pygame.display.flip()
-
-	def update_screen_with_delay(self, delay_update=0):
-		""" Обновляем экран c задержкой. По умолчанию задержка 0"""
-		pygame.display.flip()
-		pygame.time.delay(delay_update)
-
-	# del?
-	def set_delay(self, delay_update):
-		""" Установить задержку для каждой отрисовки"""
-		self.delay_update = delay_update
-
-	def get_pos_mouse(self):
-		""" Возвращает кортеж x и y позиции мышки"""
-		return pygame.mouse.get_pos()
-
-	def check_object_on_screen(self, pos):
-		""" Возвращает True, если объект находится в зоне окна, иначе False """
-		# на вход принимается кортеж
-		# pos[0] - это x, pos[1] - это y
-		if pos[0] > 0 and pos[0] < self.screen_width and pos[1] > 0 and pos[1] < self.screen_height:
-			return True
-		else:
-			return False
-
-	def get_list_colors(self):
-		return list(Drawing.color_object.keys())
