@@ -14,17 +14,15 @@ class Drawing():
 		"white" : (255, 255, 255)
 	}
 
-	def __init__(self, name="Hello, pygame!", screen_width=700, screen_height=500, text_height=25):
-		""" Начальные условия
-			Создание окна, инициализация объекта класса pygame, 
-			название окна, стиль текста, и т.д. 
-		"""
-		pygame.init()
-		self.screen_width = screen_width
-		self.screen_height = screen_height
-		self.window = pygame.display.set_mode((self.screen_width, self.screen_height))
 		self.fontObj = pygame.font.SysFont("verdana", text_height)
+	pygame.init()
+	screen_width = 700
+	screen_height = 500
+	window = pygame.display.set_mode((screen_width, screen_height))
 
+	def __init__(self):
+		""" DOC """
+		pass
 		pygame.display.set_caption(name)
 
 	def clear_pos_bot(self):
