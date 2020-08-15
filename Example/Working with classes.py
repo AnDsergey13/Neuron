@@ -57,7 +57,22 @@ class Operation():
 		# print(self.name)
 		return self.names
 
-num_bananes = Operation("Объект 1", 1)
+# изучение наследования 
+class podClass(Operation):
+	""" DOC """
+
+	def __init__(self):
+		""" DOC """
+		print("Подкласс запустился")
+
+	def metod1(self):
+		""" DOC """
+		pass
+
+# num_bananes = Operation("Объект 1", 1)
+cheburek = podClass()
+# вызывается ошибка так как переменная self.names не создавалась в podClass
+print(cheburek.minus())
 # help(num_bananes)
 
 # print(num_bananes.output.__doc__)
@@ -67,4 +82,4 @@ num_bananes = Operation("Объект 1", 1)
 # print(num_bananes.plus(5, 7643, 975, 7748))
 # print(num_bananes.plus(mass))
 
-print(num_bananes.minus())
+# print(num_bananes.minus())
