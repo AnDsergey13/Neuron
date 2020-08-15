@@ -35,6 +35,7 @@ class Drawing():
 		Drawing.screen_width = screen_width
 		Drawing.screen_height = screen_height
 		Drawing.window = pygame.display.set_mode((Drawing.screen_width, Drawing.screen_height))
+		
 	def update_screen(self):
 		""" Обновляем экран без задержки"""
 		pygame.display.flip()
@@ -79,6 +80,7 @@ class Bot(Drawing):
 		""" Очищаем место где был бот раньше на экране """
 		# меняем цвет бота на чёрный
 		self.bot.fill(Drawing.color_object.get("black"))
+
 	def draw_bot(self, x, y):
 		""" Преносим изменения на экран """
 		Drawing.window.blit(self.bot, (x, y))
@@ -118,6 +120,7 @@ class Text(Drawing):
 		self.fontObj = pygame.font.SysFont(style, h)
 		# по умолчанию ставим белый текст 
 		self.set_color_text("white")
+
 	def clear_text(self):
 		""" Закрашиваем чёрным место, где отрисовывается текст"""
 		self.text = self.fontObj.render("██████████", 1, Drawing.color_object.get("black"),
@@ -132,7 +135,6 @@ class Text(Drawing):
 			ПРИМЕР! test.draw_text("purple") или test.draw_text(255, 0, 255) # фиолетовый
 		"""
 		self.color_text = color
-
 
 	def pos_text(self, x=15, y=15):
 		""" Задаём позицию для текста. 
@@ -159,3 +161,4 @@ class Text(Drawing):
 				ПРИМЕРЫ! test.draw_text("light blue") или test.draw_text(0, 255, 255)
 				Для уточнения, какие цвета можно использовать, введите py.get_list_colors()
 			""")
+		
