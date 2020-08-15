@@ -59,7 +59,7 @@ class Drawing():
 
 	def clear_text(self):
 		""" Закрашиваем чёрным место, где отрисовывается текст"""
-		self.text = self.fontObj.render("█████", 1, Drawing.color_object.get("black"),
+		self.text = self.fontObj.render("██████████", 1, Drawing.color_object.get("black"),
 										Drawing.color_object.get("black"))
 		self.window.blit(self.text, (self.x_text, self.y_text))
 
