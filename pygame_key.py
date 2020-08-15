@@ -95,7 +95,6 @@ while done:
 	label_num_th.draw_text(threading.active_count())
 	bool_mouse.draw_text(py.get_pos_mouse())
 
-	print(threading.active_count())
 	for e in pygame.event.get():
 		if e.type == pygame.QUIT:
 			done = False
