@@ -88,12 +88,16 @@ keyboard_z = Event_mouse_and_keyboard()
 # print(LIST_BOT)
 
 while done:
+	# # # INFO # # #
 	label_num_th.clear_text()
 	bool_mouse.clear_text()
 	py.update_screen()
 	# рисуем количество потоков
 	label_num_th.draw_text(threading.active_count())
+	# Рисуем позицию мыши
 	bool_mouse.draw_text(py.get_pos_mouse())
+
+	# # # INFO # # #
 
 	for e in pygame.event.get():
 		if e.type == pygame.QUIT:
