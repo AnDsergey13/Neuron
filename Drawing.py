@@ -29,6 +29,9 @@ class Drawing():
 		self.name = name
 		pygame.display.set_caption(name)
 
+	def set_size_window(self, width=screen_width, height=screen_height):
+		""" Установка размера экрана 
+			ПРИМЕР! py.set_size_window(width, height) или py.set_size_window(500, 700)"""
 		Drawing.screen_width = screen_width
 		Drawing.screen_height = screen_height
 		Drawing.window = pygame.display.set_mode((Drawing.screen_width, Drawing.screen_height))
