@@ -70,7 +70,6 @@ LIST_BOT = np.zeros((1, num_index_list_bot), dtype=int)  # Стиль имени
 
 # ?name
 py = Drawing()
-py.pos_text()
 label_num_th = Text(y=15)
 label_num_th.set_color_text("purple")
 
