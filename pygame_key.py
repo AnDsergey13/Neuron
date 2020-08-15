@@ -72,6 +72,8 @@ LIST_BOT = np.zeros((1, num_index_list_bot), dtype=int)  # Стиль имени
 py = Drawing()
 label_num_th = Text(y=15)
 label_num_th.set_color_text("purple")
+bool_mouse = Text(y=50)
+bool_mouse.set_color_text("green")
 
 done = True
 pause_session = False
@@ -87,9 +89,11 @@ keyboard_z = Event_mouse_and_keyboard()
 
 while done:
 	label_num_th.clear_text()
+	bool_mouse.clear_text()
 	py.update_screen()
 	# рисуем количество потоков
 	label_num_th.draw_text(threading.active_count())
+	bool_mouse.draw_text(py.get_pos_mouse())
 
 	print(threading.active_count())
 	for e in pygame.event.get():
