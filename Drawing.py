@@ -29,8 +29,12 @@ class Drawing():
 		self.name = name
 		pygame.display.set_caption(name)
 
+		Drawing.screen_width = screen_width
+		Drawing.screen_height = screen_height
+		Drawing.window = pygame.display.set_mode((Drawing.screen_width, Drawing.screen_height))
 
 	def create_bot(self, bot_width=5, bot_height=5):
+		if pos[0] > 0 and pos[0] < Drawing.screen_width and pos[1] > 0 and pos[1] < Drawing.screen_height:
 		""" Создаём объект бота """
 		self.bot = pygame.Surface((bot_width, bot_height))
 
@@ -40,7 +44,7 @@ class Drawing():
 		self.bot.fill(Drawing.color_object.get("black"))
 	def draw_bot(self, x, y):
 		""" Преносим изменения на экран """
-		self.window.blit(self.bot, (x, y))
+		Drawing.window.blit(self.bot, (x, y))
 
 	def set_color_bot(self, *color):
 		""" Задаём цвет для бота.
@@ -63,10 +67,9 @@ class Drawing():
 		""" Закрашиваем чёрным место, где отрисовывается текст"""
 		self.text = self.fontObj.render("██████████", 1, Drawing.color_object.get("black"),
 										Drawing.color_object.get("black"))
-		self.window.blit(self.text, (self.x_text, self.y_text))
-
-	# text1 = fontObj.render(
-	# "\u2588\u2588\u2588\u2588\u2588", 1, (0, 0, 0), (0, 0, 0))  # alt + 219
+		Drawing.window.blit(self.text, (self.x_text, self.y_text))
+		# text1 = fontObj.render(
+		# "\u2588\u2588\u2588\u2588\u2588", 1, (0, 0, 0), (0, 0, 0))  # alt + 219
 
 	def set_color_text(self, *color):
 		""" Задаём цвет для текста.
@@ -87,11 +90,11 @@ class Drawing():
 		"""
 		if len(self.color_text) == 3:
 			self.text = self.fontObj.render(str(value), 1, self.color_text)
-			self.window.blit(self.text, (self.x_text, self.y_text))
+			Drawing.window.blit(self.text, (self.x_text, self.y_text))
 		elif len(self.color_text) == 1:
 			color_text = self.color_text[0]
 			self.text = self.fontObj.render(str(value), 1, Drawing.color_object.get(color_text))
-			self.window.blit(self.text, (self.x_text, self.y_text))
+			Drawing.window.blit(self.text, (self.x_text, self.y_text))
 		else:
 			print("""
 				Ошибка ввода! Введите название цвета или его RGB формат.
