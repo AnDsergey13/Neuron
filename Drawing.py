@@ -77,19 +77,22 @@ class Drawing():
 	def set_color_text(self, *color):
 		""" Задаём цвет для текста.
 			В установке цвета допускается надписи типа "red", а также в RGB виде
-			ПРИМЕР! py.draw_text("purple") или py.draw_text(255, 0, 255) # фиолетовый
+			ПРИМЕР! test.draw_text("purple") или test.draw_text(255, 0, 255) # фиолетовый
 		"""
 		self.color_text = color
 
 
 	def pos_text(self, x=15, y=15):
+		""" Задаём позицию для текста. 
+			ПРИМЕР!test.pos_text(x, y) 
+		"""
 		self.x_text = x
 		self.y_text = y
 
 	def draw_text(self, value):
 		""" Рисуем заданный текст по координатам.
-			ПРИМЕР! py.draw_text(5467, 100, 70)
-			Нарисовано число 5467 по координатам х = 100 и y = 70
+			ПРИМЕР! test.draw_text(5467)
+			Нарисовано число 5467
 		"""
 		if len(self.color_text) == 3:
 			self.text = self.fontObj.render(str(value), 1, self.color_text)
@@ -101,8 +104,8 @@ class Drawing():
 		else:
 			print("""
 				Ошибка ввода! Введите название цвета или его RGB формат.
-				ПРИМЕРЫ! draw_num_th("light blue") или draw_num_th(0, 255, 255)
-				Для уточнения, какие цвета можно использовать, введите get_list_colors()
+				ПРИМЕРЫ! test.draw_text("light blue") или test.draw_text(0, 255, 255)
+				Для уточнения, какие цвета можно использовать, введите py.get_list_colors()
 			""")
 		
 	def update_screen(self):
