@@ -43,24 +43,24 @@ def create_object():
 
 	# ???
 	x, y = py.get_pos_mouse()
-	py.create_bot(3, 3)
+	bot1 = Bot()
 
 	while done:
 		if pause_session:
 			continue
-		py.clear_pos_bot()
-		py.draw_bot(x, y)
+		bot1.clear_pos_bot()
+		bot1.draw_bot(x, y)
 
 		x += math.sin(x) * 5
 		y += -math.cos(y) * 5
 
 		# если выход за пределы комнаты, то удаление
 		if not py.check_object_on_screen((x, y)):
-			py.clear_pos_bot()
+			bot1.clear_pos_bot()
 			break
 
-		py.set_color_bot(np.random.randint(140, 255), np.random.randint(140, 255), 255)
-		py.draw_bot(x, y)
+		bot1.set_color_bot(np.random.randint(140, 255), np.random.randint(140, 255), 255)
+		bot1.draw_bot(x, y)
 		py.update_screen()
 
 
@@ -71,7 +71,8 @@ LIST_BOT = np.zeros((1, num_index_list_bot), dtype=int)  # Стиль имени
 # ?name
 py = Drawing()
 py.pos_text()
-py.set_color_text("purple")
+label_num_th = Text(y=15)
+label_num_th.set_color_text("purple")
 
 done = True
 pause_session = False
@@ -86,10 +87,10 @@ keyboard_z = Event_mouse_and_keyboard()
 # print(LIST_BOT)
 
 while done:
-	py.clear_text()
+	label_num_th.clear_text()
 	py.update_screen()
 	# рисуем количество потоков
-	py.draw_text(threading.active_count())
+	label_num_th.draw_text(threading.active_count())
 
 	print(threading.active_count())
 	for e in pygame.event.get():
