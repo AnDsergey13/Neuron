@@ -4,7 +4,7 @@
 # !добавить общий список, с координатами
 
 from Keyboard_and_mouse import Event_mouse_and_keyboard
-from Drawing import Drawing
+from Drawing import *
 
 import math
 import time
