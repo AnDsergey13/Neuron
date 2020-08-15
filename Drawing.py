@@ -29,15 +29,15 @@ class Drawing():
 		self.name = name
 		pygame.display.set_caption(name)
 
-	def clear_pos_bot(self):
-		""" Очищаем место где был бот раньше на экране """
-		# меняем цвет бота
-		self.bot.fill(Drawing.color_object.get("black"))
 
 	def create_bot(self, bot_width=5, bot_height=5):
 		""" Создаём объект бота """
 		self.bot = pygame.Surface((bot_width, bot_height))
 
+	def clear_pos_bot(self):
+		""" Очищаем место где был бот раньше на экране """
+		# меняем цвет бота на чёрный
+		self.bot.fill(Drawing.color_object.get("black"))
 	def draw_bot(self, x, y):
 		""" Преносим изменения на экран """
 		self.window.blit(self.bot, (x, y))
