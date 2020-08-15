@@ -23,6 +23,10 @@ class Drawing():
 	def __init__(self):
 		""" DOC """
 		pass
+	def set_name_window(self, name="Hello, pygame!"):
+		""" Устанавливаем имя окна.
+			ПРИМЕР! py.set_name_window("Rembo") """
+		self.name = name
 		pygame.display.set_caption(name)
 
 	def clear_pos_bot(self):
