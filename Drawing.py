@@ -127,14 +127,12 @@ class Text(Drawing):
 	def clear_text(self):
 		""" Закрашиваем чёрным место, где отрисовывается текст"""
 		# создаём затирающую строку равную длине получаемого текста
-		string_clear = self.len_value * "█"
+		string_clear = self.len_value * "█" # alt + 219
 		# альтернативный вариант ↓
 		# string_clear = self.len_value * "\u2588"
 		self.text = self.fontObj.render(string_clear, 1, Drawing.color_object.get("black"),
 										Drawing.color_object.get("black"))
 		Drawing.window.blit(self.text, (self.x_text, self.y_text))
-		# text1 = fontObj.render(
-		# "\u2588\u2588\u2588\u2588\u2588", 1, (0, 0, 0), (0, 0, 0))  # alt + 219
 
 	def set_color_text(self, *color):
 		""" Задаём цвет для текста.
