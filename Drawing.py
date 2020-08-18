@@ -120,10 +120,13 @@ class Text(Drawing):
 		self.fontObj = pygame.font.SysFont(style, h)
 		# по умолчанию ставим белый текст 
 		self.set_color_text("white")
+		# переменная для хранения длины получаемого текста
+		# нужна для генерации символов очистки
 		self.len_value = 1
 
 	def clear_text(self):
 		""" Закрашиваем чёрным место, где отрисовывается текст"""
+		# создаём затирающую строку равную длине получаемого текста
 		string_clear = self.len_value * "█"
 		self.text = self.fontObj.render(string_clear, 1, Drawing.color_object.get("black"),
 										Drawing.color_object.get("black"))
