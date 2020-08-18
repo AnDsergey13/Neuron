@@ -128,6 +128,8 @@ class Text(Drawing):
 		""" Закрашиваем чёрным место, где отрисовывается текст"""
 		# создаём затирающую строку равную длине получаемого текста
 		string_clear = self.len_value * "█"
+		# альтернативный вариант ↓
+		# string_clear = self.len_value * "\u2588"
 		self.text = self.fontObj.render(string_clear, 1, Drawing.color_object.get("black"),
 										Drawing.color_object.get("black"))
 		Drawing.window.blit(self.text, (self.x_text, self.y_text))
