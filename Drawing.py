@@ -120,10 +120,12 @@ class Text(Drawing):
 		self.fontObj = pygame.font.SysFont(style, h)
 		# по умолчанию ставим белый текст 
 		self.set_color_text("white")
+		self.len_value = 1
 
 	def clear_text(self):
 		""" Закрашиваем чёрным место, где отрисовывается текст"""
-		self.text = self.fontObj.render("██████████", 1, Drawing.color_object.get("black"),
+		string_clear = self.len_value * "█"
+		self.text = self.fontObj.render(string_clear, 1, Drawing.color_object.get("black"),
 										Drawing.color_object.get("black"))
 		Drawing.window.blit(self.text, (self.x_text, self.y_text))
 		# text1 = fontObj.render(
@@ -148,6 +150,7 @@ class Text(Drawing):
 			ПРИМЕР! test.draw_text(5467)
 			Нарисовано число 5467
 		"""
+		self.len_value = len(str(value))
 		if len(self.color_text) == 3:
 			self.text = self.fontObj.render(str(value), 1, self.color_text)
 			Drawing.window.blit(self.text, (self.x_text, self.y_text))
