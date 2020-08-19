@@ -25,35 +25,39 @@ class Drawing():
 
 	def set_name_window(self, name="Hello, pygame!"):
 		""" Устанавливаем имя окна.
-			ПРИМЕР! py.set_name_window("Rembo") """
+			ПРИМЕР! py.set_name_window("Rembo")
+		"""
 		self.name = name
 		pygame.display.set_caption(name)
 
 	def set_size_window(self, width=screen_width, height=screen_height):
 		""" Установка размера экрана 
-			ПРИМЕР! py.set_size_window(width, height) или py.set_size_window(500, 700)"""
 		Drawing.screen_width = screen_width
 		Drawing.screen_height = screen_height
+			ПРИМЕР! py.set_size_window(width, height) или py.set_size_window(500, 700)
+		"""
 		Drawing.window = pygame.display.set_mode((Drawing.screen_width, Drawing.screen_height))
 		
 	def update_screen(self):
-		""" Обновляем экран без задержки"""
+		""" Обновляем экран без задержки """
 		pygame.display.flip()
 
 	def update_screen_with_delay(self, delay_update=0):
 		""" Обновляем экран c задержкой. По умолчанию задержка 0 милисекунд.
-			ПРИМЕР! py.update_screen_with_delay(10)"""
+			ПРИМЕР! py.update_screen_with_delay(10)
+		"""
 		pygame.display.flip()
 		pygame.time.delay(delay_update)
 
 	# del?
 	def set_delay(self, delay_update):
 		""" Установить задержку для каждой отрисовки. Значения в милисекундах.
-			ПРИМЕР! py.set_delay(10)"""
+			ПРИМЕР! py.set_delay(10)
+		"""
 		self.delay_update = delay_update
 
 	def get_pos_mouse(self):
-		""" Возвращает кортеж x и y позиции мышки"""
+		""" Возвращает кортеж x и y позиции мышки """
 		return pygame.mouse.get_pos()
 
 	def check_object_on_screen(self, pos):

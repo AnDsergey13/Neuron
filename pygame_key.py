@@ -93,7 +93,7 @@ while done:
 	label_num_th.clear_text()
 	bool_mouse.clear_text()
 	py.update_screen()
-	# рисуем количество ботов на экране. Не считаем главный поток, поэтому минус 1
+	# Каждый поток - это бот. Поэтому рисуем количество ботов на экране, не считая главный поток, поэтому минус 1
 	label_num_th.draw_text(threading.active_count()-1)
 	# Рисуем позицию мыши
 	bool_mouse.draw_text(py.get_pos_mouse())
