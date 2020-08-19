@@ -1,6 +1,4 @@
 import pygame
-import mouse
-import keyboard
 
 class Drawing():
 	""" Класс для работы с графикой	"""
@@ -23,7 +21,6 @@ class Drawing():
 
 	def __init__(self):
 		""" DOC """
-		self.th_border = 10
 		pass
 
 	def set_name_window(self, name="Hello, pygame!"):
@@ -77,75 +74,10 @@ class Drawing():
 		else:
 			return False
 
-	def check_border_screen(self, pos_obj, th_border=10):
-		""" Возвращает True, если объект находится около границы окна, иначе False.
-			ПРИМЕР! py.check_border_screen((x, y ), 6)"""
-		self.th_border = th_border
-		# на вход принимается кортеж
-		x_obj = pos_obj[0]
-		y_obj = pos_obj[1]
-
-		# проверка левого сектора
-		if x_obj > self.out_left_up[0] and self.in_left_down[0] > x_obj and y_obj > self.out_left_up[1] and y_obj < self.in_left_down[1] + self.th_border:
-			return 1
-		# # проверка верхнего сектора
-		elif x_obj > self.out_left_up[0] and self.in_right_up[0] + self.th_border > x_obj and y_obj > self.out_left_up[1] and y_obj < self.in_right_up[1]:
-			return 2
-		# # проверка правого сектора
-		elif x_obj > self.in_right_up[0] and self.out_right_down[0] > x_obj and y_obj > self.in_right_up[1] - self.th_border and y_obj < self.out_right_down[1]:
-			return 3
-		# # проверка нижнего сектора
-		elif x_obj > self.in_left_down[0] - self.th_border and self.out_right_down[0] > x_obj and y_obj > self.in_left_down[1] and y_obj < self.out_right_down[1]:
-			return 4
-		else:
-			return 0
-
-
 	def get_list_colors(self):
 		""" Возвращает список допустимых цветов """
 		return list(Drawing.color_object.keys())
 
-	def calibrate(self):
-		""" Калибровка положения экрана игры с экраном пк """
-		# запоминаем позицию мыши, чтобы после калибровки, вернуться обратно
-		x_mouse, y_mouse = mouse.get_position()
-
-		width_window, height_window = self.get_size_window()
-		pygame.mouse.set_pos(0, 0)
-		self.left_up = mouse.get_position()
-		pygame.mouse.set_pos(width_window, 0)
-		self.right_up = mouse.get_position()
-		pygame.mouse.set_pos(width_window, height_window)
-		self.right_down = mouse.get_position()
-		pygame.mouse.set_pos(0, height_window)
-		self.left_down = mouse.get_position()
-		# print("Основной экран")
-		# print(self.left_up, self.right_up, self.right_down, self.left_down)
-
-		th_border = round(self.th_border/2)
-		# считаем внешние границы прямоугольника со смещением в +
-		self.out_left_up = (self.left_up[0] - th_border, self.left_up[1] - th_border)
-		self.out_left_down = (self.left_down[0] - th_border, self.left_down[1] + th_border)
-		self.out_right_up = (self.right_up[0] + th_border, self.right_up[1] - th_border)
-		self.out_right_down = (self.right_down[0] + th_border, self.right_down[1] + th_border)
-		# print("Внешние границы")
-		# print(self.out_left_up, self.out_right_up, self.out_right_down, self.out_left_down)
-
-		# считаем внутренние границы прямоугольника со смещением в -
-		self.in_left_up = (self.left_up[0] + th_border, self.left_up[1] + th_border)
-		self.in_left_down = (self.left_down[0] + th_border, self.left_down[1] - th_border)
-		self.in_right_up = (self.right_up[0] - th_border, self.right_up[1] + th_border)
-		self.in_right_down = (self.right_down[0] - th_border, self.right_down[1] - th_border)
-		# print("Внутренние границы")
-		# print(self.in_left_up, self.in_right_up, self.in_right_down, self.in_left_down)
-
-		# Возвращаем мышь в позицию до калибровки
-		mouse.move(x_mouse, y_mouse)
-
-		def change_border(self, num_border):
-			# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			# рамка окна НЕ изменяется с одной стороны. Только ширина и высота
-			# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 class Bot(Drawing):
 	""" Подкласс для работы с отрисовкой ботов """
