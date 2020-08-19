@@ -70,6 +70,7 @@ class Drawing():
 			return False
 
 	def get_list_colors(self):
+		""" Возвращает список допустимых цветов """
 		return list(Drawing.color_object.keys())
 
 
