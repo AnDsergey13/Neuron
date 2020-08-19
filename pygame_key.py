@@ -11,6 +11,8 @@ import math
 import time
 import threading
 
+import mouse
+import keyboard
 import pygame
 import numpy as np
 
@@ -75,6 +77,8 @@ label_num_th = Text(y=15)
 label_num_th.set_color_text("purple")
 bool_mouse = Text(y=50)
 bool_mouse.set_color_text("green")
+bool_mouse_2 = Text(y=90)
+bool_mouse_2.set_color_text("light blue")
 
 done = True
 pause_session = False
@@ -87,17 +91,23 @@ keyboard_z = Event_mouse_and_keyboard()
 # number_pix = np.zeros_like(number_pix)  # генерируем массив нулей (цвет чёрный)
 
 # print(LIST_BOT)
-
+x_old, y_old = mouse.get_position()
+py.calibrate()
 while done:
 	# # # INFO # # #
 	label_num_th.clear_text()
 	bool_mouse.clear_text()
+	bool_mouse_2.clear_text()
 	py.update_screen()
 	# Каждый поток - это бот. Поэтому рисуем количество ботов на экране, не считая главный поток, поэтому минус 1
 	label_num_th.draw_text(threading.active_count()-1)
 	# Рисуем позицию мыши
-	bool_mouse.draw_text(py.get_pos_mouse())
-
+	# if py.check_border_screen(py.get_pos_mouse()):
+	bool_mouse.draw_text(py.check_border_screen(mouse.get_position(), 14))
+	bool_mouse_2.draw_text(mouse.get_position())
+	
+	# else:
+	# 	bool_mouse.draw_text("False")
 	# # # INFO # # #
 
 	for e in pygame.event.get():
@@ -107,8 +117,32 @@ while done:
 	keyboard_space.keyboard_pressed(pygame.K_SPACE, pause_ses)  # Стиль имени!
 	keyboard_z.keyboard_pressed(pygame.K_z, closed_window)
 
-	if py.check_object_on_screen(py.get_pos_mouse()):
+	# width, height = py.get_size_window()
+	if py.check_border_screen(mouse.get_position()) == 1 and mouse.is_pressed(button='left'):
+		pass
+	elif py.check_border_screen(mouse.get_position()) == 2 and mouse.is_pressed(button='left'):
+		pass
+	elif py.check_border_screen(mouse.get_position()) == 3 and mouse.is_pressed(button='left'):
+		pass
+	elif py.check_border_screen(mouse.get_position()) == 4 and mouse.is_pressed(button='left'):
+		pass
+	elif py.check_object_on_screen(py.get_pos_mouse()):
 		mouse_lbm.mouse_pressed(0, start_th)
+	# 	pause_session = True
+	# 	while mouse.is_pressed(button='left'):
+	# 		x_new, y_new = mouse.get_position()
+	# 		delta_x = (x_old - x_new) #* 2
+	# 		delta_y = (y_old - y_new) #* 2
+	# 		print(delta_x, delta_y)
+	# 		py.set_size_window(width - delta_x, height - delta_y)
+	# 		time.sleep(0.1)
+	# 		x_old, y_old = mouse.get_position()
+	# 		time.sleep(0.1)
+		
+	# 	pause_session = False
+		
+	
+
 
 	if pause_session:
 		continue
