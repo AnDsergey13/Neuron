@@ -32,10 +32,10 @@ class Drawing():
 
 	def set_size_window(self, width=screen_width, height=screen_height):
 		""" Установка размера экрана 
-		Drawing.screen_width = screen_width
-		Drawing.screen_height = screen_height
 			ПРИМЕР! py.set_size_window(width, height) или py.set_size_window(500, 700)
 		"""
+		Drawing.screen_width = width
+		Drawing.screen_height = height
 		Drawing.window = pygame.display.set_mode((Drawing.screen_width, Drawing.screen_height))
 		
 	def update_screen(self):
