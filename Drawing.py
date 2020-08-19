@@ -37,6 +37,9 @@ class Drawing():
 		Drawing.screen_width = width
 		Drawing.screen_height = height
 		Drawing.window = pygame.display.set_mode((Drawing.screen_width, Drawing.screen_height))
+
+	def get_size_window(self):
+		return Drawing.screen_width, Drawing.screen_height
 		
 	def update_screen(self):
 		""" Обновляем экран без задержки """
