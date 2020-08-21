@@ -44,7 +44,7 @@ class Event_mouse_and_keyboard():
 		"""
 		key_p - нажимаемая клавиша ЛКМ(0),СКМ(1),ПКМ(2)
 		function - запускаемая функция после события
-		Example. key_pressed(0, closed)
+		Example. mouse_pressed(0, closed)
 		"""
 
 		if pygame.mouse.get_pressed()[key_p] == 1:  # мышь
