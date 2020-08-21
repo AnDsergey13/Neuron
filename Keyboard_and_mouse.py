@@ -40,6 +40,7 @@ class Event_mouse_and_keyboard():
 			self.block = False
 			return False
 
+
 	def mouse_pressed(self, key_p, function):
 		"""
 		key_p - нажимаемая клавиша ЛКМ(0),СКМ(1),ПКМ(2)
@@ -55,6 +56,7 @@ class Event_mouse_and_keyboard():
 		else:
 			self.block = False
 
+
 	def is_mouse_pressed(self, key_p):
 		"""
 		key_p - нажимаемая клавиша ЛКМ(0),СКМ(1),ПКМ(2)
@@ -69,3 +71,5 @@ class Event_mouse_and_keyboard():
 		else:
 			self.block = False
 			return False
+
+
