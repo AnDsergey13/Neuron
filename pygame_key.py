@@ -70,12 +70,16 @@ while on:
 		if e.type == pygame.QUIT:
 			done = False
 
-	keyboard_space.keyboard_pressed(pygame.K_SPACE, pause_ses)  # Стиль имени!
-	keyboard_z.keyboard_pressed(pygame.K_z, closed_window)
 
 	if py.check_object_on_screen(py.get_pos_mouse()):
 		lbm.mouse_pressed(0, Neuron_)
 
+	if space.is_keyboard_pressed(pygame.K_SPACE):
+		set_pause_session()
+
+	if z.is_keyboard_pressed(pygame.K_z):
+		neuron_off()
+		closed_window()
 	if pause_session:
 		continue
 
