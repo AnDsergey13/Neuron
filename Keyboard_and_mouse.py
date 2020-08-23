@@ -1,8 +1,8 @@
 import pygame
 
-class Event_mouse_and_keyboard():
 	""" DOC	"""
 	def __init__(self):
+class Event():
 		"""  Стартовые параметры """
 		self.block = False
 
