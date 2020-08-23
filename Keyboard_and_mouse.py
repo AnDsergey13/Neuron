@@ -65,7 +65,7 @@ class Event():
 		Example. key_pressed(function)
 		"""
 
-		if pygame.key.get_pressed()[key_p] == 1:
+		if pygame.key.get_pressed()[self.key_p] == 1:
 
 			if not self.block:
 				# print(block_keyboard)
@@ -80,7 +80,7 @@ class Event():
 		Возвращает True если была нажата клавиша на клавиатуре. 
 		"""
 
-		if pygame.key.get_pressed()[key_p] == 1:
+		if pygame.key.get_pressed()[self.key_p] == 1:
 
 			if not self.block:
 				# print(block_keyboard)
@@ -98,7 +98,7 @@ class Event():
 		Example. mouse_pressed(function)
 		"""
 
-		if pygame.mouse.get_pressed()[key_p] == 1:  # мышь
+		if pygame.mouse.get_pressed()[self.key_p] == 1:  # мышь
 			if not self.block:
 				# print(block_mouse)
 				self.block = True
@@ -112,7 +112,7 @@ class Event():
 		Возвращает True если была нажата клавиша на мыши. 
 		"""
 
-		if pygame.mouse.get_pressed()[key_p] == 1:  # мышь
+		if pygame.mouse.get_pressed()[self.key_p] == 1:  # мышь
 			if not self.block:
 				# print(block_mouse)
 				self.block = True
