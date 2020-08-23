@@ -49,19 +49,19 @@ label_num_th.set_color_text("purple")
 bool_mouse = Text(y=50)
 bool_mouse.set_color_text("green")
 
-done = True
+on = True
 pause_session = False
 
-mouse_lbm = Event_mouse_and_keyboard()
-keyboard_space = Event_mouse_and_keyboard()
-keyboard_z = Event_mouse_and_keyboard()
+lbm = Event_mouse_and_keyboard()
+space = Event_mouse_and_keyboard()
+z = Event_mouse_and_keyboard()
 
 # number_pix = np.ones((screen_width, screen_height), dtype=int)
 # number_pix = np.zeros_like(number_pix)  # генерируем массив нулей (цвет чёрный)
 
 # print(LIST_BOT)
 
-while done:
+while on:
 	# # # INFO # # #
 	label_num_th.clear_text()
 	bool_mouse.clear_text()
@@ -81,7 +81,7 @@ while done:
 	keyboard_z.keyboard_pressed(pygame.K_z, closed_window)
 
 	if py.check_object_on_screen(py.get_pos_mouse()):
-		mouse_lbm.mouse_pressed(0, start_th)
+		lbm.mouse_pressed(0, Neuron_)
 
 	if pause_session:
 		continue
