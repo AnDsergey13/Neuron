@@ -29,13 +29,6 @@ def closed_window():
 
 
 
-	last_id = max(LIST_BOT.take(1, axis=1))
-	current_id = last_id + 1
-	LIST_BOT = np.append(
-		LIST_BOT,
-		np.zeros((1, num_index_list_bot), dtype=int),
-		axis=0)
-
 
 
 num_index_list_bot = 3

@@ -48,3 +48,9 @@ class Neuron_(Drawing):
 		""" В этом методе описано движение бота """
 		self.x_bot += math.sin(self.x_bot) * 5
 		self.y_bot += -math.cos(self.y_bot) * 5
+# last_id = max(LIST_BOT.take(1, axis=1))
+# current_id = last_id + 1
+# LIST_BOT = np.append(
+# 	LIST_BOT,
+# 	np.zeros((1, num_index_list_bot), dtype=int),
+# 	axis=0)
