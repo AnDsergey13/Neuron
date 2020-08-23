@@ -11,6 +11,9 @@ class Neuron_(Drawing):
 		""" mode = 0 - без потоков 
 			mode = 1 - это когда один бот в одном потоке 
 		"""
+		if mode == 1:
+			create_th = threading.Thread(target=self.create_bot)
+			create_th.start()
 	def create_bot(self):
 		""" Промежуточный метод в котором создаётся бот """
 	def loop(self):

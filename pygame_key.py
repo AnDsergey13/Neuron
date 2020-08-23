@@ -26,10 +26,6 @@ def closed_window():
 	done = False
 
 
-def start_th():
-	create_bot = threading.Thread(target=create_object)
-	# create_object(5, 5)
-	create_bot.start()
 
 
 def create_object():
