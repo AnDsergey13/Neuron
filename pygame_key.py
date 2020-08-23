@@ -33,9 +33,9 @@ bool_mouse.set_color_text("green")
 on = True
 pause_session = False
 
-lbm = Event_mouse_and_keyboard()
-space = Event_mouse_and_keyboard()
-z = Event_mouse_and_keyboard()
+lbm = Event("lbm")
+space = Event("space")
+z = Event("z")
 
 # number_pix = np.ones((screen_width, screen_height), dtype=int)
 # number_pix = np.zeros_like(number_pix)  # генерируем массив нулей (цвет чёрный)
