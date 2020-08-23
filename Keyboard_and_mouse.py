@@ -116,5 +116,6 @@ class Event():
 			return False
 
 	def get_list_key(self):
+		""" Возвращает список зарезервированных клавиш """
 		return list(Event.key_object.keys())
 
