@@ -11,7 +11,6 @@ import math
 import time
 import threading
 
-import pygame
 import numpy as np
 
 
