@@ -22,13 +22,13 @@ def pause_ses():
 
 
 def closed_window():
-	global done
-	done = False
 
 
 
 
 
+	global on
+	on = False
 
 
 num_index_list_bot = 3
