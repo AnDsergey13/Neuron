@@ -68,8 +68,8 @@ while on:
 
 	for e in pygame.event.get():
 		if e.type == pygame.QUIT:
-			done = False
-
+			neuron_off()
+			closed_window()
 
 	if py.check_object_on_screen(py.get_pos_mouse()):
 		lbm.mouse_pressed(0, Neuron_)
