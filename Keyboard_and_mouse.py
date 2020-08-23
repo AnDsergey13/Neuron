@@ -68,8 +68,6 @@ class Event():
 		if pygame.key.get_pressed()[self.key_p] == 1:
 
 			if not self.block:
-				# print(block_keyboard)
-				# time.sleep(0.5)
 				self.block = True
 				function()
 		else:
@@ -83,8 +81,6 @@ class Event():
 		if pygame.key.get_pressed()[self.key_p] == 1:
 
 			if not self.block:
-				# print(block_keyboard)
-				# time.sleep(0.5)
 				self.block = True
 				return True
 		else:
@@ -100,7 +96,6 @@ class Event():
 
 		if pygame.mouse.get_pressed()[self.key_p] == 1:  # мышь
 			if not self.block:
-				# print(block_mouse)
 				self.block = True
 				function()
 		else:
@@ -114,7 +109,6 @@ class Event():
 
 		if pygame.mouse.get_pressed()[self.key_p] == 1:  # мышь
 			if not self.block:
-				# print(block_mouse)
 				self.block = True
 				return True
 		else:
