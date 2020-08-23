@@ -60,12 +60,12 @@ while on:
 			closed_window()
 
 	if py.check_object_on_screen(py.get_pos_mouse()):
-		lbm.mouse_pressed(0, Neuron_)
+		lbm.mouse_pressed(Neuron_)
 
-	if space.is_keyboard_pressed(pygame.K_SPACE):
+	if space.is_keyboard_pressed():
 		set_pause_session()
 
-	if z.is_keyboard_pressed(pygame.K_z):
+	if z.is_keyboard_pressed():
 		neuron_off()
 		closed_window()
 
