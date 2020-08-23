@@ -115,4 +115,6 @@ class Event():
 			self.block = False
 			return False
 
+	def get_list_key(self):
+		return list(Event.key_object.keys())
 
