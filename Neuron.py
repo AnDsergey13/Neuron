@@ -51,10 +51,12 @@ class Neuron_(Drawing):
 on = True
 pause_session = False
 def set_pause_session():
+	""" Глобальная функция для остановки движения бота """
 	global pause_session
 	pause_session = not pause_session
 	print(pause_session)
 def neuron_off():
+	""" Глобальная функция для отключения бота """
 	global on
 	on = False
 # last_id = max(LIST_BOT.take(1, axis=1))
