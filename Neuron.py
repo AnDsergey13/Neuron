@@ -50,6 +50,13 @@ class Neuron_(Drawing):
 		self.y_bot += -math.cos(self.y_bot) * 5
 on = True
 pause_session = False
+def set_pause_session():
+	global pause_session
+	pause_session = not pause_session
+	print(pause_session)
+def neuron_off():
+	global on
+	on = False
 # last_id = max(LIST_BOT.take(1, axis=1))
 # current_id = last_id + 1
 # LIST_BOT = np.append(

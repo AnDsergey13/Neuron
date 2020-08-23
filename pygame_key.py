@@ -15,10 +15,6 @@ import pygame
 import numpy as np
 
 
-def pause_ses():
-	global pause_session
-	pause_session = not pause_session
-	print(pause_session)
 
 
 def closed_window():
