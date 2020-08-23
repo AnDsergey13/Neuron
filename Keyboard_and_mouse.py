@@ -1,10 +1,18 @@
 import pygame
 
 	""" DOC	"""
-	def __init__(self):
 class Event():
+	def __init__(self, key_p):
 		"""  Стартовые параметры """
 		self.block = False
+		try:
+			self.key_p = Event.key_object.get(key_p)
+		except:
+			print(""" 
+				Ошибка ввода! Нет такой клавиши.
+				Используйте метод get_list_key(), чтобы посомтреть зарезервированные имена клавиш.
+				""")
+		
 
 	def keyboard_pressed(self, key_p, function):
 		"""
