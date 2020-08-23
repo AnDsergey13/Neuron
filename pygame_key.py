@@ -15,14 +15,7 @@ import pygame
 import numpy as np
 
 
-
-
 def closed_window():
-
-
-
-
-
 	global on
 	on = False
 
@@ -76,6 +69,7 @@ while on:
 	if z.is_keyboard_pressed(pygame.K_z):
 		neuron_off()
 		closed_window()
+
 	if pause_session:
 		continue
 
