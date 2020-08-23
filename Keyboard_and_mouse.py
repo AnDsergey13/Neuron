@@ -59,7 +59,7 @@ class Event():
 				""")
 		
 
-	def keyboard_pressed(self, key_p, function):
+	def keyboard_pressed(self, function):
 		"""
 		key_p - нажимаемая клавиша. клавиатура(pygame.K_SPACE)  # Стиль имени!
 		function - запускаемая функция после события
@@ -76,7 +76,7 @@ class Event():
 		else:
 			self.block = False
 
-	def is_keyboard_pressed(self, key_p):
+	def is_keyboard_pressed(self):
 		"""
 		key_p - нажимаемая клавиша. клавиатура(pygame.K_SPACE)
 		Example. is_keyboard_pressed(pygame.K_SPACE)
@@ -94,7 +94,7 @@ class Event():
 			return False
 
 
-	def mouse_pressed(self, key_p, function):
+	def mouse_pressed(self, function):
 		"""
 		key_p - нажимаемая клавиша ЛКМ(0),СКМ(1),ПКМ(2)
 		function - запускаемая функция после события
@@ -110,7 +110,7 @@ class Event():
 			self.block = False
 
 
-	def is_mouse_pressed(self, key_p):
+	def is_mouse_pressed(self):
 		"""
 		key_p - нажимаемая клавиша ЛКМ(0),СКМ(1),ПКМ(2)
 		Example. is_mouse_pressed(0)
