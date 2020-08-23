@@ -47,6 +47,7 @@ class Event():
 		"y" : pygame.K_y,
 		"z" : pygame.K_z
 	}
+
 	def __init__(self, key_p):
 		"""  Стартовые параметры """
 		self.block = False
@@ -118,4 +119,5 @@ class Event():
 	def get_list_key(self):
 		""" Возвращает список зарезервированных клавиш """
 		return list(Event.key_object.keys())
+
 
