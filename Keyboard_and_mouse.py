@@ -1,7 +1,7 @@
 import pygame
 
-	""" DOC	"""
 class Event():
+	""" Класс для работы с клавиатурой и мышью """
 	key_object = {
 		# Левая кнопка мыши
 		"lbm" : 0,
@@ -61,9 +61,8 @@ class Event():
 
 	def keyboard_pressed(self, function):
 		"""
-		key_p - нажимаемая клавиша. клавиатура(pygame.K_SPACE)  # Стиль имени!
 		function - запускаемая функция после события
-		Example. key_pressed(pygame.K_SPACE, pause_ses)  # Стиль имени!
+		Example. key_pressed(function)
 		"""
 
 		if pygame.key.get_pressed()[key_p] == 1:
@@ -78,8 +77,7 @@ class Event():
 
 	def is_keyboard_pressed(self):
 		"""
-		key_p - нажимаемая клавиша. клавиатура(pygame.K_SPACE)
-		Example. is_keyboard_pressed(pygame.K_SPACE)
+		Возвращает True если была нажата клавиша на клавиатуре. 
 		"""
 
 		if pygame.key.get_pressed()[key_p] == 1:
@@ -96,9 +94,8 @@ class Event():
 
 	def mouse_pressed(self, function):
 		"""
-		key_p - нажимаемая клавиша ЛКМ(0),СКМ(1),ПКМ(2)
 		function - запускаемая функция после события
-		Example. mouse_pressed(0, closed)
+		Example. mouse_pressed(function)
 		"""
 
 		if pygame.mouse.get_pressed()[key_p] == 1:  # мышь
@@ -112,8 +109,7 @@ class Event():
 
 	def is_mouse_pressed(self):
 		"""
-		key_p - нажимаемая клавиша ЛКМ(0),СКМ(1),ПКМ(2)
-		Example. is_mouse_pressed(0)
+		Возвращает True если была нажата клавиша на мыши. 
 		"""
 
 		if pygame.mouse.get_pressed()[key_p] == 1:  # мышь
