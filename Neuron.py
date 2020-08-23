@@ -26,10 +26,13 @@ class Neuron_(Drawing):
 				continue
 			self.neuron.clear_pos_bot()
 			self.neuron.draw_bot(self.x_bot, self.y_bot)
+			# Метод для описания поведения движения
 			self.movement()
+			# если выход за пределы комнаты, то удаление
 			if not self.check_object_on_screen((self.x_bot, self.y_bot)):
 				self.neuron.clear_pos_bot()
 				break
+			# Меняем случайно цвет бота 
 			self.neuron.set_color_bot(np.random.randint(140, 255), np.random.randint(140, 255), 255)
 			
 			self.neuron.draw_bot(self.x_bot, self.y_bot)
