@@ -6,6 +6,7 @@
 
 from Keyboard_and_mouse import Event_mouse_and_keyboard
 from Drawing import *
+from Neuron import *
 
 import math
 import time
