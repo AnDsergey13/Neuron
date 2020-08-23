@@ -28,8 +28,6 @@ def closed_window():
 
 
 
-def create_object():
-	global LIST_BOT
 
 	last_id = max(LIST_BOT.take(1, axis=1))
 	current_id = last_id + 1
@@ -38,27 +36,6 @@ def create_object():
 		np.zeros((1, num_index_list_bot), dtype=int),
 		axis=0)
 
-	# ???
-	x, y = py.get_pos_mouse()
-	bot1 = Bot()
-
-	while done:
-		if pause_session:
-			continue
-		bot1.clear_pos_bot()
-		bot1.draw_bot(x, y)
-
-		x += math.sin(x) * 5
-		y += -math.cos(y) * 5
-
-		# если выход за пределы комнаты, то удаление
-		if not py.check_object_on_screen((x, y)):
-			bot1.clear_pos_bot()
-			break
-
-		bot1.set_color_bot(np.random.randint(140, 255), np.random.randint(140, 255), 255)
-		bot1.draw_bot(x, y)
-		py.update_screen()
 
 
 num_index_list_bot = 3
