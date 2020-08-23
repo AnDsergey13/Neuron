@@ -3,7 +3,7 @@
 #     где уже есть экземпляр
 # !добавить общий список, с координатами
 
-from Keyboard_and_mouse import Event_mouse_and_keyboard
+from Keyboard_and_mouse import *
 from Drawing import *
 from Neuron import *
 
