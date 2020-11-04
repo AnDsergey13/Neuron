@@ -3,11 +3,12 @@ import socket
 import time
 import threading
 
+# поток для чтения с клавы. Чтобы не было ожидания ввода
 def th_input_keyboard():
 	global message
-	# поток для чтения с клавы. Чтобы не было ожидания ввода
-	message = bytes(input(), 'utf-8')
-	# conn.sendall(bytes(input(), 'utf-8'))
+	while work_server:
+		message = bytes(input(), 'utf-8')
+	print("Прослушка клавы отключена")
 
 def API():
 	global work_server
@@ -23,27 +24,37 @@ def API():
 		work_server = False
 
 HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
-PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
+PORT = 55555        # Port to listen on (non-privileged ports are > 1023)
 
 work_server = True
-message = b''
+message = b'1'
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 	s.bind((HOST, PORT))
-	
 	s.listen()
 	print("Ждём подключения")
 	conn, addr = s.accept()
+
+	input_keyboard = threading.Thread(target=th_input_keyboard)
+	input_keyboard.start()
 	with conn:
 		print('Connected by', addr)
-		
+
 		while work_server:
 			data = conn.recv(1024)
-			print(data)
 
-			th_input_keyboard()
+			if data == b'end':
+				work_server = False
+
+			if not data == b'1':
+				print("Принято ", data)
+			# time.sleep(1)
+			conn.sendall(message)
+			if not message == b'1':
+				print("Отправлено сообщение ", message)
+				message = b'1'
 			
-			API()
+			# API()
 
-			if not data:
-				break
+			# if not data:
+			# 	work_server = False
