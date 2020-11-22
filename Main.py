@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -
-from Keyboard_and_mouse import *
+from Keyboard_and_mouse import Event
 
 import math
 import threading
