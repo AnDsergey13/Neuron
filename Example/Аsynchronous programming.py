@@ -23,5 +23,6 @@ fruits = [
 ]
 
 event_loop = asyncio.get_event_loop()
+# Добавляем в цикл список 
 event_loop.run_until_complete(asyncio.gather(*fruits))
-# event_loop.close()
+event_loop.close()
