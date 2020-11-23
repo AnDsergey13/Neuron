@@ -1,5 +1,11 @@
 # https://www.youtube.com/watch?v=BmOjeVM0w1U
 import asyncio
+import keyboard
+import sys
+
+# Добавить пути и для винды и для линукса
+sys.path.append('/home/pi/Documents/Python/Neuron')
+from Keyboard_and_mouse import Event
 
 delay = 1
 
