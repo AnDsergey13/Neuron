@@ -1,0 +1,11 @@
+[tool.poetry]
+name = "Neuron"
+version = "0.0.1"
+description = ""
+authors = ["Anakin <44977098+AnD13@users.noreply.github.com>",
+           "Paciupa <65620103+Paciupa@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.6"
+pygame = "^1.9.6"
+numpy = "^1.19.0"
