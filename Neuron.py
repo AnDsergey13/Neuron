@@ -43,7 +43,9 @@ class Neuron_(Drawing):
 				break
 
 			# Меняем случайно цвет бота
-			self.neuron.set_color_bot(np.random.randint(140, 255), np.random.randint(140, 255), 255)
+			self.neuron.set_color_bot(
+				np.random.randint(140, 255),
+				np.random.randint(140, 255), 255)
 
 			self.neuron.draw_bot(self.x_bot, self.y_bot)
 			self.update_screen()
