@@ -1,5 +1,8 @@
+# -*- coding: utf-8 -
+
 import keyboard
 import mouse
+
 
 class Event():
 	""" Класс для работы с клавиатурой и мышью """
@@ -10,11 +13,10 @@ class Event():
 		try:
 			self.key_p = key_p
 		except:
-			print(""" 
+			print("""
 				Ошибка ввода! Нет такой клавиши.
 				Используйте метод get_list_key(), чтобы посомтреть зарезервированные имена клавиш.
 				""")
-		
 
 	def keyboard_pressed(self, function):
 		"""
@@ -32,7 +34,7 @@ class Event():
 
 	def is_keyboard_pressed(self):
 		"""
-		Возвращает True если была нажата клавиша на клавиатуре. 
+		Возвращает True если была нажата клавиша на клавиатуре.
 		"""
 
 		if keyboard.is_pressed(self.key_p):
@@ -43,7 +45,6 @@ class Event():
 		else:
 			self.block = False
 			return False
-
 
 	def mouse_pressed(self, function):
 		"""
@@ -58,10 +59,9 @@ class Event():
 		else:
 			self.block = False
 
-
 	def is_mouse_pressed(self):
 		"""
-		Возвращает True если была нажата клавиша на мыши. 
+		Возвращает True если была нажата клавиша на мыши.
 		"""
 
 		if mouse.is_pressed(button=self.key_p):  # мышь
@@ -73,6 +73,5 @@ class Event():
 			return False
 	# del ?
 	# def get_list_key(self):
-	#	""" Возвращает список зарезервированных клавиш """
-	#	return list(Event.key_object.keys())
-
+	# 	""" Возвращает список зарезервированных клавиш """
+	# 	return list(Event.key_object.keys())
