@@ -1,4 +1,5 @@
 # https://www.youtube.com/watch?v=BmOjeVM0w1U
+
 import asyncio
 import keyboard
 import sys
@@ -9,9 +10,11 @@ from Keyboard_and_mouse import Event
 
 delay = 1
 
+
 async def banana():
 	await asyncio.sleep(delay)
 	print("Я люблю бананы")
+
 
 async def apple():
 	await asyncio.sleep(delay)
