@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -
-from websocket import create_connection
-import threading
-import keyboard
+
 import sys
+import threading
+
+import keyboard
+from websocket import create_connection
+
+
+work_client = True
 
 
 def emergency_shutdown():
@@ -15,9 +20,8 @@ def emergency_shutdown():
 			ws.close()
 			print("Закрываем клиент")
 			sys.exit()
-			
 
-work_client = True
+
 message = ""
 
 ws = create_connection("ws://127.0.0.1:13254")
@@ -31,7 +35,7 @@ while work_client:
 	ws.send(message)
 	print("Сообщение отправил, жду ответа...")
 
-	result =  ws.recv()
+	result = ws.recv()
 	print("Ответ '%s'" % result)
 	if result == 'end':
 		work_client = False
