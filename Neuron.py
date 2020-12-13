@@ -6,7 +6,7 @@ import threading
 # import pygame
 import numpy as np
 
-from Drawing import *
+from Drawing import Drawing, Bot
 
 
 class Neuron_(Drawing):
