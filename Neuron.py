@@ -1,16 +1,20 @@
-from Drawing import *
+# -*- coding: utf-8 -
 
-import pygame
 import math
 import threading
+
+# import pygame
 import numpy as np
+
+from Drawing import *
+
 
 class Neuron_(Drawing):
 	""" Класс для работы с ботами """
 
 	def __init__(self, mode=1):
-		""" mode = 0 - без потоков 
-			mode = 1 - это когда один бот в одном потоке 
+		""" mode = 0 - без потоков
+			mode = 1 - это когда один бот в одном потоке
 		"""
 		if mode == 1:
 			create_th = threading.Thread(target=self.create_bot)
@@ -20,7 +24,7 @@ class Neuron_(Drawing):
 		""" Промежуточный метод в котором создаётся бот """
 		self.x_bot, self.y_bot = self.get_pos_mouse()
 		self.neuron = Bot()
-		self.loop()	
+		self.loop()
 
 	def loop(self):
 		""" Цикл в котором всё происходит """
@@ -38,9 +42,9 @@ class Neuron_(Drawing):
 				self.neuron.clear_pos_bot()
 				break
 
-			# Меняем случайно цвет бота 
+			# Меняем случайно цвет бота
 			self.neuron.set_color_bot(np.random.randint(140, 255), np.random.randint(140, 255), 255)
-			
+
 			self.neuron.draw_bot(self.x_bot, self.y_bot)
 			self.update_screen()
 
@@ -53,11 +57,13 @@ class Neuron_(Drawing):
 on = True
 pause_session = False
 
+
 def set_pause_session():
 	""" Глобальная функция для остановки движения бота """
 	global pause_session
 	pause_session = not pause_session
 	print(pause_session)
+
 
 def neuron_off():
 	""" Глобальная функция для отключения бота """
