@@ -37,7 +37,8 @@ class Drawing():
 		"""
 		Drawing.screen_width = width
 		Drawing.screen_height = height
-		Drawing.window = pygame.display.set_mode((Drawing.screen_width, Drawing.screen_height))
+		Drawing.window = pygame.display.set_mode(
+			(Drawing.screen_width, Drawing.screen_height))
 
 	def get_size_window(self):
 		return Drawing.screen_width, Drawing.screen_height
@@ -70,7 +71,8 @@ class Drawing():
 		x_obj = pos_obj[0]
 		y_obj = pos_obj[1]
 
-		return x_obj > 0 and x_obj < Drawing.screen_width and y_obj > 0 and y_obj < Drawing.screen_height
+		return (x_obj > 0 and x_obj < Drawing.screen_width
+			and y_obj > 0 and y_obj < Drawing.screen_height)
 
 	def get_list_colors(self):
 		""" Возвращает список допустимых цветов """
@@ -109,7 +111,8 @@ class Bot(Drawing):
 		else:
 			print("""
 				Ошибка ввода! Введите название цвета или его RGB формат.
-				ПРИМЕРЫ! test.set_color_bot("light blue") или test.set_color_bot(0, 255, 255)
+				ПРИМЕРЫ! test.set_color_bot("light blue")
+				или test.set_color_bot(0, 255, 255)
 				Для уточнения, какие цвета можно использовать, введите py.get_list_colors()
 			""")
 
@@ -147,7 +150,8 @@ class Text(Drawing):
 	def set_color_text(self, *color):
 		""" Задаём цвет для текста.
 			В установке цвета допускается надписи типа "red", а также в RGB виде
-			ПРИМЕР! test.draw_text("purple") или test.draw_text(255, 0, 255) # фиолетовый
+			ПРИМЕР! test.draw_text("purple")
+			или test.draw_text(255, 0, 255) # фиолетовый
 		"""
 		self.color_text = color
 
