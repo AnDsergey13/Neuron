@@ -64,7 +64,7 @@ class Drawing():
 		""" Возвращает кортеж x и y позиции мышки """
 		return pygame.mouse.get_pos()
 
-	def check_object_on_screen(self, pos_obj):
+	def is_object_on_screen(self, pos_obj):
 		""" Возвращает True, если объект находится в зоне окна, иначе False """
 		# на вход принимается кортеж
 		x_obj = pos_obj[0]

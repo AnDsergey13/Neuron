@@ -34,7 +34,7 @@ class Neuron_(Drawing):
 			self.movement()
 
 			# если выход за пределы комнаты, то удаление
-			if not self.check_object_on_screen((self.x_bot, self.y_bot)):
+			if not self.is_object_on_screen((self.x_bot, self.y_bot)):
 				self.neuron.clear_pos_bot()
 				break
 
