@@ -6,10 +6,11 @@
 #
 #
 
-from websocket_server import WebsocketServer
-import threading
-import keyboard
 import sys
+import threading
+
+from websocket_server import WebsocketServer
+import keyboard
 
 
 def emergency_shutdown():
@@ -19,6 +20,7 @@ def emergency_shutdown():
 			server.server_complete()
 			print("Закрываем сервер")
 			sys.exit()
+
 
 def loop(client, server, message):
 
@@ -30,11 +32,12 @@ def loop(client, server, message):
 	if message == "end":
 		print("Получено сообщение выключение сервера")
 		server.send_message_to_all("end")
-		server.server_complete() # Отключение сервера 
+		server.server_complete()  # Отключение сервера
 		print("Сервер отключён")
 		sys.exit()
 
 	# server.send_message_to_all("Hey all, a new client has joined us")
+
 
 server = WebsocketServer(13254, host='127.0.0.1')
 
