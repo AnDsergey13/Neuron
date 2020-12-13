@@ -70,10 +70,7 @@ class Drawing():
 		x_obj = pos_obj[0]
 		y_obj = pos_obj[1]
 
-		if x_obj > 0 and x_obj < Drawing.screen_width and y_obj > 0 and y_obj < Drawing.screen_height:
-			return True
-		else:
-			return False
+		return x_obj > 0 and x_obj < Drawing.screen_width and y_obj > 0 and y_obj < Drawing.screen_height
 
 	def get_list_colors(self):
 		""" Возвращает список допустимых цветов """
