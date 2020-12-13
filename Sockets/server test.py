@@ -1,4 +1,5 @@
-#https://realpython.com/python-sockets/
+# https://realpython.com/python-sockets/
+
 import socket
 # import time
 import threading
