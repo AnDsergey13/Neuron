@@ -1,17 +1,18 @@
 import pygame
 
+
 class Drawing():
 	""" Класс для работы с графикой	"""
 	color_object = {
-		"red" : (255, 0, 0),
-		"orange" : (255, 128, 0),
-		"yellow" : (255, 255, 0),
-		"green" : (0, 255, 0),
-		"light blue" : (0, 255, 255),
-		"dark blue" : (0, 0, 255),
-		"purple" : (255, 0, 255),
-		"black" : (0, 0, 0),
-		"white" : (255, 255, 255)
+		"red": (255, 0, 0),
+		"orange": (255, 128, 0),
+		"yellow": (255, 255, 0),
+		"green": (0, 255, 0),
+		"light blue": (0, 255, 255),
+		"dark blue": (0, 0, 255),
+		"purple": (255, 0, 255),
+		"black": (0, 0, 0),
+		"white": (255, 255, 255)
 	}
 
 	pygame.init()
@@ -31,7 +32,7 @@ class Drawing():
 		pygame.display.set_caption(name)
 
 	def set_size_window(self, width=screen_width, height=screen_height):
-		""" Установка размера экрана 
+		""" Установка размера экрана
 			ПРИМЕР! py.set_size_window(width, height) или py.set_size_window(500, 700)
 		"""
 		Drawing.screen_width = width
@@ -40,7 +41,7 @@ class Drawing():
 
 	def get_size_window(self):
 		return Drawing.screen_width, Drawing.screen_height
-		
+
 	def update_screen(self):
 		""" Обновляем экран без задержки """
 		pygame.display.flip()
@@ -97,7 +98,7 @@ class Bot(Drawing):
 
 	def set_color_bot(self, *color):
 		""" Задаём цвет для бота.
-			Допускается надписи типа "red", а также в RGB виде 
+			Допускается надписи типа "red", а также в RGB виде
 			ПРИМЕР! test.set_color_bot("light blue") или test.set_color_bot(0, 255, 255)
 			Для уточнения, какие цвета можно использовать, введите py.get_list_colors()
 		"""
@@ -121,14 +122,14 @@ class Text(Drawing):
 
 	def __init__(self, x=15, y=15, h=25, style="verdana"):
 		""" Инициализируем стартовые параметры.
-			Такие как координаты x и y. Высота текста и его стиль 
+			Такие как координаты x и y. Высота текста и его стиль
 			ПРИМЕР! test = Text(x, y, h, style) или test = Text(16, 71, 10, "verdana")
 		"""
 		pygame.font.init()
 		self.x_text = x
 		self.y_text = y
 		self.fontObj = pygame.font.SysFont(style, h)
-		# по умолчанию ставим белый текст 
+		# по умолчанию ставим белый текст
 		self.set_color_text("white")
 		# переменная для хранения длины получаемого текста
 		# нужна для генерации символов очистки
@@ -137,7 +138,7 @@ class Text(Drawing):
 	def clear_text(self):
 		""" Закрашиваем чёрным место, где отрисовывается текст"""
 		# создаём затирающую строку равную длине получаемого текста
-		string_clear = self.len_value * "█" # alt + 219
+		string_clear = self.len_value * "█"  # alt + 219
 		# альтернативный вариант ↓
 		# string_clear = self.len_value * "\u2588"
 		self.text = self.fontObj.render(string_clear, 1, Drawing.color_object.get("black"),
@@ -152,8 +153,8 @@ class Text(Drawing):
 		self.color_text = color
 
 	def pos_text(self, x=15, y=15):
-		""" Задаём позицию для текста. 
-			ПРИМЕР!test.pos_text(x, y) 
+		""" Задаём позицию для текста.
+			ПРИМЕР!test.pos_text(x, y)
 		"""
 		self.x_text = x
 		self.y_text = y
@@ -177,4 +178,3 @@ class Text(Drawing):
 				ПРИМЕРЫ! test.draw_text("light blue") или test.draw_text(0, 255, 255)
 				Для уточнения, какие цвета можно использовать, введите py.get_list_colors()
 			""")
-		
