@@ -1,7 +1,8 @@
-#https://realpython.com/python-sockets/
+# https://realpython.com/python-sockets/
 import socket
 import time
 import threading
+
 
 # поток для чтения с клавы. Чтобы не было ожидания ввода
 def th_input_keyboard():
@@ -9,6 +10,7 @@ def th_input_keyboard():
 	while work_client:
 		message = bytes(input(), 'utf-8')
 	print("Прослушка клавы отключена")
+
 
 HOST = '127.0.0.1'  # The server's hostname or IP address
 PORT = 55555        # The port used by the server
@@ -35,12 +37,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
 		data = s.recv(1024)
 		if not data == b'1':
-				print("Принято ", data)
-		
+			print("Принято ", data)
+
 		# if data == b'end':
 		# 	print("Клиент закрыт")
 		# 	work_client = False
 
-	
 
 # print('Received', repr(data))
