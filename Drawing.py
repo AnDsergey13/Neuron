@@ -47,7 +47,7 @@ class Drawing():
 		pygame.display.flip()
 
 	def update_screen_with_delay(self, delay_update=0):
-		""" Обновляем экран c задержкой. По умолчанию задержка 0 милисекунд.
+		""" Обновляем экран c задержкой. По умолчанию задержка 0 миллисекунд.
 			ПРИМЕР! py.update_screen_with_delay(10)
 		"""
 		pygame.display.flip()
@@ -55,7 +55,7 @@ class Drawing():
 
 	# del?
 	def set_delay(self, delay_update):
-		""" Установить задержку для каждой отрисовки. Значения в милисекундах.
+		""" Установить задержку для каждой отрисовки. Значения в миллисекундах.
 			ПРИМЕР! py.set_delay(10)
 		"""
 		self.delay_update = delay_update
@@ -93,7 +93,7 @@ class Bot(Drawing):
 		self.bot.fill(Drawing.color_object.get("black"))
 
 	def draw_bot(self, x, y):
-		""" Преносим изменения на экран """
+		""" Переносим изменения на экран """
 		Drawing.window.blit(self.bot, (x, y))
 
 	def set_color_bot(self, *color):
