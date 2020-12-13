@@ -7,7 +7,7 @@ class Operation():
 
 	# при созданиии объекта класса, автоматически запускается этот метод
 	def __init__(self, name="-Никто-", block=0):
-		""" +++Автоматически запускаем метод+++ 
+		""" +++Автоматически запускаем метод+++
 		Пример:
 		name - это имя объекта
 		block - печать имени(1 - не печатает, 0 - печатает)
@@ -17,7 +17,7 @@ class Operation():
 			print(f"Объект c именем -{name}- создан!")
 		self.names = name
 
-	# без self метод класса не вызовится 
+	# без self метод класса не вызовется
 	# после self, пишутся поля(переменные), которые передаются в метод
 	def output(self, value):
 		""" +++Вывод введённого значения+++ """
@@ -47,7 +47,7 @@ class Operation():
 			if str(type(numbers)) == type_structures:
 				for number in numbers:
 					summ += number
-				return summ	
+				return summ
 
 		print("Введите допустимый тип аргумента. Список, число или кортеж")
 
@@ -57,7 +57,8 @@ class Operation():
 		# print(self.name)
 		return self.names
 
-# изучение наследования 
+
+# изучение наследования
 class podClass(Operation):
 	""" DOC """
 
@@ -68,6 +69,7 @@ class podClass(Operation):
 	def metod1(self):
 		""" DOC """
 		pass
+
 
 # num_bananes = Operation("Объект 1", 1)
 cheburek = podClass()
