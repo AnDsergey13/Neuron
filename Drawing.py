@@ -138,8 +138,10 @@ class Text(Drawing):
 		string_clear = self.len_value * "█"  # alt + 219
 		# альтернативный вариант ↓
 		# string_clear = self.len_value * "\u2588"
-		self.text = self.fontObj.render(string_clear, 1, Drawing.color_object.get("black"),
-										Drawing.color_object.get("black"))
+		self.text = self.fontObj.render(
+			string_clear, 1,
+			Drawing.color_object.get("black"),
+			Drawing.color_object.get("black"))
 		Drawing.window.blit(self.text, (self.x_text, self.y_text))
 
 	def set_color_text(self, *color):
@@ -163,11 +165,15 @@ class Text(Drawing):
 		"""
 		self.len_value = len(str(value))
 		if len(self.color_text) == 3:
-			self.text = self.fontObj.render(str(value), 1, self.color_text)
+			self.text = self.fontObj.render(
+				str(value), 1,
+				self.color_text)
 			Drawing.window.blit(self.text, (self.x_text, self.y_text))
 		elif len(self.color_text) == 1:
 			color_text = self.color_text[0]
-			self.text = self.fontObj.render(str(value), 1, Drawing.color_object.get(color_text))
+			self.text = self.fontObj.render(
+				str(value), 1,
+				Drawing.color_object.get(color_text))
 			Drawing.window.blit(self.text, (self.x_text, self.y_text))
 		else:
 			print("""
