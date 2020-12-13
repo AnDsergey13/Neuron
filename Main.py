@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -
-from Keyboard_and_mouse import Event
 
-import math
-import threading
-import numpy as np
-import time
+# import math
+# import threading
+# import time
 
 import keyboard
+import numpy as np
+
+from Keyboard_and_mouse import Event
 
 size_x = 10
 size_y = 10
@@ -22,4 +23,3 @@ while not keyboard.is_pressed("space"):
 	pass
 	if c.is_keyboard_pressed():
 		print(str(pole))
-
