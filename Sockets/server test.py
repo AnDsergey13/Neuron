@@ -1,7 +1,13 @@
 import socket
 import threading
-
-
+'''
+ЗАДАЧИ
+1) Узнать в чём ошибка у клиентов, когда одновременно закрываешь все соединения
+Fatal Python error: could not acquire lock for <_io.BufferedWriter name='<stdout>'> at interpreter shutdown, possibly due to daemon threads
+2) проверка на все возможные ошибки
+3) избавится от потоков(асинхронность)
+4) реализовать общий класс(?) для клиента и сервера
+'''
 def input_keyboard():
 	global message
 	while work_server:
