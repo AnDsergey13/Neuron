@@ -1,11 +1,5 @@
 # -*- coding: utf-8 -
 
-# ЗАДАЧИ
-# Реализовать полудуплекную связь
-# Баг! Сервер не отключается. (Гипотеза - потоки в библиотеке)
-#
-#
-
 from websocket_server import WebsocketServer
 import threading
 import keyboard
