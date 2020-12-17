@@ -1,60 +1,85 @@
-#https://realpython.com/python-sockets/
 import socket
-import time
 import threading
 
-# поток для чтения с клавы. Чтобы не было ожидания ввода
-def th_input_keyboard():
+
+def input_keyboard():
 	global message
 	while work_server:
 		message = bytes(input(), 'utf-8')
-	print("Прослушка клавы отключена")
+	print("\n Прослушка клавы отключена")
 
-def API():
+def client_send_message(conn):
+	global work_server
+	global message
+
+	while work_server:
+		if not message in list_command:
+			try:
+				conn.send(message)
+			except:
+				print("\n client_send_message. Ошибка отправки сообщения")
+				work_server = False
+			message = b""
+
+		if message == b"end":
+			conn.send(message)
+			message = b""
+			print("\n Отключаем клиента")
+			# Без брейка поток продолжит отправлять данные на закрытый сокет
+			break
+
+		if message == b"close":
+			conn.sendall(b"close")
+			message = b""
+			print("\n Получено сообщение выключение сервера")
+			work_server = False
+
+def server_accept(server):
 	global work_server
 
-	if data == b'password':
-		conn.sendall(b"12345678")
+	while work_server:
+		print("\n Сервер слушает")
+		conn, addr = server.accept()
+		print(f"\n Подключился {conn} по адресу {addr}")
+		clients.append(conn)
 
-	if data == b'end':
-		conn.sendall(b"end")
+		try:
+			# Создаём отдельны демон-потоки для клиентов
+			th_cl_send_message = threading.Thread(target=client_send_message, args=(conn,))
+			# Завершить поток, если поток main завершится
+			th_cl_send_message.daemon = True
+			th_cl_send_message.start()
+		except:
+			print("\n sever_accept. Ошибка при создании потока клиента")
+			work_server = False
 
-	if data == b'0':
-		print("Отключаем сервер")
+def Main():
+	global work_server
+
+	# Подключаем клавиатуру
+	th_input_keyboard = threading.Thread(target=input_keyboard)
+	# Завершить поток, если поток main завершится
+	th_input_keyboard.daemon = True
+	th_input_keyboard.start()
+
+	try:
+		server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		server.bind((HOST, PORT))
+		server.listen(NUM_CLIENTS)
+
+		server_accept(server)
+	except:
 		work_server = False
+		print("Main. Ошибка при создании сервера")
 
-HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
-PORT = 55555        # Port to listen on (non-privileged ports are > 1023)
+
+HOST = "127.0.0.1"
+PORT = 13254
+NUM_CLIENTS = 5
+clients = []
 
 work_server = True
-message = b'1'
+message = b""
+list_command = [b"end", b"close", b""]
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-	s.bind((HOST, PORT))
-	s.listen()
-	print("Ждём подключения")
-	conn, addr = s.accept()
-
-	input_keyboard = threading.Thread(target=th_input_keyboard)
-	input_keyboard.start()
-	with conn:
-		print('Connected by', addr)
-
-		while work_server:
-			data = conn.recv(1024)
-
-			if data == b'end':
-				work_server = False
-
-			if not data == b'1':
-				print("Принято ", data)
-			# time.sleep(1)
-			conn.sendall(message)
-			if not message == b'1':
-				print("Отправлено сообщение ", message)
-				message = b'1'
-			
-			# API()
-
-			# if not data:
-			# 	work_server = False
+Main()
