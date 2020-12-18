@@ -2,6 +2,7 @@ import socket
 import threading
 '''
 ЗАДАЧИ
+0) Устранить DoS атаку на клиентов
 1) Узнать в чём ошибка у клиентов, когда одновременно закрываешь все соединения
 Fatal Python error: could not acquire lock for <_io.BufferedWriter name='<stdout>'> at interpreter shutdown, possibly due to daemon threads
 2) проверка на все возможные ошибки
