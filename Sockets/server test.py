@@ -8,13 +8,35 @@ Fatal Python error: could not acquire lock for <_io.BufferedWriter name='<stdout
 3) избавится от потоков(асинхронность)
 4) реализовать общий класс(?) для клиента и сервера
 '''
-def input_keyboard():
+
+
+def shutdown_clients_emergency():
+	# Имя?
+	# Отключение клиентов на стороне сервера
+	for client in clients:
+		try:
+			client.close()
+		except:
+			print("shutdown_clients_emergency. Один из клиентов не может закрыться \n")
+	
+
+def input_keyboard(server):
 	global message
+	global work_server
+
 	while work_server:
 		message = bytes(input(), 'utf-8')
-	print("\n Прослушка клавы отключена")
 
-def client_send_message(conn):
+		if message == b"close":
+			print("Получено сообщение выключение сервера \n")
+			message = b""
+			shutdown_clients_emergency()
+			server.shutdown(socket.SHUT_RDWR)
+			work_server = False
+			server.close()
+	print("Поток input_keyboard - закрыт \n")		
+
+def client_send_message(server, conn):
 	global work_server
 	global message
 
@@ -23,60 +45,67 @@ def client_send_message(conn):
 			try:
 				conn.send(message)
 			except:
-				print("\n client_send_message. Ошибка отправки сообщения")
+				print("client_send_message. Ошибка отправки сообщения \n")
+				# Отключаем соединение для всех клиентов
+				shutdown_clients_emergency()
 				work_server = False
+				server.shutdown(socket.SHUT_RDWR)
+				server.close()
 			message = b""
 
 		if message == b"end":
-			conn.send(message)
+			# Отправляем сообщение, чтобы клиент закрывался
+			shutdown_clients_emergency()
+			# Очищаем сообщение, чтобы условие больше не сработало
 			message = b""
-			print("\n Отключаем клиента")
+			# Удаляем из списка клиентов
+			clients.remove(conn)
+			print("Отключаем клиента \n")
 			# Без брейка поток продолжит отправлять данные на закрытый сокет
 			break
-
-		if message == b"close":
-			conn.sendall(b"close")
-			message = b""
-			print("\n Получено сообщение выключение сервера")
-			work_server = False
 
 def server_accept(server):
 	global work_server
 
 	while work_server:
-		print("\n Сервер слушает")
+		print("Сервер слушает \n")
 		conn, addr = server.accept()
-		print(f"\n Подключился {conn} по адресу {addr}")
+		print(f"Подключился {conn} по адресу {addr} \n")
 		clients.append(conn)
 
 		try:
 			# Создаём отдельны демон-потоки для клиентов
-			th_cl_send_message = threading.Thread(target=client_send_message, args=(conn,))
+			th_cl_send_message = threading.Thread(target=client_send_message, args=(server, conn,))
 			# Завершить поток, если поток main завершится
 			th_cl_send_message.daemon = True
 			th_cl_send_message.start()
 		except:
-			print("\n sever_accept. Ошибка при создании потока клиента")
+			print("sever_accept. Ошибка при создании потока клиента \n")
 			work_server = False
+			server.shutdown(socket.SHUT_RDWR)
+			server.close()
 
 def Main():
 	global work_server
 
-	# Подключаем клавиатуру
-	th_input_keyboard = threading.Thread(target=input_keyboard)
-	# Завершить поток, если поток main завершится
-	th_input_keyboard.daemon = True
-	th_input_keyboard.start()
-
 	try:
 		server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+		# Подключаем клавиатуру
+		th_input_keyboard = threading.Thread(target=input_keyboard, args=(server,))
+		# Завершить поток, если поток main завершится
+		th_input_keyboard.daemon = True
+		th_input_keyboard.start()
+
 		server.bind((HOST, PORT))
 		server.listen(NUM_CLIENTS)
 
 		server_accept(server)
 	except:
 		work_server = False
-		print("Main. Ошибка при создании сервера")
+		print("Main. Ошибка при создании сервера \n")
+		server.shutdown(socket.SHUT_RDWR)
+		server.close()
 
 
 HOST = "127.0.0.1"

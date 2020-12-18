@@ -3,15 +3,16 @@ import threading
 import keyboard
 import sys
 
-def emergency_shutdown():
+def emergency_shutdown(client):
 	global work_client
 
 	while work_client:
 		if keyboard.is_pressed("/"):
-			print("\n Клиент - Активировано экстренное отключение \n ")
+			print("Клиент - Активировано экстренное отключение \n ")
+			client.close()
 			work_client = False
 			sys.exit()
-	print("\n Поток emergency_shutdown - закрыт \n ")
+	print("Поток emergency_shutdown - закрыт \n ")
 
 '''
 def input_keyboard():
@@ -25,32 +26,37 @@ def client_listen(client):
 	global work_client
 	
 	while work_client:
-		print("\n Ждём сообщения")
+		print("Ждём сообщения... \n ")
 		data = client.recv(1024)
 
 		if not data in list_command:
-			print("\n Принято ", data)
+			print(f"Принято {data} \n ")
+			data = b""
+			
 
 		if data == b"end":
-			print("\n Клиент закрыт")
+			print("Клиент закрыт \n ")
 			work_client = False
+			client.close()
 
 def Main():
 	global work_client
 
-	# Включаем поток для экстренного отключения клиента
-	th_emergency_shutdown = threading.Thread(target=emergency_shutdown)
-	# Завершить поток, если поток main завершится
-	th_emergency_shutdown.daemon = True
-	th_emergency_shutdown.start()
-
 	try:
 		client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		client.connect((HOST, PORT))
+
+		# Включаем поток для экстренного отключения клиента
+		th_emergency_shutdown = threading.Thread(target=emergency_shutdown, args=(client,))
+		# Завершить поток, если поток main завершится
+		th_emergency_shutdown.daemon = True
+		th_emergency_shutdown.start()
+			
 		client_listen(client)
 	except:
-		print("\n Main. Ошибка при создании клиента")
+		print("Main. Ошибка при создании клиента \n")
 		work_client = False
+		client.close()
 
 HOST = "127.0.0.1"
 PORT = 13254
