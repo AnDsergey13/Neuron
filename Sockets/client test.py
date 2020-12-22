@@ -31,7 +31,6 @@ def client_listen(client):
 
 		if not data in list_command:
 			print(f"Принято {data} \n ")
-			data = b""
 			
 
 		if data == b"end":
@@ -62,6 +61,6 @@ HOST = "127.0.0.1"
 PORT = 13254
 
 work_client = True
-list_command = ["end", "close", ""]
+list_command = [b"end", b"close", b""]
 
 Main()

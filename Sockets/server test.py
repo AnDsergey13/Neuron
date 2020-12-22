@@ -2,7 +2,6 @@ import socket
 import threading
 '''
 ЗАДАЧИ
-0) Устранить DoS атаку на клиентов
 1) Узнать в чём ошибка у клиентов, когда одновременно закрываешь все соединения
 Fatal Python error: could not acquire lock for <_io.BufferedWriter name='<stdout>'> at interpreter shutdown, possibly due to daemon threads
 2) проверка на все возможные ошибки
@@ -55,12 +54,12 @@ def client_send_message(server, conn):
 			message = b""
 
 		if message == b"end":
-			# Отправляем сообщение, чтобы клиент закрывался
-			shutdown_clients_emergency()
+			conn.send(message)
 			# Очищаем сообщение, чтобы условие больше не сработало
 			message = b""
 			# Удаляем из списка клиентов
 			clients.remove(conn)
+			conn.close()
 			print("Отключаем клиента \n")
 			# Без брейка поток продолжит отправлять данные на закрытый сокет
 			break
