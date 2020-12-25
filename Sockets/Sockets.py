@@ -1,5 +1,6 @@
 import socket
-import threading
+import asyncio
+
 '''
 ЗАДАЧИ
 1) Узнать в чём ошибка у клиентов, когда одновременно закрываешь все соединения
@@ -9,52 +10,39 @@ Fatal Python error: could not acquire lock for <_io.BufferedWriter name='<stdout
 4) реализовать общий класс(?) для клиента и сервера
 '''
 
+# Сюда приходят команды из Debag.py(клавиатуры)
+async def set_command(command):
+	global message
+	message = command
 
-def shutdown_clients_emergency():
-	# Имя?
-	# Отключение клиентов на стороне сервера
+def shutdown_all_clients():
+	# Отключение всех клиентов на стороне сервера
 	for client in clients:
 		try:
 			client.close()
 		except:
-			print("shutdown_clients_emergency. Один из клиентов не может закрыться \n")
-	
-
-def input_keyboard(server):
-	global message
-	global work_server
-
-	while work_server:
-		message = bytes(input(), 'utf-8')
-
-		if message == b"close":
-			print("Получено сообщение выключение сервера \n")
-			message = b""
-			shutdown_clients_emergency()
-			server.shutdown(socket.SHUT_RDWR)
-			work_server = False
-			server.close()
-	print("Поток input_keyboard - закрыт \n")		
-
-def client_send_message(server, conn):
+			print("shutdown_all_clients. Один из клиентов не может закрыться \n")
+		
+# ?????
+async def client_send_message(server, conn# ?????):
 	global work_server
 	global message
 
 	while work_server:
 		if not message in list_command:
 			try:
-				conn.send(message)
+				await conn.send(message)
 			except:
 				print("client_send_message. Ошибка отправки сообщения \n")
 				# Отключаем соединение для всех клиентов
-				shutdown_clients_emergency()
+				shutdown_all_clients()
 				work_server = False
 				server.shutdown(socket.SHUT_RDWR)
 				server.close()
 			message = b""
 
 		if message == b"end":
-			conn.send(message)
+			await conn.send(message)
 			# Очищаем сообщение, чтобы условие больше не сработало
 			message = b""
 			# Удаляем из списка клиентов
@@ -63,49 +51,40 @@ def client_send_message(server, conn):
 			print("Отключаем клиента \n")
 			# Без брейка поток продолжит отправлять данные на закрытый сокет
 			break
-
-def server_accept(server):
+		
+# ?????
+async def server_accept(server# ?????):
 	global work_server
 
 	while work_server:
-		print("Сервер слушает \n")
-		conn, addr = server.accept()
-		print(f"Подключился {conn} по адресу {addr} \n")
+		print("Сервер слушает ... ...")
+		conn, _ = await server.accept()
+		print(f"Подключился {conn}")
 		clients.append(conn)
 
-		try:
-			# Создаём отдельны демон-потоки для клиентов
-			th_cl_send_message = threading.Thread(target=client_send_message, args=(server, conn,))
-			# Завершить поток, если поток main завершится
-			th_cl_send_message.daemon = True
-			th_cl_send_message.start()
-		except:
-			print("sever_accept. Ошибка при создании потока клиента \n")
-			work_server = False
-			server.shutdown(socket.SHUT_RDWR)
-			server.close()
 
-def Main():
+def create_server(HOST, PORT, NUM_CLIENTS):
 	global work_server
 
 	try:
 		server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-		# Подключаем клавиатуру
-		th_input_keyboard = threading.Thread(target=input_keyboard, args=(server,))
-		# Завершить поток, если поток main завершится
-		th_input_keyboard.daemon = True
-		th_input_keyboard.start()
-
 		server.bind((HOST, PORT))
 		server.listen(NUM_CLIENTS)
-
+		server.setblocking(False)
+		print("*** Сервер создан! ***")
 		server_accept(server)
 	except:
 		work_server = False
-		print("Main. Ошибка при создании сервера \n")
+		print("create_server. Ошибка при создании сервера \n")
 		server.shutdown(socket.SHUT_RDWR)
 		server.close()
+
+	try:
+		# ?????
+		loop = asyncio.get_event_loop()
+		loop.run_until_complete(run_server())
+	except:
+		print("create_server. Ошибка при создании списка событий \n")
 
 
 HOST = "127.0.0.1"
@@ -117,4 +96,4 @@ work_server = True
 message = b""
 list_command = [b"end", b"close", b""]
 
-Main()
+create_server(HOST, PORT, NUM_CLIENTS)
