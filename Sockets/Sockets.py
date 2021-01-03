@@ -7,12 +7,6 @@ import asyncio
 2) реализовать общий класс(?) для клиента и сервера
 '''
 
-'''
-# Сюда приходят команды из Debag.py(клавиатуры)
-async def set_command(command):
-	global message
-	message = command
-'''
 
 def shutdown_all_clients():
 	# Отключение всех клиентов на стороне сервера
