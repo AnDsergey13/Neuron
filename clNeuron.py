@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 class Space:
     def __init__(self, number_points=8):
@@ -13,10 +14,13 @@ class Space:
                     Пример записи для куба [[0, 0, 0], [0, 0, 99], [99, 0, 99], [99, 0, 0],[0, 99, 0], [0, 99, 99], [99, 99, 99], [99, 99, 0]]
                 th - толщина внешней области пространства. По умолчанию 10 """
         self.out_points = points
-        points_in = points.copy()
-        points_in = np.where(points_in == points_in.min(), points_in + th, points_in)
-        points_in = np.where(points_in == points_in.max(), points_in - th, points_in)
-        self.in_points = points_in
+
+        #####
+        x, y, z = points[0] # Получаем координаты стартовой точки
+        size_in_cube = self.size_out_cube - th * 2 # Вычисляем длину внутреннего пространства
+
+        self.in_points = self.create_cube(x + th, y + th, z + th, size_in_cube)
+        #####
 
     def get_out_points(self):
         """ Возвращает массив точек (координат). Из внешней области пространства"""
@@ -26,10 +30,36 @@ class Space:
         """ Возвращает массив точек (координат). Из внутренней области пространства"""
         return self.in_points
 
-    def create_cube(self, size=100):
+    def create_cube(self, x=0, y=0, z=0, size=100):
         """ Создаёт и возвращает массив точек для куба.
+                x,y,z(int) - начальная точка для создания куба
                 size(int) - размер грани """
-        return np.array([[0, 0, 0], [0, 0, size - 1], [size - 1, 0, size - 1], [size - 1, 0, 0],[0, size - 1, 0], [0, size - 1, size - 1], [size - 1, size - 1, size - 1], [size - 1, size - 1, 0]])
+        #####
+        self.size_out_cube = size - 1
+        list_points = []
+
+        def funcc():
+            summ = 0
+            offset = 0.8
+            for point in range(8):
+                summ = summ + offset
+                yield math.sin(summ)
+
+        def convert():
+            koeff = next(a)
+            return koeff < 0
+
+        for plane in range(2):
+            a = funcc()
+            for point in range(4):
+                koeff_x = convert()
+                koeff_z = convert()
+                list_points.append([x + koeff_x * self.size_out_cube, y, z + koeff_z * self.size_out_cube])
+            y = y + self.size_out_cube
+
+        return np.array(list_points)
+        #####
+
 
 class Neuron():
     def __init__(self, x, y, z):
@@ -61,17 +91,18 @@ class Neuron():
 
 
 
-# space = Space()
-# out_p = space.create_cube(50)
-# space.set_points(out_p, 15)
-# print(space.get_out_points())
-# print(space.get_in_points())
-# a = Neuron(3, 10, 13)
-# print(a.get_pos())
-# print(a.is_internal_space())
-# a.set_pos()
-# print(a.get_pos())
-# print(a.is_internal_space())
+space = Space()
+out_p = space.create_cube(size=50)
+space.set_points(out_p, 10)
+print(space.get_out_points())
+print(space.get_in_points())
+a = Neuron(13, 20, 23)
+print(a.get_pos())
+print(a.is_internal_space())
+a.set_pos()
+print(a.get_pos())
+print(a.is_internal_space())
+
 
 
 
