@@ -15,12 +15,11 @@ class Space:
                 th(int) - толщина внешней области пространства. По умолчанию 10 """
         self.out_points = points
 
-        #####
         x, y, z = points[0] # Получаем координаты начальной точки
         size_in_cube = self.size_out_cube - th * 2 # Вычисляем длину для внутреннего пространства куба
+
         self.in_points = self.create_cube(x + th, y + th, z + th, size_in_cube + 1)
 
-        #####
 
     def get_out_points(self):
         """ Возвращает массив точек (координат). Из внешней области пространства"""
@@ -34,7 +33,7 @@ class Space:
         """ Создаёт и возвращает массив точек для куба.
                 x,y,z(int) - начальная точка для создания куба
                 size(int) - размер грани """
-        #####
+
         self.size_out_cube = size - 1
         list_points = []
 
@@ -66,7 +65,6 @@ class Space:
             y += self.size_out_cube
 
         return np.array(list_points)
-        #####
 
 
 class Neuron():
