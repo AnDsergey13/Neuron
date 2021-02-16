@@ -46,7 +46,7 @@ class Space:
             # поэтому умножая количество осей на количество точек, получаем число 8
             # !это не количество точек/вершин в кубе
             for point in range(8):
-                summ = summ + offset
+                summ += offset
                 yield math.sin(summ)
 
         def get_convert_coeff(a):
@@ -58,12 +58,12 @@ class Space:
             a = gen_coeff()
             # В каждой плойскости есть по 4 точки, поэтому проходи по каждой
             for point in range(4):
-            y = y + self.size_out_cube
                 coeff_x = get_convert_coeff(a)
                 coeff_z = get_convert_coeff(a)
                 # Записываем в список точек, сиписок координат для каджой точки
                 list_points.append([x + coeff_x * self.size_out_cube, y, z + coeff_z * self.size_out_cube])
             # Переходим на следующую плоскость
+            y += self.size_out_cube
 
         return np.array(list_points)
         #####
@@ -79,9 +79,9 @@ class Neuron():
 
     def set_pos(self):
         offset = 20
-        self.x_pos = self.x_pos + offset
-        self.y_pos = self.y_pos + offset
-        self.z_pos = self.z_pos + offset
+        self.x_pos += offset
+        self.y_pos += offset
+        self.z_pos += offset
 
     def get_pos(self):
         return self.x_pos, self.y_pos, self.z_pos
@@ -91,11 +91,7 @@ class Neuron():
             А False, когда во внешней зоне."""
 
         in_space = space.get_in_points()
-        if (self.z_pos > in_space[0][2] and self.z_pos < in_space[1][2]) and (self.y_pos > in_space[0][1] and self.y_pos < in_space[4][1]) and (self.x_pos > in_space[0][0] and self.x_pos < in_space[2][0]):
-            return True
-        else:
-            return False
-
+        return (self.z_pos > in_space[0][2] and self.z_pos < in_space[1][2]) and (self.y_pos > in_space[0][1] and self.y_pos < in_space[4][1]) and (self.x_pos > in_space[0][0] and self.x_pos < in_space[2][0])
 
 
 
