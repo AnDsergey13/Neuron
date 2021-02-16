@@ -95,7 +95,7 @@ class Neuron():
 
 # test
 space = Space()
-out_p = space.create_cube(size=50)
+out_p = space.create_cube(0, 0, 0, size=50)
 space.set_points(out_p, 10)
 print(space.get_out_points())
 print(space.get_in_points())
