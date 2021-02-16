@@ -18,8 +18,8 @@ class Space:
         #####
         x, y, z = points[0] # Получаем координаты стартовой точки
         size_in_cube = self.size_out_cube - th * 2 # Вычисляем длину внутреннего пространства
+        self.in_points = self.create_cube(x + th, y + th, z + th, size_in_cube + 1)
 
-        self.in_points = self.create_cube(x + th, y + th, z + th, size_in_cube)
         #####
 
     def get_out_points(self):
