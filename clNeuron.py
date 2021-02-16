@@ -38,7 +38,7 @@ class Space:
         self.size_out_cube = size - 1
         list_points = []
 
-        def funcc():
+        def gen_coeff():
             summ = 0
             # Коэффициент смещения выявлен экспериментально 
             offset = 0.8
@@ -49,20 +49,20 @@ class Space:
                 summ = summ + offset
                 yield math.sin(summ)
 
-        def convert():
-            koeff = next(a)
-            return koeff < 0
+        def get_convert_coeff(a):
+            coeff = next(a)
+            return coeff < 0
 
 		# Сначала генерим точки в нижней части куба(1-ая плоскость), а потом в верхней(2-ая плоскость)
         for plane in range(2):
-            a = funcc()
+            a = gen_coeff()
             # В каждой плойскости есть по 4 точки, поэтому проходи по каждой
             for point in range(4):
-                koeff_x = convert()
-                koeff_z = convert()
-                list_points.append([x + koeff_x * self.size_out_cube, y, z + koeff_z * self.size_out_cube])
             y = y + self.size_out_cube
+                coeff_x = get_convert_coeff(a)
+                coeff_z = get_convert_coeff(a)
                 # Записываем в список точек, сиписок координат для каджой точки
+                list_points.append([x + coeff_x * self.size_out_cube, y, z + coeff_z * self.size_out_cube])
             # Переходим на следующую плоскость
 
         return np.array(list_points)
