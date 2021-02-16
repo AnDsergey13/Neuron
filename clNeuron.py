@@ -3,7 +3,7 @@ import math
 
 class Space:
     def __init__(self, number_points=8):
-        """ number_points - количество точек (вершин) у пространства.
+        """ number_points(int) - количество точек (вершин) у пространства.
                 По умолчанию геометрическая фигура куб (8 точек) """
         self.in_points = np.zeros((number_points, 3))
         self.out_points = np.zeros((number_points, 3))
@@ -12,12 +12,12 @@ class Space:
         """ Задаются точки для внешней области пространства. Генерируется точки для внутренней области.
                 points - массив внешних(!) точек.
                     Пример записи для куба [[0, 0, 0], [0, 0, 99], [99, 0, 99], [99, 0, 0],[0, 99, 0], [0, 99, 99], [99, 99, 99], [99, 99, 0]]
-                th - толщина внешней области пространства. По умолчанию 10 """
+                th(int) - толщина внешней области пространства. По умолчанию 10 """
         self.out_points = points
 
         #####
-        x, y, z = points[0] # Получаем координаты стартовой точки
-        size_in_cube = self.size_out_cube - th * 2 # Вычисляем длину внутреннего пространства
+        x, y, z = points[0] # Получаем координаты начальной точки
+        size_in_cube = self.size_out_cube - th * 2 # Вычисляем длину для внутреннего пространства куба
         self.in_points = self.create_cube(x + th, y + th, z + th, size_in_cube + 1)
 
         #####
@@ -40,7 +40,11 @@ class Space:
 
         def funcc():
             summ = 0
+            # Коэффициент смещения выявлен экспериментально 
             offset = 0.8
+            # range(8) - так как для 4-х точек на одной плоскости куба, существуют 2 оси которые меняются - это x и z
+            # поэтому умножая количество осей на количество точек, получаем число 8
+            # !это не количество точек/вершин в кубе
             for point in range(8):
                 summ = summ + offset
                 yield math.sin(summ)
@@ -49,13 +53,17 @@ class Space:
             koeff = next(a)
             return koeff < 0
 
+		# Сначала генерим точки в нижней части куба(1-ая плоскость), а потом в верхней(2-ая плоскость)
         for plane in range(2):
             a = funcc()
+            # В каждой плойскости есть по 4 точки, поэтому проходи по каждой
             for point in range(4):
                 koeff_x = convert()
                 koeff_z = convert()
                 list_points.append([x + koeff_x * self.size_out_cube, y, z + koeff_z * self.size_out_cube])
             y = y + self.size_out_cube
+                # Записываем в список точек, сиписок координат для каджой точки
+            # Переходим на следующую плоскость
 
         return np.array(list_points)
         #####
@@ -91,6 +99,7 @@ class Neuron():
 
 
 
+# test
 space = Space()
 out_p = space.create_cube(size=50)
 space.set_points(out_p, 10)
