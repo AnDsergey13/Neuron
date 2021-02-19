@@ -98,14 +98,14 @@ class Neuron():
 space = Space()
 out_p = space.create_cube(0, 0, 0, size=50)
 space.set_points(out_p, 10)
-print(space.get_out_points())
-print(space.get_in_points())
-a = Neuron(13, 20, 23)
-print(a.get_pos())
-print(a.is_internal_space())
-a.set_pos()
-print(a.get_pos())
-print(a.is_internal_space())
+# print(space.get_out_points())
+# print(space.get_in_points())
+a = Neuron(space, 13, 20, 23)
+# print(a.get_pos())
+# print(a.is_internal_space())
+# a.set_pos()
+# print(a.get_pos())
+# print(a.is_internal_space())
 
 
 
