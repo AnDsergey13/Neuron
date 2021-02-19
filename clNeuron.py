@@ -68,9 +68,10 @@ class Space:
 
 
 class Neuron():
-    def __init__(self, x, y, z):
+	def __init__(self, obj_space, x, y, z):
 		#self.list_input = []
 		#self.list_output = []
+		self.obj_space = obj_space
 		self.x_pos = x
 		self.y_pos = y
 		self.z_pos = z
