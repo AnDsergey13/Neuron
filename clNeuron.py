@@ -72,15 +72,23 @@ class Neuron():
 		#self.list_input = []
 		#self.list_output = []
 		self.obj_space = obj_space
+		self.move(x, y, z)
+		# По умолчанию состояние равно 0
+		self.set_state(0)
+
+	def set_pos(self):
+		# 1. Проверка, нужно ли нейрону вообще передвигаться
+		# 2. Получить координаты и состояния всех ближайших нейронов
+		# 3. Вычислить точку для передвижения
+		# 4. Проверить, сможет ли нейрон перейти в новую точку
+		# 5. Если да, то двигаем self.move(x, y, z)
+		# 6. Если нет, то старт с п.3.
+		pass
+
+	def move(self, x, y, z):
 		self.x_pos = x
 		self.y_pos = y
 		self.z_pos = z
-
-	def set_pos(self):
-		offset = 20
-		self.x_pos += offset
-		self.y_pos += offset
-		self.z_pos += offset
 
 	def get_pos(self):
 		return self.x_pos, self.y_pos, self.z_pos
