@@ -85,6 +85,7 @@ class Neuron():
 	def get_pos(self):
 		return self.x_pos, self.y_pos, self.z_pos
 
+	def set_state(self, state):
 		"""	set_state(self, state). 
 			Устанавить 1 из 6 состояний нейрона.
 				state(int) - номер состояния, где:
@@ -95,9 +96,14 @@ class Neuron():
 					4 - нейрон, с полным подключением через сеть. Ничего не ожидает. Статичен
 					5 - это смерть нейрона. Ожидает уничтожения
 		"""
+		self.state = state
+
+	def get_state(self):
 		"""
 			Возвращает номер состояния указанного нейрона
 		"""
+		return self.state
+
 	def is_internal_space(self):
 		""" Возвращает True, если нейрон находится во внутренней зоне пространства.
 			А False, когда во внешней зоне."""
