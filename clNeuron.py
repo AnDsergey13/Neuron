@@ -116,6 +116,6 @@ class Neuron():
 		""" Возвращает True, если нейрон находится во внутренней зоне пространства.
 			А False, когда во внешней зоне."""
 
-		in_space = space.get_in_points()
+		in_space = self.obj_space.get_in_points()
 		return (self.z_pos > in_space[0][2] and self.z_pos < in_space[1][2]) and (self.y_pos > in_space[0][1] and self.y_pos < in_space[4][1]) and (self.x_pos > in_space[0][0] and self.x_pos < in_space[2][0])
 
