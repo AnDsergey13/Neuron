@@ -92,28 +92,3 @@ class Neuron():
 		in_space = space.get_in_points()
 		return (self.z_pos > in_space[0][2] and self.z_pos < in_space[1][2]) and (self.y_pos > in_space[0][1] and self.y_pos < in_space[4][1]) and (self.x_pos > in_space[0][0] and self.x_pos < in_space[2][0])
 
-
-
-# test
-space = Space()
-out_p = space.create_cube(0, 0, 0, size=50)
-space.set_points(out_p, 10)
-# print(space.get_out_points())
-# print(space.get_in_points())
-a = Neuron(space, 13, 20, 23)
-# print(a.get_pos())
-# print(a.is_internal_space())
-# a.set_pos()
-# print(a.get_pos())
-# print(a.is_internal_space())
-
-
-
-
-
-
-
-
-
-
-
