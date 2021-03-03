@@ -5,16 +5,19 @@ import time
 
 def create_neuron():
 	# for num in range(0, NUM_NEURONS):
-	#     list_object.insert(num, n.Neuron())
-	while True:
+	#	list_object.insert(num, n.Neuron())
+	if len(list_object) < MAX_NEURONS:
 		new_coord = gen_coord_neuron()
 		for coord in list_coordinates:
-			if new_coord == coord:
-				continue
+			if new_coord == tuple(coord):
+				#print("найдена копия, начинаем заново")
+				break
 		else:
+			#print("копии нет, создаём нейрон")
 			list_object.append(Neuron(space, new_coord[0], new_coord[1], new_coord[2]))
 			list_coordinates.append([new_coord[0], new_coord[1], new_coord[2]])
-			break
+	else:
+		print("Привышено максимальное количество нейронов для данной области")
 		
 	
 
@@ -24,6 +27,7 @@ def gen_coord_neuron():
 	y = random.randrange(mass[0][1]+1, mass[4][1])
 	z = random.randrange(mass[0][2]+1, mass[1][2])
 	return x, y, z
+
 # def next(number_changes):
 #     list_random_changes = [random.randrange(0, NUM_NEURONS) for i in range(number_changes)]
 #     for num in list_random_changes:
@@ -37,23 +41,23 @@ def gen_coord_neuron():
 #     for num in range(len(list_object)):
 #         print(f"{num}..{list_object[num].get_pos()}")
 
-MAX_NEURONS = 1000000
+MAX_NEURONS = 100
 list_object = []
 list_coordinates = []
 
 space = Space()
-out_p = space.create_cube(0, 0, 0, size=50)
-space.set_points(out_p, 10)
+out_p = space.create_cube(0, 0, 0, size=5)
+space.set_points(out_p, 1)
 print(space.get_out_points())
 print(space.get_in_points())
 
-for i in range(10):
+for i in range(100):
 	create_neuron()
 	print(len(list_object))
-	print(list_coordinates)
-	for neuron in list_object:
-		print(neuron.get_pos())
-
+	#print(list_coordinates[i])
+	#for neuron in list_object:
+	#	print(neuron.get_pos())
+#print(it)
 
 # print(a.get_pos())
 # print(a.is_internal_space())
