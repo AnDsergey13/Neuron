@@ -46,7 +46,7 @@ list_object = []
 list_coordinates = []
 
 space = Space()
-out_p = space.create_cube(0, 0, 0, size=5)
+out_p = space.create_cube(10, 10, 10, size=20)
 space.set_points(out_p, 1)
 print(space.get_out_points())
 print(space.get_in_points())
