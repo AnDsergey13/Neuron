@@ -5,6 +5,11 @@ pip install PyOpenGL PyOpenGL_accelerate
 pip install PyQt5
 """
 
+"""
+Примеры
+pyqtgraph.examples.run()
+"""
+
 import sys
 # from PyQt5.QtWidgets import (QApplication, QWidget, QLabel, QPushButton)
 from PyQt5.QtWidgets import QApplication
@@ -19,6 +24,7 @@ import numpy as np
 class Window():
 	def __init__(self, width=500, height=500, x_offset=500, y_offset=200):
 		self.app = QApplication(sys.argv)
+		#self.app = pg.QtGui.QApplication.exec_()
 		# pg.mkQApp()
 		self.w = gl.GLViewWidget()
 		self.w.setWindowTitle('Интерфейс')
@@ -57,7 +63,7 @@ class Window():
 
 	def print_window(self):
 		self.w.show()
-		sys.exit(self.app.exec_())
+		#sys.exit(self.app.exec_())
 
 a = Window(1000, 800, 0, 0)
 # a.set_color_grid(255, 255, 255, 10)
