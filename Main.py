@@ -6,6 +6,13 @@ import Interface as ui
 #import keyboard
 import numpy as np
 
+def full_completion_space():
+	while control.is_max_neurons():
+		control.create_neuron()
+		print(len(control.get_list_xyz()))
+	print("Заполнение завершено успешно!")
+
+#full_completion_space()
 # size_x = 10
 # size_y = 10
 
