@@ -64,9 +64,3 @@ class Window():
 		sys.exit(self.app.exec_())
 
 
-a = Window(1000, 800, 0, 0)
-# a.set_color_grid(255, 255, 255, 10)
-# a.create_grid()
-a.set_coord()
-a.create_line(np.array([[10,10,10],[10,10,29],[29,10,29],[29,10,10],[10,29,10],[10,29,29],[29,29,29],[29,29,10]]))
-a.print_window()
