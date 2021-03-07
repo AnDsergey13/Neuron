@@ -1,33 +1,33 @@
 from clNeuron import Space,Neuron
 import numpy as np
 import random
-import time
 
-def create_neuron():
-	# for num in range(0, NUM_NEURONS):
-	#	list_object.insert(num, n.Neuron())
-	if len(list_object) < MAX_NEURONS:
-		new_coord = gen_coord_neuron()
-		for coord in list_coordinates:
-			if new_coord == tuple(coord):
+class Controller:
+	def __init__(self, obj_space, max_neuron=None):
+		self.space = obj_space
+		self.list_object = []
+		self.list_xyz = []
+	def create_neuron(self):
+		""" Создаёт нейрон в случайном месте пространства """
+		new_xyz = self.gen_xyz_neuron()
+		for xyz in self.list_xyz:
+			if new_xyz == tuple(xyz):
 				#print("найдена копия, начинаем заново")
 				break
 		else:
 			#print("копии нет, создаём нейрон")
-			list_object.append(Neuron(space, new_coord[0], new_coord[1], new_coord[2]))
-			list_coordinates.append([new_coord[0], new_coord[1], new_coord[2]])
-	else:
-		print("Привышено максимальное количество нейронов для данной области")
-		
-	
+			self.list_object.append(Neuron(self.space, new_xyz[0], new_xyz[1], new_xyz[2]))
+			self.list_xyz.append([new_xyz[0], new_xyz[1], new_xyz[2]])
+		# else:
+		# 	print("Привышено максимальное количество нейронов для данной области")	
 
-def gen_coord_neuron():
-	mass = space.get_out_points()
-	x = random.randrange(mass[0][0]+1, mass[2][0])
-	y = random.randrange(mass[0][1]+1, mass[4][1])
-	z = random.randrange(mass[0][2]+1, mass[1][2])
-	return x, y, z
-
+	def gen_xyz_neuron(self):
+		""" Возвращает кортеж с новыми координатами нейрона """
+		out_points = self.space.get_out_points()
+		x = random.randrange(out_points[0][0] + 1, out_points[2][0])
+		y = random.randrange(out_points[0][1] + 1, out_points[4][1])
+		z = random.randrange(out_points[0][2] + 1, out_points[1][2])
+		return x, y, z
 # def next(number_changes):
 #     list_random_changes = [random.randrange(0, NUM_NEURONS) for i in range(number_changes)]
 #     for num in list_random_changes:
