@@ -6,16 +6,6 @@ import Interface as ui
 #import keyboard
 import numpy as np
 
-
-
-
-
-
-
-while not keyboard.is_pressed("space"):
-	pass
-	if c.is_keyboard_pressed():
-		print(str(pole))
 # size_x = 10
 # size_y = 10
 
