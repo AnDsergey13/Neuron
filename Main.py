@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -
-
-# import math
-# import threading
-# import time
-
-import keyboard
+#from Keyboard_and_mouse import Event
+from clNeuron import Space, Neuron
+import Neuron_controller as nc
+import Interface as ui
+#import keyboard
 import numpy as np
 
-from Keyboard_and_mouse import Event
+
+
 
 size_x = 10
 size_y = 10
