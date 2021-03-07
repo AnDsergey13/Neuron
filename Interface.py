@@ -8,6 +8,7 @@ pip install PyQt5
 """
 Примеры
 pyqtgraph.examples.run()
+raspberri https://github.com/pyqtgraph/pyqtgraph/issues/1260
 """
 
 import sys
