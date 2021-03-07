@@ -5,8 +5,23 @@ import random
 class Controller:
 	def __init__(self, obj_space, max_neuron=None):
 		self.space = obj_space
+		if max_neuron == None:
+			number = self.calc_max_neuron_cube(self.space.get_out_points())
+			self.set_max_neurons(number)
+		else:
+			self.set_max_neurons(max_neuron)
+
 		self.list_object = []
 		self.list_xyz = []
+		
+
+	def calc_max_neuron_cube(self, out_points):
+		""" Возвращает максимальное число нейронов, которое может пометиться в заданном пространстве """
+		x_delta = abs(out_points[0][0] - out_points[2][0]) - 1
+		y_delta = abs(out_points[0][1] - out_points[4][1]) - 1
+		z_delta = abs(out_points[0][2] - out_points[1][2]) - 1
+		return x_delta * y_delta * z_delta
+
 	def create_neuron(self):
 		""" Создаёт нейрон в случайном месте пространства """
 		new_xyz = self.gen_xyz_neuron()
