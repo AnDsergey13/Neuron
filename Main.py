@@ -12,7 +12,38 @@ def full_completion_space():
 		print(len(control.get_list_xyz()))
 	print("Заполнение завершено успешно!")
 
+
+MAX_NEURONS = 100
+
+space = Space()
+out_p = space.create_cube(10, 10, 10, size=10)
+space.set_points(out_p, 1)
+print(space.get_out_points())
+print(space.get_in_points())
+
+control = nc.Controller(space)
 #full_completion_space()
+
+# Interface
+# # =================================
+# a = Window(1000, 800, 0, 0)
+# # a.set_color_grid(255, 255, 255, 10)
+# # a.create_grid()
+# a.set_coord()
+# a.create_line(np.array([[10,10,10],[10,10,29],[29,10,29],[29,10,10],[10,29,10],[10,29,29],[29,29,29],[29,29,10]]))
+# a.print_window()
+
+# =================================
+
+# print(a.get_pos())
+# print(a.is_internal_space())
+# a.move(15, 25, 40)
+# print(a.get_pos())
+# print(a.is_internal_space())
+
+# print("------------------")
+# print(gen_coord_neuron())
+# =================================
 # size_x = 10
 # size_y = 10
 
