@@ -41,29 +41,3 @@ def gen_coord_neuron():
 #     for num in range(len(list_object)):
 #         print(f"{num}..{list_object[num].get_pos()}")
 
-MAX_NEURONS = 100
-list_object = []
-list_coordinates = []
-
-space = Space()
-out_p = space.create_cube(10, 10, 10, size=20)
-space.set_points(out_p, 1)
-print(space.get_out_points())
-print(space.get_in_points())
-
-for i in range(100):
-	create_neuron()
-	print(len(list_object))
-	#print(list_coordinates[i])
-	#for neuron in list_object:
-	#	print(neuron.get_pos())
-#print(it)
-
-# print(a.get_pos())
-# print(a.is_internal_space())
-# a.move(15, 25, 40)
-# print(a.get_pos())
-# print(a.is_internal_space())
-
-# print("------------------")
-# print(gen_coord_neuron())
