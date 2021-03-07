@@ -36,6 +36,10 @@ class Controller:
 		# else:
 		# 	print("Привышено максимальное количество нейронов для данной области")	
 
+	def is_max_neurons(self):
+		""" Возвращает True, если можно создать нейрон в области """
+		return len(self.list_object) < self.get_max_neurons()
+
 	def gen_xyz_neuron(self):
 		""" Возвращает кортеж с новыми координатами нейрона """
 		out_points = self.space.get_out_points()
@@ -43,6 +47,23 @@ class Controller:
 		y = random.randrange(out_points[0][1] + 1, out_points[4][1])
 		z = random.randrange(out_points[0][2] + 1, out_points[1][2])
 		return x, y, z
+
+	def set_max_neurons(self, number):
+		""" Задать вручную максимальное количество нейронов в пространстве"""
+		self.MAX_NEURONS = number
+
+	def get_max_neurons(self):
+		return self.MAX_NEURONS
+
+	# ?
+	def get_list_object(self):
+		return self.list_object
+
+	def get_list_xyz(self):
+		return self.list_xyz
+
+
+
 # def next(number_changes):
 #     list_random_changes = [random.randrange(0, NUM_NEURONS) for i in range(number_changes)]
 #     for num in list_random_changes:
