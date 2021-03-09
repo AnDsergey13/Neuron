@@ -27,12 +27,14 @@ control = nc.Controller(space)
 
 # Interface
 # # =================================
-# a = Window(1000, 800, 0, 0)
-# # a.set_color_grid(255, 255, 255, 10)
-# # a.create_grid()
-# a.set_coord()
-# a.create_line(np.array([[10,10,10],[10,10,29],[29,10,29],[29,10,10],[10,29,10],[10,29,29],[29,29,29],[29,29,10]]))
-# a.print_window()
+window = ui.Window(1000, 800, 0, 0)
+window.set_color_grid(255, 255, 255, 10)
+window.create_grid()
+window.set_coord()
+line_cube = window.gen_line_for_cube(space.get_out_points())
+window.create_line(line_cube)
+window.create_point(5, 5, 0)
+window.print_window()
 
 # =================================
 
