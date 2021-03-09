@@ -57,6 +57,10 @@ class Window():
 		line = gl.GLLinePlotItem(pos=points, color=(255,0,0,255), width=1, antialias="lines",mode="line_strip")
 		self.w.addItem(line)
 
+	def create_point(self, x, y, z, size=10):
+		point = gl.GLScatterPlotItem(pos=np.array([x, y, z]), size=size, color=(0,255,0,255))
+		self.w.addItem(point)
+
 	def gen_line_for_cube(self, points):
 		def func():
 			l = [i for i in range(4)]
