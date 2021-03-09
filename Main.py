@@ -16,10 +16,11 @@ def full_completion_space():
 MAX_NEURONS = 100
 
 space = Space()
-out_p = space.create_cube(10, 10, 10, size=10)
+out_p = space.create_cube(10, 10, 0, size=50)
 space.set_points(out_p, 1)
-print(space.get_out_points())
-print(space.get_in_points())
+
+# print(space.get_out_points())
+# print(space.get_in_points())
 
 control = nc.Controller(space)
 #full_completion_space()
