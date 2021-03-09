@@ -57,6 +57,34 @@ class Window():
 		line = gl.GLLinePlotItem(pos=points, color=(255,0,0,255), width=1, antialias="lines",mode="line_strip")
 		self.w.addItem(line)
 
+	def gen_line_for_cube(self, points):
+		def func():
+			l = [i for i in range(4)]
+
+			for i in reversed(range(len(l))):
+				yield l[-i-1]
+				yield l[-i]
+
+		def replace(xyz, h_cube):
+			xyz = np.delete(xyz, 1)
+			xyz = np.insert(xyz, 1, h_cube)
+			return xyz
+
+		h_cube = points[4][1]
+		new_arr = np.array(())
+		a = func()
+
+		for i in range(4):
+			new_arr = np.concatenate([new_arr, points[next(a)]])
+			index = next(a)
+			new_arr = np.concatenate([new_arr, points[index]])
+			new_arr = np.concatenate([new_arr, replace(points[index], h_cube)])
+		new_arr = np.reshape(new_arr, (int(len(new_arr)/3), 3))
+		new_arr = np.concatenate([new_arr, points[5:]])
+		new_arr = np.append(new_arr, [points[4]], axis = 0)
+		return new_arr
+
+
 	def update():
 		self.w.show()
 
