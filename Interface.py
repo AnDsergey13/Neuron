@@ -34,8 +34,8 @@ class Window():
 		self.color = (R, G, B, A)
 
 	def set_coord(self):
-		self.axis = gl.GLAxisItem(size = QtGui.QVector3D(50,50,50))
-		self.w.addItem(self.axis)
+		axis = gl.GLAxisItem(size = QtGui.QVector3D(50,50,50))
+		self.w.addItem(axis)
 
 	def create_grid(self):
 		self.xgrid = gl.GLGridItem(size = QtGui.QVector3D(50,50,1), color=self.color)
@@ -54,8 +54,8 @@ class Window():
 		self.zgrid.scale(1, 1, 1)
 
 	def create_line(self, points):
-		self.line = gl.GLLinePlotItem(pos=points, color=(255,0,0,255), width=1, antialias="lines",mode="line_strip")
-		self.w.addItem(self.line)
+		line = gl.GLLinePlotItem(pos=points, color=(255,0,0,255), width=1, antialias="lines",mode="line_strip")
+		self.w.addItem(line)
 
 	def update():
 		self.w.show()
