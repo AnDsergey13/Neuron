@@ -1,6 +1,9 @@
 from clNeuron import Space,Neuron
+from Keyboard_and_mouse import Event
 import numpy as np
 import random
+import threading
+import time
 
 class Controller:
 	def __init__(self, obj_space, max_neuron=None):
@@ -13,6 +16,8 @@ class Controller:
 
 		self.list_object = []
 		self.list_xyz = []
+
+		self.q = Event("q")
 		
 
 	def calc_max_neuron_cube(self, out_points):
@@ -31,7 +36,8 @@ class Controller:
 				break
 		else:
 			#print("копии нет, создаём нейрон")
-			self.list_object.append(Neuron(self.space, new_xyz[0], new_xyz[1], new_xyz[2]))
+			# self.list_object.append(Neuron(self.space, new_xyz[0], new_xyz[1], new_xyz[2]))
+			self.list_object.append(Neuron(self.space))
 			self.list_xyz.append([new_xyz[0], new_xyz[1], new_xyz[2]])
 		# else:
 		# 	print("Привышено максимальное количество нейронов для данной области")	
@@ -52,6 +58,31 @@ class Controller:
 		""" Задать вручную максимальное количество нейронов в пространстве"""
 		self.MAX_NEURONS = number
 
+	def start_loop(self):
+		create_th = threading.Thread(target=self.loop)
+		create_th.start()
+
+	def loop(self):
+		while not self.q.is_keyboard_pressed():
+			time.sleep(0.1)
+			# Движение
+			for obj_neuron in self.get_list_object():
+				status = obj_neuron.get_state()
+				if status == 0:
+					if obj_neuron.is_internal_space():
+						obj_neuron.move()
+					else:
+						print("output zone!!!")
+
+			# Обновление координат
+			# copy_list_xyz_neuron = copy.get_list_xyz()
+			# for pos, xyz_neuron in enumerate(copy_list_xyz_neuron):
+			# 	self.list_xyz[pos] = xyz_neuron.get_pos()
+
+			# Предача данных
+			pass
+		print("Loop close!!!")
+
 	def get_max_neurons(self):
 		return self.MAX_NEURONS
 
@@ -61,7 +92,6 @@ class Controller:
 
 	def get_list_xyz(self):
 		return self.list_xyz
-
 
 
 # def next(number_changes):
