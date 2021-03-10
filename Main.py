@@ -5,11 +5,19 @@ import Neuron_controller as nc
 import Interface as ui
 #import keyboard
 import numpy as np
+import time
 
 def full_completion_space():
 	while control.is_max_neurons():
 		control.create_neuron()
-		print(len(control.get_list_xyz()))
+
+		list_xyz = control.get_list_xyz()
+		xyz = np.array(list_xyz[-1])
+		window.create_point(xyz, 1)
+		time.sleep(0.1)
+
+		window.update()
+		# print(len(control.get_list_xyz()))
 	print("Заполнение завершено успешно!")
 
 
@@ -27,16 +35,32 @@ control = nc.Controller(space)
 
 # Interface
 # # =================================
-window = ui.Window(1000, 800, 0, 0)
+window = ui.Window(1000, 800, 400, 100)
+
+control.create_neuron()
+# window.create_point(xyz, 1)
+
+window.start_update(control, 50)
 window.set_color_grid(255, 255, 255, 10)
 window.create_grid()
 window.set_coord()
 line_cube = window.gen_line_for_cube(space.get_out_points())
 window.create_line(line_cube)
-window.create_point(5, 5, 0)
+
+
+# for i in range(1000):
+# 	control.create_neuron()
+# 	list_xyz = control.get_list_xyz()
+# 	xyz = np.array(list_xyz[i])
+# 	print(type(xyz), xyz)
+# 	window.create_point(xyz)
+# full_completion_space()
 window.print_window()
 
 # =================================
+
+
+
 
 # print(a.get_pos())
 # print(a.is_internal_space())

@@ -10,11 +10,11 @@ pip install PyQt5
 pyqtgraph.examples.run()
 raspberri https://github.com/pyqtgraph/pyqtgraph/issues/1260
 """
+# import Neuron_controller as nc
 
 import sys
 # from PyQt5.QtWidgets import (QApplication, QWidget, QLabel, QPushButton)
 from PyQt5.QtWidgets import QApplication
-# from PyQt5.QtCore import pyqtSlot, QRect, QCoreApplication
 from pyqtgraph.Qt import QtCore, QtGui
 
 import pyqtgraph as pg
@@ -29,6 +29,8 @@ class Window():
 		self.w.setWindowTitle('Интерфейс')
 		self.w.resize(width, height)
 		self.w.move(x_offset, y_offset)
+
+		self.list_obj_points = []
 
 	def set_color_grid(self, R=255, G=255, B=255, A=100):
 		self.color = (R, G, B, A)
@@ -46,7 +48,7 @@ class Window():
 		self.w.addItem(self.ygrid)
 		self.w.addItem(self.zgrid)
 
-		self.xgrid.rotate(90, 0, 1, 0)
+		self.xgrid.rotate(90, 1, 0, 0)
 		self.ygrid.rotate(90, 1, 0, 0)
 
 		self.xgrid.scale(1, 1, 1)
@@ -57,8 +59,9 @@ class Window():
 		line = gl.GLLinePlotItem(pos=points, color=(255,0,0,255), width=1, antialias="lines",mode="line_strip")
 		self.w.addItem(line)
 
-	def create_point(self, x, y, z, size=10):
-		point = gl.GLScatterPlotItem(pos=np.array([x, y, z]), size=size, color=(0,255,0,255))
+	def create_point(self, xyz, size=3):
+		point = gl.GLScatterPlotItem(pos=xyz, size=size, color=(0,255,0,255))
+		self.list_obj_points.append(point)
 		self.w.addItem(point)
 
 	def gen_line_for_cube(self, points):
@@ -88,9 +91,20 @@ class Window():
 		new_arr = np.append(new_arr, [points[4]], axis = 0)
 		return new_arr
 
+	def start_update(self, obj_neuron_controller=None, time=50):
+		self.time_update = time
+		self.nc = obj_neuron_controller
 
-	def update():
-		self.w.show()
+		self.t = QtCore.QTimer()
+		self.t.timeout.connect(self.update)
+		self.t.start(self.time_update)
+
+	def update(self):
+		print(self.list_obj_points)
+		for pos_, i in enumerate(self.list_obj_points):
+			new_xyz = np.array(self.nc.get_list_xyz()[pos_])
+			print(len(self.list_obj_points), new_xyz)
+			self.list_obj_points[pos_].setData(pos=new_xyz)
 
 	def print_window(self):
 		self.w.show()
