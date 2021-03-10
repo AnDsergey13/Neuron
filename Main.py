@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -
-#from Keyboard_and_mouse import Event
+#
 from clNeuron import Space, Neuron
 import Neuron_controller as nc
-import Interface as ui
+#import Interface as ui
 #import keyboard
 import numpy as np
 import time
@@ -31,21 +31,22 @@ space.set_points(out_p, 1)
 # print(space.get_in_points())
 
 control = nc.Controller(space)
+control.start_loop()
 #full_completion_space()
 
 # Interface
 # # =================================
-window = ui.Window(1000, 800, 400, 100)
-
-control.create_neuron()
+# window = ui.Window(q1000, 800, 400, 100)
+for i in range(4):
+	control.create_neuron()
 # window.create_point(xyz, 1)
 
-window.start_update(control, 50)
-window.set_color_grid(255, 255, 255, 10)
-window.create_grid()
-window.set_coord()
-line_cube = window.gen_line_for_cube(space.get_out_points())
-window.create_line(line_cube)
+# window.start_update(control, 50)
+# window.set_color_grid(255, 255, 255, 10)
+# window.create_grid()
+# window.set_coord()
+# line_cube = window.gen_line_for_cube(space.get_out_points())
+# window.create_line(line_cube)
 
 
 # for i in range(1000):
@@ -55,7 +56,7 @@ window.create_line(line_cube)
 # 	print(type(xyz), xyz)
 # 	window.create_point(xyz)
 # full_completion_space()
-window.print_window()
+# window.print_window()
 
 # =================================
 
