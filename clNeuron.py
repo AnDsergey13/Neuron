@@ -1,5 +1,6 @@
 import numpy as np
 import math
+import random
 
 class Space:
 	def __init__(self, number_points=8):
@@ -68,11 +69,16 @@ class Space:
 
 
 class Neuron():
-	def __init__(self, obj_space, x, y, z):
+	def __init__(self, obj_space, x=25, y=25, z=25):
 		#self.list_input = []
 		#self.list_output = []
 		self.obj_space = obj_space
-		self.move(x, y, z)
+
+		self.x_pos = x
+		self.y_pos = y
+		self.z_pos = z
+
+		self.move()
 		# По умолчанию состояние равно 0
 		self.set_state(0)
 
@@ -85,10 +91,11 @@ class Neuron():
 		# 6. Если нет, то старт с п.3.
 		pass
 
-	def move(self, x, y, z):
-		self.x_pos = x
-		self.y_pos = y
-		self.z_pos = z
+	def move(self):
+		self.x_pos += random.randrange(-2, 2)
+		self.y_pos += random.randrange(-2, 2)
+		self.z_pos += random.randrange(-2, 2)
+		print(self.x_pos, self.y_pos, self.z_pos)
 
 	def get_pos(self):
 		return self.x_pos, self.y_pos, self.z_pos
