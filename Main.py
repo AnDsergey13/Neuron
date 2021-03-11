@@ -36,7 +36,7 @@ control.start_loop()
 
 # Interface
 # # =================================
-# window = ui.Window(q1000, 800, 400, 100)
+# window = ui.Window(1000, 800, 400, 100)
 for i in range(4):
 	control.create_neuron()
 # window.create_point(xyz, 1)
