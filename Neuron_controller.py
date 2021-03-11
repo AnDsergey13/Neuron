@@ -73,12 +73,12 @@ class Controller:
 						obj_neuron.move()
 					else:
 						print("output zone!!!")
-
+			print("движение выполнено!")
 			# Обновление координат
-			# copy_list_xyz_neuron = copy.get_list_xyz()
-			# for pos, xyz_neuron in enumerate(copy_list_xyz_neuron):
-			# 	self.list_xyz[pos] = xyz_neuron.get_pos()
-
+			copy_list_obj_neuron = self.get_list_object().copy()
+			for pos, obj_neuron in enumerate(copy_list_obj_neuron):
+				self.list_xyz[pos] = obj_neuron.get_pos()
+			print("координаты выполнены!")
 			# Предача данных
 			pass
 		print("Loop close!!!")
