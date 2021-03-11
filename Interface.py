@@ -59,11 +59,6 @@ class Window():
 		line = gl.GLLinePlotItem(pos=points, color=(255,0,0,255), width=1, antialias="lines",mode="line_strip")
 		self.w.addItem(line)
 
-	def create_point(self, xyz, size=3):
-		point = gl.GLScatterPlotItem(pos=xyz, size=size, color=(0,255,0,255))
-		self.list_obj_points.append(point)
-		self.w.addItem(point)
-
 	def gen_line_for_cube(self, points):
 		def func():
 			l = [i for i in range(4)]
@@ -91,7 +86,12 @@ class Window():
 		new_arr = np.append(new_arr, [points[4]], axis = 0)
 		return new_arr
 
-	def start_update(self, obj_neuron_controller=None, time=50):
+	def create_point(self, xyz, size=3):
+		point = gl.GLScatterPlotItem(pos=xyz, size=size, color=(0,255,0,255))
+		self.list_obj_points.append(point)
+		self.w.addItem(point)
+
+	def draw_neurons(self, obj_neuron_controller=None, time=50):
 		self.time_update = time
 		self.nc = obj_neuron_controller
 
