@@ -95,25 +95,47 @@ class Window():
 		new_arr = np.append(new_arr, [points[4]], axis = 0)
 		return new_arr
 
-	def create_point(self, xyz, size=3):
-		point = gl.GLScatterPlotItem(pos=xyz, size=size, color=(0,255,0,255))
-		self.list_obj_points.append(point)
-		self.w.addItem(point)
 
-	def draw_neurons(self, obj_neuron_controller=None, time=50):
-		self.time_update = time
+	def draw_neurons(self, obj_neuron_controller, size_point=3, color_point=(0,255,0,255),time_update=50):
 		self.nc = obj_neuron_controller
+		self.size_point = size_point
+		self.color_point = color_point
+		self.time_update = time_update
+
+		for xyz_neuron in self.nc.get_list_xyz():
+			create_neuron(xyz_neuron, self.size_point, self.color_point)
 
 		self.t = QtCore.QTimer()
 		self.t.timeout.connect(self.update)
 		self.t.start(self.time_update)
 
+	def create_neuron(self, xyz_neuron, size_point, color_point):
+		point = gl.GLScatterPlotItem(pos=xyz_neuron, size=size_point, color=color_point)
+		self.list_obj_points.append(point)
+		self.w.addItem(point)
+
 	def update(self):
-		print(self.list_obj_points)
-		for pos_, i in enumerate(self.list_obj_points):
-			new_xyz = np.array(self.nc.get_list_xyz()[pos_])
-			print(len(self.list_obj_points), new_xyz)
-			self.list_obj_points[pos_].setData(pos=new_xyz)
+		# ПОТОМ НУЖНО ПЕРЕДЕЛАТЬ. ЭТО СЫРОЙ ПРОТОТИП
+		# создать более жёсткую привязку объекта отрисовки, к объету нейрона
+		# нужно перерисовывать нероны лишь те, которые обновили свою позицию
+
+		# print(self.list_obj_points)
+		if len(self.list_obj_points) == len(self.nc.get_list_xyz()):
+			# когда количество нейронов не изменилось с последенего обновления окна
+			for pos_, i in enumerate(self.list_obj_points):
+				new_xyz = np.array(self.nc.get_list_xyz()[pos_])
+				# print(len(self.list_obj_points), new_xyz)
+
+				# Устанавливаем новые координаты для каждого объекта
+				self.list_obj_points[pos_].setData(pos=new_xyz)
+
+		elif len(self.list_obj_points) > len(self.nc.get_list_xyz()):
+			# это значит нейрон был удалён
+			pass
+		elif len(self.list_obj_points) < len(self.nc.get_list_xyz()):
+			# это значит нейрон был создан
+			xyz_new_point = self.nc.get_list_xyz()[-1]
+			create_neuron(xyz_new_point, self.size_point, self.color_point)
 
 	def print_window(self):
 		self.w.show()
