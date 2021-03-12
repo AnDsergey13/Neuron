@@ -60,29 +60,38 @@ class Window():
 		self.w.addItem(line)
 
 	def gen_line_for_cube(self, points):
-		def func():
+		""" Создание массива точек для отрисовки границ куба в пространстве с помощью линии"""
+		def gen_index():
+			""" Возвращает при вызове следующие индексы для массива 0, 1, 1, 2, 2, 3, 3, 0"""
 			l = [i for i in range(4)]
 
+			# Разворачиваем список для удобного взятия отрицательного индекса
 			for i in reversed(range(len(l))):
 				yield l[-i-1]
 				yield l[-i]
 
-		def replace(xyz, h_cube):
+		def replace(xyz, up_y_cube):
+			""" Преобразует координаты точки нижней плоскости, в координаты точки верхней плоскости, путём замены в координатах у(игрика)"""
 			xyz = np.delete(xyz, 1)
-			xyz = np.insert(xyz, 1, h_cube)
+			xyz = np.insert(xyz, 1, up_y_cube)
 			return xyz
 
-		h_cube = points[4][1]
+		up_y_cube = points[4][1]
 		new_arr = np.array(())
-		a = func()
+		get_index = gen_index()
 
+		# Создаём точки прохода линии для нижней плоскости и для примыкающих веритикальных рёбер
 		for i in range(4):
-			new_arr = np.concatenate([new_arr, points[next(a)]])
-			index = next(a)
+			new_arr = np.concatenate([new_arr, points[next(get_index)]])
+			index = next(get_index)
 			new_arr = np.concatenate([new_arr, points[index]])
-			new_arr = np.concatenate([new_arr, replace(points[index], h_cube)])
+			new_arr = np.concatenate([new_arr, replace(points[index], up_y_cube)])
+		# В связи с тем что массив имеет вид [x0, y0, z0, x1, y1, z1, x2, y2 ,z2, ...]
+		# Преобразуем его в нормальный вид [[x0, y0, z0], [x1, y1, z1], [x2, y2 ,z2], ...]
 		new_arr = np.reshape(new_arr, (int(len(new_arr)/3), 3))
+		# Добавляем точки верхней плоскости
 		new_arr = np.concatenate([new_arr, points[5:]])
+		# Добавляем последнюю точку, которая закрывает последнее ребро
 		new_arr = np.append(new_arr, [points[4]], axis = 0)
 		return new_arr
 
