@@ -17,7 +17,7 @@ class Controller:
 		self.list_object = []
 		self.list_xyz = []
 
-		self.q = Event("q")
+		self.shift = Event("esc")
 		
 
 	def calc_max_neuron_cube(self, out_points):
@@ -63,22 +63,23 @@ class Controller:
 		create_th.start()
 
 	def loop(self):
-		while not self.q.is_keyboard_pressed():
-			time.sleep(0.1)
+		while not self.shift.is_keyboard_pressed():
+			time.sleep(0.03)
 			# Движение
 			for obj_neuron in self.get_list_object():
 				status = obj_neuron.get_state()
 				if status == 0:
-					if obj_neuron.is_internal_space():
-						obj_neuron.move()
-					else:
-						print("output zone!!!")
-			print("движение выполнено!")
+					obj_neuron.move()
+					# if obj_neuron.is_internal_space():
+						
+					# else:
+					# 	print("output zone!!!")
+			# print("движение выполнено!")
 			# Обновление координат
 			copy_list_obj_neuron = self.get_list_object().copy()
 			for pos, obj_neuron in enumerate(copy_list_obj_neuron):
 				self.list_xyz[pos] = obj_neuron.get_pos()
-			print("координаты выполнены!")
+			# print("координаты выполнены!")
 			# Предача данных
 			pass
 		print("Loop close!!!")

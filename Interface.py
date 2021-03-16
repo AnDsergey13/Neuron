@@ -102,12 +102,15 @@ class Window():
 		self.color_point = color_point
 		self.time_update = time_update
 
+		# print(self.nc.get_list_xyz())
 		for xyz_neuron in self.nc.get_list_xyz():
-			create_neuron(xyz_neuron, self.size_point, self.color_point)
+			pass
+			# print(xyz_neuron)
+			# self.create_neuron(xyz_neuron, self.size_point, self.color_point)
 
 		self.t = QtCore.QTimer()
 		self.t.timeout.connect(self.update)
-		self.t.start(self.time_update)
+		self.t.start(time_update)
 
 	def create_neuron(self, xyz_neuron, size_point, color_point):
 		point = gl.GLScatterPlotItem(pos=xyz_neuron, size=size_point, color=color_point)
@@ -135,7 +138,7 @@ class Window():
 		elif len(self.list_obj_points) < len(self.nc.get_list_xyz()):
 			# это значит нейрон был создан
 			xyz_new_point = self.nc.get_list_xyz()[-1]
-			create_neuron(xyz_new_point, self.size_point, self.color_point)
+			self.create_neuron(xyz_new_point, self.size_point, self.color_point)
 
 	def print_window(self):
 		self.w.show()

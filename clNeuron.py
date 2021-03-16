@@ -95,7 +95,7 @@ class Neuron():
 		self.x_pos += random.randrange(-2, 2)
 		self.y_pos += random.randrange(-2, 2)
 		self.z_pos += random.randrange(-2, 2)
-		print(self.x_pos, self.y_pos, self.z_pos)
+		# print(self.x_pos, self.y_pos, self.z_pos)
 
 	def get_pos(self):
 		return self.x_pos, self.y_pos, self.z_pos
