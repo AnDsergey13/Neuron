@@ -12,23 +12,25 @@ raspberri https://github.com/pyqtgraph/pyqtgraph/issues/1260
 """
 # import Neuron_controller as nc
 
-import sys
 # from PyQt5.QtWidgets import (QApplication, QWidget, QLabel, QPushButton)
-from PyQt5.QtWidgets import QApplication
+#from PyQt5.QtWidgets import QApplication
 from pyqtgraph.Qt import QtCore, QtGui
-
 import pyqtgraph as pg
 import pyqtgraph.opengl as gl
-
 import numpy as np
+import sys
 
 class Window():
 	def __init__(self, width=500, height=500, x_offset=500, y_offset=200):
-		self.app = QApplication(sys.argv)
+		# self.app = QApplication(sys.argv)
+
+		self.app = pg.mkQApp("Test_name")
 		self.w = gl.GLViewWidget()
 		self.w.setWindowTitle('Интерфейс')
 		self.w.resize(width, height)
 		self.w.move(x_offset, y_offset)
+
+		self.w.show()
 
 		self.list_obj_points = []
 
@@ -142,6 +144,9 @@ class Window():
 
 	def print_window(self):
 		self.w.show()
-		sys.exit(self.app.exec_())
+		# sys.exit(self.app.exec_())
+		if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
+			# QtGui.QApplication(sys.argv).exec_()
+			QtGui.QApplication.instance().exec_()
 
 
