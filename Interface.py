@@ -23,7 +23,7 @@ import sys
 class Window():
 	def __init__(self, width=500, height=500, x_offset=500, y_offset=200):
 		# self.app = QApplication(sys.argv)
-
+		# self.app = pg.mkQApp("Test_name")
 		self.app = pg.mkQApp("Test_name")
 		self.w = gl.GLViewWidget()
 		self.w.setWindowTitle('Интерфейс')
@@ -143,10 +143,12 @@ class Window():
 			self.create_neuron(xyz_new_point, self.size_point, self.color_point)
 
 	def print_window(self):
-		self.w.show()
+		# self.w.show()
 		# sys.exit(self.app.exec_())
 		if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
 			# QtGui.QApplication(sys.argv).exec_()
+			print("Запуск")	
 			QtGui.QApplication.instance().exec_()
+			print("Конец")
 
 
