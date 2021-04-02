@@ -43,9 +43,7 @@ class test_class():
 		self.t.start(100)
 
 	def update(self):
-		x = self.xyz_neuron[0]
-		y = self.xyz_neuron[1]
-		z = self.xyz_neuron[2]
+		x, y, z = self.xyz_neuron
 
 		self.xyz_neuron = np.array([x + 0, y + 1, z + 0])
 		self.point.setData(pos=self.xyz_neuron)
