@@ -115,9 +115,14 @@ class Window():
 		self.t.start(time_update)
 
 	def create_neuron(self, xyz_neuron, size_point, color_point):
-		point = gl.GLScatterPlotItem(pos=xyz_neuron, size=size_point, color=color_point)
-		self.list_obj_points.append(point)
-		self.w.addItem(point)
+		# Условие проверяет чтобы xyz_neuron был типа <class 'numpy.ndarray'>
+		if isinstance(xyz_neuron, type(np.array([]))):
+			point = gl.GLScatterPlotItem(pos=xyz_neuron, size=size_point, color=color_point)
+			self.list_obj_points.append(point)
+			self.w.addItem(point)
+		else:
+			print("TypeError. Указан неверный тип координат. Должен быть массив")
+		
 
 	def update(self):
 		# ПОТОМ НУЖНО ПЕРЕДЕЛАТЬ. ЭТО СЫРОЙ ПРОТОТИП
