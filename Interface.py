@@ -51,7 +51,7 @@ class Window():
 		self.w.addItem(self.zgrid)
 
 		self.xgrid.rotate(90, 1, 0, 0)
-		self.ygrid.rotate(90, 1, 0, 0)
+		self.ygrid.rotate(90, 0, 1, 0)
 
 		self.xgrid.scale(1, 1, 1)
 		self.ygrid.scale(1, 1, 1)
