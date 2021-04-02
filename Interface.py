@@ -128,7 +128,7 @@ class Window():
 		if len(self.list_obj_points) == len(self.nc.get_list_xyz()):
 			# когда количество нейронов не изменилось с последенего обновления окна
 			for pos_, i in enumerate(self.list_obj_points):
-				new_xyz = np.array(self.nc.get_list_xyz()[pos_])
+				new_xyz = np.array([self.nc.get_list_xyz()[pos_]])
 				# print(len(self.list_obj_points), new_xyz)
 
 				# Устанавливаем новые координаты для каждого объекта
@@ -139,7 +139,7 @@ class Window():
 			pass
 		elif len(self.list_obj_points) < len(self.nc.get_list_xyz()):
 			# это значит нейрон был создан
-			xyz_new_point = self.nc.get_list_xyz()[-1]
+			xyz_new_point = np.array([self.nc.get_list_xyz()[-1]])
 			self.create_neuron(xyz_new_point, self.size_point, self.color_point)
 
 	def print_window(self):
