@@ -92,9 +92,32 @@ class Neuron():
 		pass
 
 	def move(self):
-		self.x_pos += random.randrange(-2, 2)
-		self.y_pos += random.randrange(-2, 2)
-		self.z_pos += random.randrange(-2, 2)
+		'''self.x_pos += random.randrange(-1, 1)
+
+		x = random.randrange(-2, 2)
+		if x > 0:
+			self.x_pos -= x
+		elif x < 0:
+			self.x_pos += x
+		else:
+			self.x_pos = x
+
+		y = random.randrange(-2, 2)
+		if y > 0:
+			self.y_pos -= y
+		elif y < 0:
+			self.y_pos += y
+		else:
+			self.y_pos = y
+
+		z = random.randrange(-2, 2)
+		if z > 0:
+			self.z_pos -= z
+		elif z < 0:
+			self.z_pos += z
+		else:
+			self.z_pos = z'''
+		# self.z_pos += random.randrange(-1, 1)
 		# print(self.x_pos, self.y_pos, self.z_pos)
 
 	def get_pos(self):
