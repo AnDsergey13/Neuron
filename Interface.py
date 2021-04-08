@@ -116,6 +116,7 @@ class Window():
 
 	def create_neuron(self, xyz_neuron, size_point, color_point):
 		# Условие проверяет чтобы xyz_neuron был типа <class 'numpy.ndarray'>
+		# Это нужно для проверки типа входящих данных
 		if isinstance(xyz_neuron, type(np.array([]))):
 			point = gl.GLScatterPlotItem(pos=xyz_neuron, size=size_point, color=color_point)
 			self.list_obj_points.append(point)
