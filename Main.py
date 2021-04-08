@@ -36,8 +36,8 @@ control.start_loop()
 
 # Interface
 # # =================================
-window = ui.Window(1000, 800, 400, 100)
 for i in range(100):
+window = ui.Window(1000, 800, 400, 100, 20)
 	control.create_neuron()
 
 

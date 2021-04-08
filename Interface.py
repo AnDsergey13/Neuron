@@ -21,7 +21,7 @@ import numpy as np
 import sys
 
 class Window():
-	def __init__(self, width=500, height=500, x_offset=500, y_offset=200):
+	def __init__(self, width=500, height=500, x_offset=500, y_offset=200, scale=1):
 		# self.app = QApplication(sys.argv)
 		# self.app = pg.mkQApp("Test_name")
 		self.app = pg.mkQApp("Test_name")
@@ -29,6 +29,7 @@ class Window():
 		self.w.setWindowTitle('Интерфейс')
 		self.w.resize(width, height)
 		self.w.move(x_offset, y_offset)
+		self.w.opts['distance'] = scale * 10
 
 		self.w.show()
 
