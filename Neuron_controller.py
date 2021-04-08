@@ -64,6 +64,7 @@ class Controller:
 
 	def loop(self):
 		while not self.shift.is_keyboard_pressed():
+			# Без задержки виснет программа
 			time.sleep(0.03)
 			# Движение
 			for obj_neuron in self.get_list_object():
