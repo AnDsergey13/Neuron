@@ -24,7 +24,7 @@ def full_completion_space():
 MAX_NEURONS = 100
 
 space = Space()
-out_p = space.create_cube(10, 10, 0, size=50)
+out_p = space.create_cube(10, 10, 0, size=500)
 space.set_points(out_p, 1)
 
 # print(space.get_out_points())
@@ -36,12 +36,12 @@ control.start_loop()
 
 # Interface
 # # =================================
-for i in range(100):
-window = ui.Window(1000, 800, 400, 100, 20)
+window = ui.Window(1000, 800, 400, 100, 200)
+for i in range(20):
 	control.create_neuron()
 
 
-window.draw_neurons(control, size_point=5, time_update=20)
+window.draw_neurons(control, size_point=5, time_update=5)
 # window.set_color_grid(255, 255, 255, 10)
 # window.create_grid()
 window.set_coord()
