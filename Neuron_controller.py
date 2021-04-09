@@ -29,16 +29,20 @@ class Controller:
 
 	def create_neuron(self):
 		""" Создаёт нейрон в случайном месте пространства """
-		new_xyz = self.gen_xyz_neuron()
-		for xyz in self.list_xyz:
-			if new_xyz == tuple(xyz):
-				#print("найдена копия, начинаем заново")
-				break
-		else:
-			#print("копии нет, создаём нейрон")
-			# self.list_object.append(Neuron(self.space, new_xyz[0], new_xyz[1], new_xyz[2]))
-			self.list_object.append(Neuron(self.space))
-			self.list_xyz.append([new_xyz[0], new_xyz[1], new_xyz[2]])
+		on = True
+		while on:
+			new_xyz = self.gen_xyz_neuron()
+			for xyz in self.list_xyz:
+				if new_xyz == tuple(xyz):
+					#print("найдена копия, начинаем заново")
+					break
+			else:
+				# если копии нет, то создаём нейрон со сгенерированными координатами
+				new_neuron = Neuron(self.space, new_xyz[0], new_xyz[1], new_xyz[2])
+				self.list_object.append(new_neuron)
+				self.list_xyz.append([new_xyz[0], new_xyz[1], new_xyz[2]])
+				on = False
+		
 		# else:
 		# 	print("Привышено максимальное количество нейронов для данной области")	
 
