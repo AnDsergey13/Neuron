@@ -12,8 +12,6 @@ raspberri https://github.com/pyqtgraph/pyqtgraph/issues/1260
 """
 # import Neuron_controller as nc
 
-# from PyQt5.QtWidgets import (QApplication, QWidget, QLabel, QPushButton)
-#from PyQt5.QtWidgets import QApplication
 from pyqtgraph.Qt import QtCore, QtGui
 import pyqtgraph as pg
 import pyqtgraph.opengl as gl
@@ -22,8 +20,6 @@ import sys
 
 class Window():
 	def __init__(self, width=500, height=500, x_offset=500, y_offset=200, scale=1):
-		# self.app = QApplication(sys.argv)
-		# self.app = pg.mkQApp("Test_name")
 		self.app = pg.mkQApp("Test_name")
 		self.w = gl.GLViewWidget()
 		self.w.setWindowTitle('Интерфейс')
@@ -105,6 +101,7 @@ class Window():
 		self.color_point = color_point
 		self.time_update = time_update
 
+		#### ??? Что это? Нужно ли этот блок
 		# print(self.nc.get_list_xyz())
 		for xyz_neuron in self.nc.get_list_xyz():
 			pass
@@ -150,11 +147,8 @@ class Window():
 			self.create_neuron(xyz_new_point, self.size_point, self.color_point)
 
 	def print_window(self):
-		# self.w.show()
-		# sys.exit(self.app.exec_())
 		if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-			# QtGui.QApplication(sys.argv).exec_()
-			print("Запуск")	
+			print("Запуск")
 			QtGui.QApplication.instance().exec_()
 			print("Конец")
 
