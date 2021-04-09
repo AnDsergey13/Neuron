@@ -86,6 +86,13 @@ class Controller:
 			for pos, obj_neuron in enumerate(copy_list_obj_neuron):
 				self.list_xyz[pos] = obj_neuron.get_pos()
 			# print("координаты выполнены!")
+
+			## Обновление состояния
+			## ВРЕМЕННАЯ РЕАЛИЗАЦИЯ ДЛЯ ТЕСТОВ
+			# При выходе за пределы пространства, нейрон помечается состоянием = 5
+			for obj_neuron in self.get_list_object():
+				if not obj_neuron.is_internal_space():
+					obj_neuron.set_state(5)
 			# Предача данных
 			pass
 		print("Loop close!!!")
