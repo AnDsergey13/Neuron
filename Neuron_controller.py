@@ -88,24 +88,8 @@ class Controller:
 	def get_max_neurons(self):
 		return self.MAX_NEURONS
 
-	# ?
 	def get_list_object(self):
 		return self.list_object
 
 	def get_list_xyz(self):
 		return self.list_xyz
-
-
-# def next(number_changes):
-#     list_random_changes = [random.randrange(0, NUM_NEURONS) for i in range(number_changes)]
-#     for num in list_random_changes:
-#         list_object[num].next_step()
-
-# def next_all():
-#     for num in range(NUM_NEURONS):
-#         list_object[num].next_step()
-
-# def see_all_changes():
-#     for num in range(len(list_object)):
-#         print(f"{num}..{list_object[num].get_pos()}")
-
