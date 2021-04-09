@@ -58,14 +58,15 @@ class Controller:
 		""" Задать вручную максимальное количество нейронов в пространстве"""
 		self.MAX_NEURONS = number
 
-	def start_loop(self):
-		create_th = threading.Thread(target=self.loop)
+	def start_loop(self, time_update=0.01):
+		create_th = threading.Thread(target=self.loop, args=(time_update,))
 		create_th.start()
 
-	def loop(self):
+	def loop(self, time_update):
 		while not self.shift.is_keyboard_pressed():
 			# Без задержки виснет программа
-			time.sleep(0.03)
+			# time.sleep(0.03)
+			time.sleep(time_update)
 			# Движение
 			for obj_neuron in self.get_list_object():
 				status = obj_neuron.get_state()
