@@ -78,7 +78,7 @@ class Neuron():
 		self.y_pos = y
 		self.z_pos = z
 
-		self.move()
+		new_pos = self.calc_new_pos()
 		self.set_pos(new_pos)
 
 		# По умолчанию состояние равно 0
@@ -89,13 +89,19 @@ class Neuron():
 		# 2. Получить координаты и состояния всех ближайших нейронов
 		# 3. Вычислить точку для передвижения
 		# 4. Проверить, сможет ли нейрон перейти в новую точку
-		# 5. Если да, то двигаем self.move(x, y, z)
+		# 5. Если да, то двигаем self.calc_new_pos(x, y, z)
 		# 6. Если нет, то старт с п.3.
-		pass
-
-	def move(self):
 		self.x_pos, self.y_pos, self.z_pos = xyz
+
+	def calc_new_pos(self):
+		random.seed(0)
+		x_pos = self.x_pos + random.randrange(-1, 1)
+		random.seed(100)
+		y_pos = self.y_pos + random.randrange(-1, 1)
+		random.seed(15)
+		z_pos = self.z_pos + random.randrange(-1, 1)
 		# print(self.x_pos, self.y_pos, self.z_pos)
+		return x_pos, y_pos, z_pos
 
 	def get_pos(self):
 		return self.x_pos, self.y_pos, self.z_pos
