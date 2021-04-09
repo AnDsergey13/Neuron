@@ -72,15 +72,18 @@ class Controller:
 			# time.sleep(0.03)
 			time.sleep(time_update)
 			# Движение
-			for obj_neuron in self.get_list_object():
+			copy_list_obj_neuron = self.get_list_object().copy()
+			for pos, obj_neuron in enumerate(copy_list_obj_neuron):
 				status = obj_neuron.get_state()
 				if status == 0:
-					obj_neuron.move()
-					# if obj_neuron.is_internal_space():
-						
-					# else:
-					# 	print("output zone!!!")
+					new_pos = obj_neuron.calc_new_pos()
+					obj_neuron.set_pos(new_pos)
+				if status == 5:
+					# Пока не удаляем нейрон, а перемещаем в центр
+					obj_neuron.set_pos((255, 255, 255))
+					obj_neuron.set_state(0)
 			# print("движение выполнено!")
+
 			# Обновление координат
 			copy_list_obj_neuron = self.get_list_object().copy()
 			for pos, obj_neuron in enumerate(copy_list_obj_neuron):
