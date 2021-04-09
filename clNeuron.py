@@ -79,10 +79,12 @@ class Neuron():
 		self.z_pos = z
 
 		self.move()
+		self.set_pos(new_pos)
+
 		# По умолчанию состояние равно 0
 		self.set_state(0)
 
-	def set_pos(self):
+	def set_pos(self, xyz):
 		# 1. Проверка, нужно ли нейрону вообще передвигаться
 		# 2. Получить координаты и состояния всех ближайших нейронов
 		# 3. Вычислить точку для передвижения
@@ -118,6 +120,7 @@ class Neuron():
 		else:
 			self.z_pos = z'''
 		# self.z_pos += random.randrange(-1, 1)
+		self.x_pos, self.y_pos, self.z_pos = xyz
 		# print(self.x_pos, self.y_pos, self.z_pos)
 
 	def get_pos(self):
