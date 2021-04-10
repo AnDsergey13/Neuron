@@ -94,13 +94,9 @@ class Neuron():
 		self.x_pos, self.y_pos, self.z_pos = xyz
 
 	def calc_new_pos(self):
-		random.seed(0)
-		x_pos = self.x_pos + random.randrange(-1, 1)
-		random.seed(100)
-		y_pos = self.y_pos + random.randrange(-1, 1)
-		random.seed(15)
-		z_pos = self.z_pos + random.randrange(-1, 1)
-		# print(self.x_pos, self.y_pos, self.z_pos)
+		x_pos = self.x_pos + random.randrange(-1, 2)
+		y_pos = self.y_pos + random.randrange(-1, 2)
+		z_pos = self.z_pos + random.randrange(-1, 2)
 		return x_pos, y_pos, z_pos
 
 	def get_pos(self):
