@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -
 #
-from clNeuron import Space, Neuron
+import Space
+import Neuron
 import Neuron_controller as nc
 import Interface as ui
 #import keyboard
@@ -23,7 +24,7 @@ def full_completion_space():
 
 MAX_NEURONS = 100
 
-space = Space()
+space = Space.Space()
 out_p = space.create_cube(10, 10, 0, size=500)
 space.set_points(out_p, 1)
 
@@ -31,13 +32,13 @@ space.set_points(out_p, 1)
 # print(space.get_in_points())
 
 control = nc.Controller(space)
-control.start_loop()
+control.start_loop(0.01)
 #full_completion_space()
 
 # Interface
 # # =================================
 window = ui.Window(1000, 800, 400, 100, 200)
-for i in range(20):
+for i in range(100):
 	control.create_neuron()
 
 

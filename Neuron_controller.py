@@ -1,4 +1,5 @@
-from clNeuron import Space,Neuron
+import Space
+import Neuron
 from Keyboard_and_mouse import Event
 import numpy as np
 import random
@@ -38,7 +39,7 @@ class Controller:
 					break
 			else:
 				# если копии нет, то создаём нейрон со сгенерированными координатами
-				new_neuron = Neuron(self.space, new_xyz[0], new_xyz[1], new_xyz[2])
+				new_neuron = Neuron.Neuron(self.space, new_xyz[0], new_xyz[1], new_xyz[2])
 				self.list_object.append(new_neuron)
 				self.list_xyz.append([new_xyz[0], new_xyz[1], new_xyz[2]])
 				on = False

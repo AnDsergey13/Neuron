@@ -1,80 +1,91 @@
-# -*- coding: utf-8 -
+import random
 
-import math
-import threading
+class Neuron():
+	def __init__(self, obj_space, x=25, y=25, z=25):
+		#self.list_input = []
+		#self.list_output = []
+		self.obj_space = obj_space
 
-# import pygame
-import numpy as np
+		self.x_pos = x
+		self.y_pos = y
+		self.z_pos = z
 
-from Drawing import Drawing, Bot
+		new_pos = self.calc_new_pos()
+		self.set_pos(new_pos)
 
+		# По умолчанию состояние равно 0
+		self.set_state(0)
 
-class Neuron_(Drawing):
-	""" Класс для работы с ботами """
+	def set_pos(self, xyz):
+		# 1. Проверка, нужно ли нейрону вообще передвигаться
+		# 2. Получить координаты и состояния всех ближайших нейронов
+		# 3. Вычислить точку для передвижения
+		# 4. Проверить, сможет ли нейрон перейти в новую точку
+		# 5. Если да, то двигаем self.calc_new_pos(x, y, z)
+		# 6. Если нет, то старт с п.3.
 
-	def __init__(self, mode=1):
-		""" mode = 0 - без потоков
-			mode = 1 - это когда один бот в одном потоке
+		# Перед перемещением нейрона проверяем, не выйдет ли он за границу внешней области
+		if self.is_space(xyz, "out"):
+			self.x_pos, self.y_pos, self.z_pos = xyz
+
+	def calc_new_pos(self):
+		x_pos = self.x_pos + random.randrange(-1, 2)
+		y_pos = self.y_pos + random.randrange(-1, 2)
+		z_pos = self.z_pos + random.randrange(-1, 2)
+		return x_pos, y_pos, z_pos
+
+	def get_pos(self):
+		return self.x_pos, self.y_pos, self.z_pos
+
+	def set_state(self, state):
+		"""	set_state(self, state). 
+			Устанавить 1 из 6 состояний нейрона.
+				state(int) - номер состояния, где:
+					0 - нейрон ищущий подключения в локальном пространстве. Динамичен
+					1 - нейрон, с неполным подключением(без сети). Ожидает других подключений. Статичен
+					2 - нейрон, с неполным подключением через сеть. Ожидает других подключений. Статичен
+					3 - нейрон, с полным подключением(без сети). Ничего не ожидает. Статичен
+					4 - нейрон, с полным подключением через сеть. Ничего не ожидает. Статичен
+					5 - это смерть нейрона. Ожидает уничтожения
 		"""
-		if mode == 1:
-			create_th = threading.Thread(target=self.create_bot)
-			create_th.start()
+		self.state = state
 
-	def create_bot(self):
-		""" Промежуточный метод в котором создаётся бот """
-		self.x_bot, self.y_bot = self.get_pos_mouse()
-		self.neuron = Bot()
-		self.loop()
+	def get_state(self):
+		"""
+			Возвращает номер состояния указанного нейрона
+		"""
+		return self.state
 
-	def loop(self):
-		""" Цикл в котором всё происходит """
-		while on:
-			if pause_session:
-				continue
-			self.neuron.clear_pos_bot()
-			self.neuron.draw_bot(self.x_bot, self.y_bot)
+	def is_space(self, xyz=None, mode="in"):
+		""" 
+		is_space(xyz=None, mode="in")
 
-			# Метод для описания поведения движения
-			self.movement()
+		Возвращает True, если нейрон находится в указанной области пространства.
 
-			# если выход за пределы комнаты, то удаление
-			if not self.is_object_on_screen((self.x_bot, self.y_bot)):
-				self.neuron.clear_pos_bot()
-				break
+		По умолчанию, mode="in" - это внутренняя область, 
+		а mode="out" - это внешняя область.
 
-			# Меняем случайно цвет бота
-			self.neuron.set_color_bot(
-				np.random.randint(140, 255),
-				np.random.randint(140, 255), 255)
+		xyz - По умолчанию, берёт координаты текущего нейрона. 
+		Принимает в себя кортеж или список координат объекта, для проверки. Пример записи: (34, -56, 1)
 
-			self.neuron.draw_bot(self.x_bot, self.y_bot)
-			self.update_screen()
+		"""
+		if xyz == None:
+			x, y, z = self.x_pos, self.y_pos, self.z_pos
+		else:
+			x, y, z = xyz
 
-	def movement(self):
-		""" В этом методе описано движение бота """
-		self.x_bot += math.sin(self.x_bot) * 5
-		self.y_bot += -math.cos(self.y_bot) * 5
+		if mode == "in":
+			space = self.obj_space.get_in_points()
+		elif mode == "out":
+			space = self.obj_space.get_out_points()
+		else:
+			print("***** Не верно указано название пространства. Установлено по умолчанию. in")
+			space = self.obj_space.get_in_points()
 
 
-on = True
-pause_session = False
+		delta_x = x > space[0][0] and x < space[2][0]
+		delta_y = y > space[0][1] and y < space[4][1]
+		delta_z = z > space[0][2] and z < space[1][2]
 
+		return delta_x and delta_y and delta_z
 
-def set_pause_session():
-	""" Глобальная функция для остановки движения бота """
-	global pause_session
-	pause_session = not pause_session
-	print(pause_session)
-
-
-def neuron_off():
-	""" Глобальная функция для отключения бота """
-	global on
-	on = False
-
-# last_id = max(LIST_BOT.take(1, axis=1))
-# current_id = last_id + 1
-# LIST_BOT = np.append(
-# 	LIST_BOT,
-# 	np.zeros((1, num_index_list_bot), dtype=int),
-# 	axis=0)
