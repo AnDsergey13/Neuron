@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -
-#
 import Space
 import Neuron
 import Neuron_controller as nc
@@ -8,19 +6,6 @@ import Interface as ui
 import numpy as np
 import time
 
-def full_completion_space():
-	while control.is_max_neurons():
-		control.create_neuron()
-
-		list_xyz = control.get_list_xyz()
-		xyz = np.array(list_xyz[-1])
-		window.create_point(xyz, 1)
-		time.sleep(0.1)
-
-		window.update()
-		# print(len(control.get_list_xyz()))
-	print("Заполнение завершено успешно!")
-
 
 MAX_NEURONS = 100
 
@@ -28,12 +13,8 @@ space = Space.Space()
 out_p = space.create_cube(10, 10, 0, size=500)
 space.set_points(out_p, 1)
 
-# print(space.get_out_points())
-# print(space.get_in_points())
-
 control = nc.Controller(space)
 control.start_loop(0.01)
-#full_completion_space()
 
 # Interface
 # # =================================
@@ -43,26 +24,13 @@ for i in range(100):
 
 
 window.draw_neurons(control, size_point=5, time_update=5)
-# window.set_color_grid(255, 255, 255, 10)
-# window.create_grid()
-window.set_coord()
-line_cube = window.gen_line_for_cube(space.get_out_points())
-window.create_line(line_cube)
 
 
-# for i in range(1000):
-# 	control.create_neuron()
-# 	list_xyz = control.get_list_xyz()
-# 	xyz = np.array(list_xyz[i])
-# 	print(type(xyz), xyz)
-# 	window.create_point(xyz)
-# full_completion_space()
-window.print_window()
+
+
+
 
 # =================================
-
-
-
 
 # print(a.get_pos())
 # print(a.is_internal_space())
@@ -87,3 +55,25 @@ window.print_window()
 # 	pass
 # 	if c.is_keyboard_pressed():
 # 		print(str(pole))
+
+# ===========================
+# def full_completion_space():
+# 	while control.is_max_neurons():
+# 		control.create_neuron()
+
+# 		list_xyz = control.get_list_xyz()
+# 		xyz = np.array(list_xyz[-1])
+# 		window.create_point(xyz, 1)
+# 		time.sleep(0.1)
+
+# 		window.update()
+# 		# print(len(control.get_list_xyz()))
+# 	print("Заполнение завершено успешно!")
+# ====================================
+# for i in range(1000):
+# 	control.create_neuron()
+# 	list_xyz = control.get_list_xyz()
+# 	xyz = np.array(list_xyz[i])
+# 	print(type(xyz), xyz)
+# 	window.create_point(xyz)
+# full_completion_space()
