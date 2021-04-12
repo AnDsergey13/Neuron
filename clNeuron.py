@@ -91,7 +91,10 @@ class Neuron():
 		# 4. Проверить, сможет ли нейрон перейти в новую точку
 		# 5. Если да, то двигаем self.calc_new_pos(x, y, z)
 		# 6. Если нет, то старт с п.3.
-		self.x_pos, self.y_pos, self.z_pos = xyz
+
+		# Перед перемещением нейрона проверяем, не выйдет ли он за границу внешней области
+		if self.is_space(xyz, "out"):
+			self.x_pos, self.y_pos, self.z_pos = xyz
 
 	def calc_new_pos(self):
 		x_pos = self.x_pos + random.randrange(-1, 2)
