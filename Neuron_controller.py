@@ -94,7 +94,7 @@ class Controller:
 			## ВРЕМЕННАЯ РЕАЛИЗАЦИЯ ДЛЯ ТЕСТОВ
 			# При выходе за пределы пространства, нейрон помечается состоянием = 5
 			for obj_neuron in self.get_list_object():
-				if not obj_neuron.is_internal_space():
+				if not obj_neuron.is_space():
 					obj_neuron.set_state(5)
 			# Предача данных
 			pass

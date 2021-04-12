@@ -121,13 +121,26 @@ class Neuron():
 		"""
 		return self.state
 
-	def is_internal_space(self):
 		""" Возвращает True, если нейрон находится во внутренней зоне пространства.
 			А False, когда во внешней зоне."""
+	def is_space(self, xyz=None, mode="in"):
+		if xyz == None:
+			x, y, z = self.x_pos, self.y_pos, self.z_pos
+		else:
+			x, y, z = xyz
 
-		in_space = self.obj_space.get_in_points()
-		delta_x = self.x_pos > in_space[0][0] and self.x_pos < in_space[2][0]
-		delta_y = self.y_pos > in_space[0][1] and self.y_pos < in_space[4][1]
-		delta_z = self.z_pos > in_space[0][2] and self.z_pos < in_space[1][2]
+		if mode == "in":
+			in_space = self.obj_space.get_in_points()
+		elif mode == "out":
+			in_space = self.obj_space.get_out_points()
+		else:
+			print("***** Не верно указано название пространства. Установлено по умолчанию. in")
+			in_space = self.obj_space.get_in_points()
+
+
+		delta_x = x > in_space[0][0] and x < in_space[2][0]
+		delta_y = y > in_space[0][1] and y < in_space[4][1]
+		delta_z = z > in_space[0][2] and z < in_space[1][2]
+
 		return delta_x and delta_y and delta_z
 
