@@ -19,6 +19,18 @@ import numpy as np
 import sys
 
 class Window():
+	COLORS = {
+		"red": (255, 0, 0),
+		"orange": (255, 128, 0),
+		"yellow": (255, 255, 0),
+		"green": (0, 255, 0),
+		"light blue": (0, 255, 255),
+		"dark blue": (0, 0, 255),
+		"purple": (255, 0, 255),
+		"black": (0, 0, 0),
+		"white": (255, 255, 255)
+	}
+
 	def __init__(self, width=500, height=500, x_offset=500, y_offset=200, scale=1):
 		self.app = pg.mkQApp("Test_name")
 		self.w = gl.GLViewWidget()
@@ -53,10 +65,23 @@ class Window():
 		self.xgrid.scale(1, 1, 1)
 		self.ygrid.scale(1, 1, 1)
 		self.zgrid.scale(1, 1, 1)
+	def draw_line(self, points, set_color=None):
+		if set_color == None:
+			R, G, B = self.get_colors("red")
+		else:
+			R, G, B = self.get_colors(set_color)
+		color = (R, G, B, 255)
 
-	def create_line(self, points):
-		line = gl.GLLinePlotItem(pos=points, color=(255,0,0,255), width=1, antialias="lines",mode="line_strip")
+		line = gl.GLLinePlotItem(pos=points, color=color, width=1, antialias="lines",mode="line_strip")
 		self.w.addItem(line)
+
+	@staticmethod
+	def get_colors(name):
+		return Window.COLORS.get(name)
+
+	@staticmethod
+	def get_list_all_colors():
+		return list(Window.COLORS.keys())
 
 	def gen_line_for_cube(self, points):
 		""" Создание массива точек для отрисовки границ куба в пространстве с помощью линии"""
