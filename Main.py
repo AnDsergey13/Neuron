@@ -11,23 +11,31 @@ MAX_NEURONS = 100
 
 space = Space.Space()
 out_p = space.create_cube(10, 10, 0, size=500)
-space.set_points(out_p, 1)
+space.set_points(out_p, 30)
 
 control = nc.Controller(space)
 control.start_loop(0.01)
 
 # Interface
 # # =================================
-window = ui.Window(1000, 800, 400, 100, 200)
+
 for i in range(100):
 	control.create_neuron()
 
-
+window = ui.Window(1000, 800, 400, 100, 200)
 window.draw_neurons(control, size_point=5, time_update=5)
 
+window.set_color_grid(255, 255, 255, 35)
+window.draw_grid(size=500)
 
+window.draw_axis_xyz(size=500)
 
+line_out_cube = window.gen_line_for_cube(space.get_out_points())
+line_in_cube = window.gen_line_for_cube(space.get_in_points())
+window.draw_line(line_out_cube, "yellow")
+window.draw_line(line_in_cube, "purple")
 
+window.print_window()
 
 
 # =================================
