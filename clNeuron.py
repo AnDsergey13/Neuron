@@ -140,17 +140,17 @@ class Neuron():
 			x, y, z = xyz
 
 		if mode == "in":
-			in_space = self.obj_space.get_in_points()
+			space = self.obj_space.get_in_points()
 		elif mode == "out":
-			in_space = self.obj_space.get_out_points()
+			space = self.obj_space.get_out_points()
 		else:
 			print("***** Не верно указано название пространства. Установлено по умолчанию. in")
-			in_space = self.obj_space.get_in_points()
+			space = self.obj_space.get_in_points()
 
 
-		delta_x = x > in_space[0][0] and x < in_space[2][0]
-		delta_y = y > in_space[0][1] and y < in_space[4][1]
-		delta_z = z > in_space[0][2] and z < in_space[1][2]
+		delta_x = x > space[0][0] and x < space[2][0]
+		delta_y = y > space[0][1] and y < space[4][1]
+		delta_z = z > space[0][2] and z < space[1][2]
 
 		return delta_x and delta_y and delta_z
 
