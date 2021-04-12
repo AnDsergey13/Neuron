@@ -46,14 +46,14 @@ class Window():
 	def set_color_grid(self, R=255, G=255, B=255, A=100):
 		self.color = (R, G, B, A)
 
-	def set_coord(self):
-		axis = gl.GLAxisItem(size = QtGui.QVector3D(50,50,50))
+	def draw_axis_xyz(self, size=100):
+		axis = gl.GLAxisItem(size = QtGui.QVector3D(size * 3, size * 3, size * 3))
 		self.w.addItem(axis)
 
-	def create_grid(self):
-		self.xgrid = gl.GLGridItem(size = QtGui.QVector3D(50,50,1), color=self.color)
-		self.ygrid = gl.GLGridItem(size = QtGui.QVector3D(50,50,1), color=self.color)
-		self.zgrid = gl.GLGridItem(size = QtGui.QVector3D(50,50,1), color=self.color)
+	def draw_grid(self, size=100):
+		self.xgrid = gl.GLGridItem(size = QtGui.QVector3D(10, 10, 1), color=self.color)
+		self.ygrid = gl.GLGridItem(size = QtGui.QVector3D(10, 10, 1), color=self.color)
+		self.zgrid = gl.GLGridItem(size = QtGui.QVector3D(10, 10, 1), color=self.color)
 
 		self.w.addItem(self.xgrid)
 		self.w.addItem(self.ygrid)
@@ -62,9 +62,10 @@ class Window():
 		self.xgrid.rotate(90, 1, 0, 0)
 		self.ygrid.rotate(90, 0, 1, 0)
 
-		self.xgrid.scale(1, 1, 1)
-		self.ygrid.scale(1, 1, 1)
-		self.zgrid.scale(1, 1, 1)
+		self.xgrid.scale(size, size, size)
+		self.ygrid.scale(size, size, size)
+		self.zgrid.scale(size, size, size)
+
 	def draw_line(self, points, set_color=None):
 		if set_color == None:
 			R, G, B = self.get_colors("red")
