@@ -68,7 +68,7 @@ class Controller:
 		""" Задать вручную максимальное количество нейронов в пространстве"""
 		self.MAX_NEURONS = number
 
-	def start_loop(self, time_update=0.01):
+	def start_loop(self, time_update=0.0001):
 		create_th = threading.Thread(target=self.loop, args=(time_update,))
 		create_th.start()
 
