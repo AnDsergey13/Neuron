@@ -32,17 +32,22 @@ class Controller:
 		""" Создаёт нейрон в случайном месте пространства """
 		on = True
 		while on:
+			# Генерируем новые координаты
 			new_xyz = self.gen_xyz_neuron()
+			# Новый нейрон НЕ должен появиться там, где есть уже другой нейрон
 			for xyz in self.list_xyz:
 				if new_xyz == tuple(xyz):
-					#print("найдена копия, начинаем заново")
+					#print("найдена копия координат, начинаем заново")
 					break
 			else:
 				# если копии нет, то создаём нейрон со сгенерированными координатами
-				new_neuron = Neuron.Neuron(self.space, new_xyz[0], new_xyz[1], new_xyz[2])
-				self.list_object.append(new_neuron)
-				self.list_xyz.append([new_xyz[0], new_xyz[1], new_xyz[2]])
-				on = False
+				# так же не создаём нейрон, если превышено максимальное значение по созданию
+				if len(self.get_list_object()) + 1 < self.get_max_neurons():
+					new_neuron = Neuron.Neuron(self.space, new_xyz[0], new_xyz[1], new_xyz[2])
+					self.list_object.append(new_neuron)
+					self.list_xyz.append([new_xyz[0], new_xyz[1], new_xyz[2]])
+				# Выходим из цикла в любом случае, создали ли мы нейрон, или нет
+				on = False	
 		
 		# else:
 		# 	print("Привышено максимальное количество нейронов для данной области")	
