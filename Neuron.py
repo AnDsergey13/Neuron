@@ -1,7 +1,8 @@
 import random
+import numpy as np
 
 class Neuron():
-	def __init__(self, obj_space, x=25, y=25, z=25):
+	def __init__(self, obj_space, x=25, y=25, z=25, radius_search=200):
 		#self.list_input = []
 		#self.list_output = []
 		self.obj_space = obj_space
@@ -13,8 +14,24 @@ class Neuron():
 		new_pos = self.calc_new_pos()
 		self.set_pos(new_pos)
 
-		# По умолчанию состояние равно 0
+		# По умолчанию состояние равно 0. Подробное описание в методе set_state
 		self.set_state(0)
+
+		# радиус поиска других нейронов
+		self.radius_search = radius_search
+
+		# Массив, в котором содержатся объекты ближайших нейронов 
+		self.nearest_neurons = np.array([])
+
+	def get_radius_searches(self):
+		return self.radius_search
+
+	def update_nearest_neurons(self, obj):
+		self.nearest_neurons = obj
+
+	def get_nearest_neurons(self):
+		""" Возвращает массив ближайших объектов(нейронов)"""
+		return self.nearest_neurons
 
 	def set_pos(self, xyz):
 		# 1. Проверка, нужно ли нейрону вообще передвигаться

@@ -74,10 +74,12 @@ class Controller:
 
 	def loop(self, time_update):
 		while not self.shift.is_keyboard_pressed():
+
+			######## ВРЕМЯ ОБНОВЛЕНИЯ ЦИКЛА
 			# Без задержки виснет программа
-			# time.sleep(0.03)
 			time.sleep(time_update)
-			# Движение
+
+			######## ЛОГИКА СОСТОЯНИЙ
 			copy_list_obj_neuron = self.get_list_object().copy()
 			for pos, obj_neuron in enumerate(copy_list_obj_neuron):
 				status = obj_neuron.get_state()
@@ -88,21 +90,43 @@ class Controller:
 					# Пока не удаляем нейрон, а перемещаем в центр
 					obj_neuron.set_pos((255, 255, 255))
 					obj_neuron.set_state(0)
-			# print("движение выполнено!")
 
-			# Обновление координат
+			######## ПОИСК БЛИЖАЙШИХ НЕЙРОНОВ
+			list_xyz_neurons = np.array(self.get_list_xyz())
+			list_object = self.get_list_object()
+			for obj in list_object:
+				# Получим координаты проверяемого нейрона
+				n_xyz = np.array(obj.get_pos())
+				# Получим радиус обнаружения проверяемого нейрона
+				n_radius_detection = obj.get_radius_searches()
+
+				detection_list = np.array([], dtype=bool)
+				for x, y, z in list_xyz_neurons:
+					# Считаем вектора для всех нейронов, относительно выбранного
+					x_, y_, z_ = np.array([x, y, z]) - n_xyz
+					# считаем расстояние от одного нейрона до другого
+					# а после, проверяем видит ли проверяемый нейрон, другого нейрона 
+					detect = (x_**2 + y_**2 + z_**2)**0.5 <= n_radius_detection
+					detection_list = np.append(detection_list, detect)
+				list_found_neurons = list_xyz_neurons[detection_list]
+				obj.update_nearest_neurons(np.array(list_found_neurons))
+
+
+
+			######## ОБНОВЛЕНИЕ КООРДИНАТ
 			copy_list_obj_neuron = self.get_list_object().copy()
 			for pos, obj_neuron in enumerate(copy_list_obj_neuron):
 				self.list_xyz[pos] = obj_neuron.get_pos()
 			# print("координаты выполнены!")
 
-			## Обновление состояния
-			## ВРЕМЕННАЯ РЕАЛИЗАЦИЯ ДЛЯ ТЕСТОВ
+			#### ОБНОВЛЕНИЕ СОСТОЯНИЯ
+			# ВРЕМЕННАЯ РЕАЛИЗАЦИЯ ДЛЯ ТЕСТОВ
 			# При выходе за пределы пространства, нейрон помечается состоянием = 5
 			for obj_neuron in self.get_list_object():
 				if not obj_neuron.is_space(mode="out"):
 					obj_neuron.set_state(5)
-			# Предача данных
+
+			#### ПЕРДАЧА ДАННЫХ
 			pass
 		print("Loop close!!!")
 
