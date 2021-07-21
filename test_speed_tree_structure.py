@@ -1,22 +1,8 @@
 import time
 import numpy as np
-
-class Test():
-	number_all_obj = 0
-
-	def __init__(self):
-		Test.number_all_obj += 1
-
-	def get_id(self):
-		return Test.number_all_obj
-
-	def useful_work(self):
-		time.sleep(0.01)
+import copy
 
 gen_obj = 14756
-
-for i in range(gen_obj):
-	space = Test()
 
 list_divisors = [div for div in range (1, gen_obj // 2 + 1) if gen_obj % div == 0] + [gen_obj]
 # print(list_divisors)
@@ -26,12 +12,46 @@ list_divisors = [div for div in range (1, gen_obj // 2 + 1) if gen_obj % div == 
 # delta = end_time - start_time
 # print(delta)
 
-
-
-rule = [2, 2, 2, 2]
+rule = [2, 3, 4, 2]
 
 tree = []
-# for i in range(1, n + 1):
+list_name_var = []
+
+def gen_var(num_var):
+	""" Не более 26 переменных. Так как английский алфавит содержит 26 букв"""
+	if num_var <= 26:
+		for letter in range(97, 97 + num_var):
+			globals()[f"{chr(letter)}"] = 0
+			list_name_var.append(chr(letter))
+	
+def get_name_var(index):
+	return list_name_var[index]
+
+def gen_tree(lvl_deep):
+	# print(eval(get_name_var(lvl_deep)))
+	x = eval(get_name_var(lvl_deep))
+	for x in range(rule[lvl_deep]):
+		#print(x)
+		pass
+
+
+
+deep = len(rule)
+gen_var(deep)
+
+for lvl_deep in range(deep):
+	gen_tree(lvl_deep)
+# print(list_name_var)
+# print(globals())
+
+aa = 3
+bb = copy.deepcopy(aa)
+print(aa, bb)
+aa = 4
+print(aa, bb)
+
+
+'''
 for a in range(rule[0]):
 	tree.append([])
 
@@ -76,3 +96,4 @@ print(string)
 def gen_loop(string):
 	for b in range(rule[1]):
 		eval(string).append([])
+'''
