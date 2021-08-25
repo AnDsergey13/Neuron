@@ -18,11 +18,11 @@ tree = []
 list_name_var = []
 
 def gen_var(num_var):
-	""" Не более 26 переменных. Так как английский алфавит содержит 26 букв"""
-	if num_var <= 26:
-		for letter in range(97, 97 + num_var):
-			globals()[f"{chr(letter)}"] = 0
-			list_name_var.append(chr(letter))
+	""" Генерим необходимое количество переменных с именами а1, а2, а3 ..."""
+	for letter in range(1, num_var + 1):
+		globals()[f"a{letter}"] = 0
+		# Записываем названия в список, чтобы можно было обратиться
+		list_name_var.append(f"a{letter}")
 	
 def get_name_var(index):
 	return list_name_var[index]
