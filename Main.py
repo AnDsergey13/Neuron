@@ -7,7 +7,7 @@ import numpy as np
 import time
 
 
-MAX_NEURONS = 100
+MAX_NEURONS = 25
 SIZE_CUBE = 500
 
 space = Space.Space()

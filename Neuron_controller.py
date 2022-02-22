@@ -91,25 +91,25 @@ class Controller:
 					obj_neuron.set_pos((255, 255, 255))
 					obj_neuron.set_state(0)
 
-			######## ПОИСК БЛИЖАЙШИХ НЕЙРОНОВ
-			list_xyz_neurons = np.array(self.get_list_xyz())
-			list_object = self.get_list_object()
-			for obj in list_object:
-				# Получим координаты проверяемого нейрона
-				n_xyz = np.array(obj.get_pos())
-				# Получим радиус обнаружения проверяемого нейрона
-				n_radius_detection = obj.get_radius_searches()
+			# ######## ПОИСК БЛИЖАЙШИХ НЕЙРОНОВ
+			# list_xyz_neurons = np.array(self.get_list_xyz())
+			# list_object = self.get_list_object()
+			# for obj in list_object:
+			# 	# Получим координаты проверяемого нейрона
+			# 	n_xyz = np.array(obj.get_pos())
+			# 	# Получим радиус обнаружения проверяемого нейрона
+			# 	n_radius_detection = obj.get_radius_searches()
 
-				detection_list = np.array([], dtype=bool)
-				for x, y, z in list_xyz_neurons:
-					# Считаем вектора для всех нейронов, относительно выбранного
-					x_, y_, z_ = np.array([x, y, z]) - n_xyz
-					# считаем расстояние от одного нейрона до другого
-					# а после, проверяем видит ли проверяемый нейрон, другого нейрона 
-					detect = (x_**2 + y_**2 + z_**2)**0.5 <= n_radius_detection
-					detection_list = np.append(detection_list, detect)
-				list_found_neurons = list_xyz_neurons[detection_list]
-				obj.update_nearest_neurons(np.array(list_found_neurons))
+			# 	detection_list = np.array([], dtype=bool)
+			# 	for x, y, z in list_xyz_neurons:
+			# 		# Считаем вектора для всех нейронов, относительно выбранного
+			# 		x_, y_, z_ = np.array([x, y, z]) - n_xyz
+			# 		# считаем расстояние от одного нейрона до другого
+			# 		# а после, проверяем видит ли проверяемый нейрон, другого нейрона 
+			# 		detect = (x_**2 + y_**2 + z_**2)**0.5 <= n_radius_detection
+			# 		detection_list = np.append(detection_list, detect)
+			# 	list_found_neurons = list_xyz_neurons[detection_list]
+			# 	obj.update_nearest_neurons(np.array(list_found_neurons))
 
 
 
